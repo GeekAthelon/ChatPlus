@@ -186,8 +186,8 @@ function prepToolbar() {
 
    style.push('.cp-underline-bar {');
    style.push('  border-bottom: 1px solid Scrollbar;');
-   style.push('}');
-
+   style.push('}');   
+   
    style.push('.cp-popup-visible,');
    style.push('.cp-popup-hidden {');
    style.push('overflow: hidden;');
@@ -199,6 +199,8 @@ function prepToolbar() {
    style.push('  display:block;');
    style.push('  width: 100%;');
    style.push('  margin-top: 0.5em;');
+   style.push('  background-color: ButtonFace;');
+   style.push('  color: ButtonText;');
    style.push('}');
 
    style.push('.cp-popup-visible {');
