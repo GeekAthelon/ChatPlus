@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>{TITLE}</title>
+
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  </head>
+
+  <body background="http://soiroom.hyperchat.com/chatplus/BG-Puzzle.gif">
+  ###BODY###
+  </body>
+  <head>
+    <!-- Thank you, IE, for this lovely piece of needed fluff. -->
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+  </head>
+</html>

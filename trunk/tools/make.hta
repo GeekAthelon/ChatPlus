@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>ChatPlus Builder</title>
+  
+   <HTA:APPLICATION ID="chatPlusBuilder" 
+	    APPLICATIONNAME="ChatPlus Builder" 
+	    BORDER="no"
+	    CAPTION="yes"
+	    SHOWINTASKBAR="yes"
+	    SINGLEINSTANCE="no"
+	    SYSMENU="yes"
+	    SCROLL="no"
+	    WINDOWSTATE="normal"
+		APPLICATION="no"		
+	/> 
+		
+  
+  <SCRIPT type="text/javascript" src="../src/hta.js"></script>
+  <SCRIPT type="text/javascript" src="../src/fix_ie.js"></script>
+  <SCRIPT type="text/javascript" src="make.js"></script>
+ 
+   </head>
+   <body onload="initMake()">
+    
+	<pre id="status">-</pre>
+  
+   <form action="#" onsubmit="return false;">
+   <label>
+     Version #:
+     <input id="version_number">
+   </label>
+   <br>
+   <label>
+     Build:
+     <input id="build_number">
+   </label>
+   <br>
+   <label>
+     Build Date:
+     <input id="build_date">
+   </label>
+   <br>
+   <textarea id="build_comments"></textarea>
+   <br>
+   <label>
+     SOI User Name:
+     <input id="soi_user" value="">
+   </label>
+   <label>
+     SOI User Name:
+     <input id="soi_ftp_password" value="">
+   </label>
+   <br>
+   <button onclick="build()">Build it</button>
+   &nbsp;&nbsp;&nbsp;&nbsp;
+   <button id="publish_button" onclick="publish()" disabled>Publish</button>
+   </form>
+  
+  </body>
+</html>

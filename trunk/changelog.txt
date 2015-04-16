@@ -1,0 +1,312 @@
+Version 2.0.1
+Finally fixed that bug about spirit lists being confused for a roomjump
+list.
+
+Was a stupid one-letter typo that I'm surprised my tools didn't catch.
+
+
+Version 2.0.0
+Ready for a stable release finally.
+
+Underlining names now follows the 'HP Reminder' role in ChatPlus settings.
+The popup menu resizes properly now.
+
+
+
+Version 1.1.47
+Bad uploaded... changed version numbers to make that clear
+
+
+Version 1.46
+Added a 'show offline buddy' option to the Hot list.
+
+This will prolly be the last Beta before releasing this as stable.
+
+As a test I added dashes underlining names in the chat rooms to remind
+people they are now active.  Let me know what you guys think.
+
+
+Version 1.45
+Beta release
+Fixed the 'Reply' and 'Msg again' buttons in the mail room
+
+Keeping this as a beta for a while longer, just in case...
+
+
+
+Version 1.44
+Beta release
+Although not a lot changed visually, there was a fairly massive internal
+rewrite of many ChatPlus's systems.
+
+Noticeable changes:
+1)  Buddy List shows up on the Hot List nicely.
+2)  You can add/remove buddies from the room chat
+3)  You can view home pages or add/remove from the buddy list on the same
+menu.
+4)  Tails are now picked up from what is in super script.  Much more reliable
+and doesn't gag when a person's nickname contains a '@' character.
+
+I was tempted to call this a 2.0.0 release...
+
+Coming soon!  A 'Msg' option to send a nickname to someone's mail room.
+
+Verion 1.42
+Bug fixed.  If a realm list was too large, then adding the realm with crash IE.
+(9thcork@soi -- part of the city.)
+
+
+
+Version 1.1.39
+New beta version
+
+Version 1.1.35
+Version 1.1.36
+Version 1.1.37
+Version 1.1.38
+Fixed the room detection, then broke it, then fixed it again.
+It should stay fixed.
+
+SOI was putting an empty table at the bottom of the HOT list which was causing
+a phantom and incomplete row on mine.  Detecting that.
+
+Experimental SeaMonkey support.
+
+BUDDY WATCHER!  Experimental version.  I need feedback about it.
+
+Version 1.1.34
+Better handling of realms.  Should properly detect the rooms in more realms now.
+
+Fixed the bug tiny-pet reported about the room ignore code causing things to 
+not work under IE.
+
+For those who have 'hide rooms' in SOI enable, the hide/show buttons now show
+up on the new hotlist.  The colored backgrounds, at the moment, do not.
+
+Version 1.1.33
+Changed version detection code.
+
+Version 1.1.32
+Dramatic speed up HOT list display.
+(Used documentFragment.
+Delayed rendering the non-displayed room links until
+needed, since they are not needed most of the time.)
+
+
+Version 1.1.31
+On the HOT list, the checkboxes are now anchored next to the label.  They won't
+be orphaned on a line by themselves.  (No-one has complained, but it has been
+bugging me since day 1.)
+
+You can now click on the label or the checkbox on the HOT list to toggle.
+
+
+
+Version 1.1.30
+Tracked down the issue that caused it to forget what version you were running.
+
+Version 1.1.29
+Version change to non-beta version.
+
+Version 1.1.28
+Avatar manager
+A new link on the HOT list says when a realm control was last updated (and gives quick access to the realm control room.)
+Nickname preview on the Nickname Screen
+
+
+
+Version 1.1.27
+Fixed some handling of the 'Reply' button not always working right in the
+mail room... the tail was getting corrupted.
+ 
+Some realm-room lists where causing trouble because of blank lines in
+the array.  That has now been fixed.
+
+
+Version 1.1.26
+Bug fix test
+
+Version 1.1.25
+Added the "empty" rooms to the HOT list.
+Added the ability to see rooms that are NOT part of a realm.
+
+Version 1.1.24
+Couple of speed tweaks.. most getting rid of some redundant checking.
+
+Version 1.1.23
+Added "MSG again" to the mail box.
+
+Ran the code through JSlint until it was happier -- cleaned up a bunch of 
+unused variables.
+
+Version 1.1.22
+Fixed bug with non-colored names disappearing.
+
+Thank you all for your patience.
+
+Decided to head off any other problems with IE corrupting data and its now 
+encoded.  That *SHOULD* get rid of the problem once and for all.
+
+Someone let me know if there are any errors when trying to add a realm!  I don't
+think any realms try to pass more than 3K of data, but if so, I need to know.
+
+(Code reformatted and moved around -- organized somewhat from the sloppy hodge
+podge it was becoming.)
+
+
+Version 1.1.21
+Worked FINE on my machine.. but not all versions of IE seem to have the same
+limit size, so I chopped it *way* down...
+Really should be fixed now.
+
+Version 1.1.20
+Turns out IE had max length of data it could save which was leading to data
+loss.  Should be corrected.
+
+
+Version 1.1.19
+Release Version
+
+Version 1.1.18
+
+For IE:
+  Finally found the "*from*" bug -- I'm SURE I've gotten rid of it this time.
+  ChatPlus Controls now returns you to the last page you were on.
+
+All:
+[HP] links work when reading Cork messages.  Still doesn't work on the cork
+message list.
+
+
+
+Version 1.1.17
+Think I fixed the "chopped off words" problem under some
+versions of IE.
+
+Added the "Reply" button in the Mail, but you have to enter a list of names
+you are known by.
+
+Got rid of the 'window.prompt' code, replacing it with HTML based.
+
+
+
+Ver 1.1.15 IE / Ver 1.1.16 Firefox
+
+Tweaked code to run both under Fx and IE
+
+
+
+Version 1.1.15 (BETA)
+Re-added version checking when entering ChatPlus control rooms.
+
+Mostly cosmetic changes.
+
+Hidden rooms are now really hid.  Button to show them, should you want to.
+
+Got rid of the last vestages of "innerHTML"
+
+
+
+Version 1.1.14 (BETA)
+The Control Room is now added to the realm room list it wasn't there.
+Some rooms had a dropdown that showed all rooms *BUT* that one.
+
+
+Verion 1.1.13 (BETA)
+Updated version number for release.
+
+
+Version 1.1.12 (BETA)
+Started a 'normal' and Beta version.
+
+If there is a problem with the beta, you can go back to the old version.
+
+Fixed bug of non-citizen handles being flagged for for a home page
+
+Split the Realm Edit screen into two pages.
+
+Added 'RETURN TO ROOM' links, though those are not working 100% correctly.
+
+*** ADDED REAL AUTO-UPDATED REALMS ***
+Go to a realm that has a drop-down list -- like
+hpcork@soi and notice the new 'Realm' button next to the FIND button.
+Click that.  Enter a short name for the realm, then change the realm
+description if you'd like.
+When you return to hpcork@soi, notice the "Realm" button now reads 
+"Realm!", indicating that room is a control room.
+The room list is updated whenever you go to the CONTROL room of the realm,
+not any other room.
+
+
+Version 1.1.11
+First start of putting in auto-realm detection.
+
+Changed looks of some buttons/links
+
+Fixed bug of data not being passed to the ChatPlus Controls properly.
+
+
+
+Version 1.1.10
+Catch folks who had a non-container tag in their name.
+A weird "<i/>" managed to slip in somehow...
+Odd, shouldn't even be POSSIBLE.
+
+
+Version 1.1.9
+More code clean up.
+I'm pretty sure I got rid of the two visual problems in the chat room that
+were bothering me...
+
+1)  The underline for checking homepages went out too far and bumped against
+the said.  Minor, I know, but it annoyed the crap out of me.
+
+2)  The word "*from*" showing up where it shouldn't be and wrecking the
+room look, not to mention just plain not working.
+
+However, this came at the cost of not being able to tell who is a citizen and
+who isn't, so everyone gets the link.  I have some ideas on how to fix it
+but I'll need to play around and see.
+
+(I also noticed that my "[Return to Room]" link that appeared on Homepages
+is missing. Hmmmm.  I'll have to look into that.)
+
+
+
+Version 1.1.8
+Didn't touch the plug-in itself, but I did make some changes in the HTML and
+other Javascript to eliminate caching in the ChatPlus control screens.
+This should get rid of a bunch of headaches.
+
+So far, the page size is less than a regular SOI page, so I'm willing to 
+live with it.
+
+
+Version 1.1.7
+Many, many "under the hood" changes including, unfortunately, a new way of
+communicating between the HTML web pages and the plugin.  Required an upgrade
+for all users.
+
+Most of the changes were made to make it run under IE using IE7Pro.
+
+
+Versioin 1.1.2
+Added an option under Master Contorls to not show the [HP] at all.
+
+Added an option under Master Controls to underlink all links in a room and
+restore the hand icon, over-riding the room designer's choice.
+
+Toned down the HOTLIST table to make it less ... aggressive.
+
+Version 1.1.1
+Changed layout of [HP] button to try and make it more visually appealing.
+
+
+
+Previous
+
+Fixed @yore tail to @my
+
+Delayed screen uploads to window.onload to try to work around Firefox3/Vista
+bug of wiping out the chat box on the 'back' button.
+

@@ -1,0 +1,23 @@
+// ==UserScript==
+// @name          ChatPlus
+// @namespace     tag:athelon@hyperchat.com,2008-08-17:Athelon
+// @description   Add new options to SOI (and sister-site) pages.
+// @include    	  http://*/*
+// @include    	  https://*/*
+// @icon          cp_logo.gif
+// @grant         GM_getValue
+// @grant         GM_setValue
+// @grant         GM_deleteValue
+// @grant         GM_xmlhttpRequest
+// @grant         GM_addStyle
+// @grant         unsafeWindow
+// @version       ###VERSION###
+// ==/UserScript==
+// Would be nice if there was a way to limit this to JUST SOI,
+// but SOI uses a IP address, domain name.
+// BUILD: ###BUILD###
+
+"use strict";
+
+{SCRIPTS}
+

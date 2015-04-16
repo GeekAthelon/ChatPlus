@@ -1,0 +1,1202 @@
+<html>
+<head>
+<title>MOVEit Freely - Command Line Secure FTP Client</title>
+<style>
+h1   {font-family: Tahoma, Arial, Lucida Sans Unicode, Verdana, System, Helvetica, Sans-Serif; font-size: 14pt; font-weight: bold }
+h2   {font-family: Tahoma, Arial, Lucida Sans Unicode, Verdana, System, Helvetica, Sans-Serif; font-size: 12pt; font-weight: bold }
+h3   {font-family: Tahoma, Arial, Lucida Sans Unicode, Verdana, System, Helvetica, Sans-Serif; font-size: 10pt; font-weight: bold; }
+h4   {font-family: Tahoma, Arial, Lucida Sans Unicode, Verdana, System, Helvetica, Sans-Serif; font-size: 10pt; font-weight: normal; font-style: italic }
+
+BODY, P, LI, TD, TH {font-family: Tahoma, Arial, Lucida Sans Unicode, Verdana, System, Helvetica, Sans-Serif;}
+BODY, P, LI, TD, TH {font-size: 10pt;}
+</style>
+</head>
+<body>
+
+
+<table border="0" width="100%" cellspacing="0" cellpadding="3">
+  <tr>
+
+    <td width="26%"><img src="images_moveitfreely/moveit_freelyR_150.png" width="150" height="77"
+    alt="MOVEit Freely Logo"></td>
+    <td width="74%"><h1>MOVEit Freely: <br/>
+    Command-Line Secure FTP Client</h1>
+    </td>
+  </tr>
+</table>
+
+<h2>Overview<a name="overview"></a></h2>
+
+<p><strong>MOVEit Freely</strong> (a.k.a. &quot;ftps.exe&quot;) is a secure command-line
+FTP client for Windows.
+It accepts syntax similar to Microsoft's built-in &quot;ftp.exe&quot; FTP client to make migrations to secure FTP easy.
+&#160;
+</p>
+
+<p><img src="images_moveitfreely/layout.png"/></p>
+
+<p>
+Designed with professional system administrators in mind, MOVEit Freely duplicates
+Microsoft's client syntax from commands to error messages.&nbsp; In addition to embracing
+Microsoft's old standby, <strong>MOVEit Freely extends the functionality of
+command-line FTP with the addition of secure channel communication, passive mode
+transfers and resumption of transfers</strong>.&nbsp;
+</p>
+
+<p>MOVEit Freely runs on <strong>Windows 9x/ME/NT/2000/XP/2003/Vista</strong> and can take the place
+of Microsoft's command-line FTP client in all scripts.&nbsp; Simply replace
+&quot;ftp&quot; in your existing scripts with &quot;ftps&quot;.
+
+<p>MOVEit Freely also implements a &quot;file integrity&quot; mode.&nbsp; This is a transfer mode that
+compresses files on-the-fly, and checks a file checksum to ensure that the file
+was transferred successfully.&nbsp; This mode is selected automatically when
+transferring to/from a <a href='http://www.ipswitchft.com/moveitdmz'>MOVEit DMZ</a> FTP server; it is not available with other types
+of servers.</p>
+
+<p>MOVEit Freely features:
+<ul>
+	<li>FTP and FTP/S (FTP over SSL) file transfers</li>
+	<li>Explicit (RFC-conforming) and implicit FTP/S connection modes</li>
+	<li>Active and passive file transfer modes</li>
+	<li>Client certificate support</li>
+	<li>Ability to halt script execution on first error</li>
+	<li>Client-side NAT support for legacy FTP servers</li>
+	<li>On-the-fly data transmission compression to conserve bandwidth and speed transfers (where available)</li>
+	<li>Resuming of partial transfers (where available)</li>
+	<li>Cryptographic-quality file integrity checks to guard against truncation or corruption during transit (MOVEit DMZ transfers only)</li>
+	<li>USB-Friendly "Portable" deployment</li>
+</ul>
+
+<p>Like any other well-behaved command-line utility,
+MOVEit Freely can be driven by an automated script
+such as a Windows batch file.
+In turn, these scripts can be scheduled by Windows Scheduled Tasks.
+</p>
+
+<p>
+  <ul>
+    <li><a href="#othermoveitproducts_central">Need MISSION-CRITICAL automation?</a></li>
+    <li><a href="#othermoveitproducts_dmz">Need your own secure file transfer server?</a></li>
+  </ul>
+
+<h2>Table of Contents</h2>
+<table width="100%">
+<tr>
+<td>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#commandline">Command Line</a></li>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#FTPProtocol101">FTP Protocol 101</a></li>
+<li><a href="#clientnat">Client NAT</a></li>
+<li><a href="#BasicTroubleshooting">Basic Troubleshooting</a></li>
+<li><a href="#distribution">Distribution</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#contact">Contacting the Vendor</a></li>
+<li><a href="#othermoveitproducts">Other MOVEit Products</a></li>
+</ul>
+</td>
+</tr>
+</table>
+
+<h2>Requirements<a name="requirements"></a></h2>
+
+<p>MOVEit Freely is a standalone executable that does not require any other software,
+assuming the operating system is Microsoft Windows 98, ME, NT, 2000, XP or 2003.
+</p>
+
+<h2>Installation<a name="installation"></a></h2>
+
+<p>To install MOVEit Freely, simply run the MOVEit Freely installation package.  This package will ask into which folder and which "Start menu" program group you would like to install the application.  It will change your "PATH" variable to allow you to run MOVEit Freely from any command prompt.  (You may be prompted to log off after the installation to allow this to occur.)  The installation will also install a "Start Menu" link to this documentation.</p>
+
+<p>If Windows Firewall is running--which is the default under Windows Vista and Windows Server 2008--then
+"active mode" FTP transfers will be blocked until you create an "exception"
+for MOVEit Freely in the firewall.
+(This is the case with any FTP client.)
+To create an exception, use Control Panel | Windows Firewall | Allow a program through Windows Firewall.
+</p>
+
+<h2>Command Line<a name="commandline"></a></h2>
+
+
+<p>MOVEit Freely must be executed from a shell (aka &quot;command prompt&quot;). &nbsp;
+Despite appearances to the contrary, MOVEit Freely is a 32-bit program, not a
+&quot;legacy&quot; DOS program.&nbsp; </p>
+
+<p><i>(If you plan on using MOVEit Freely with MOVEit DMZ servers only,
+Ipswitch also gives away a similar command-line client called &quot;MOVEit Xfer&quot;
+that securely transfers files over firewall/proxy-friendly HTTPS instead of FTPS.) </i></p>
+
+<p>Use the following command syntax to run MOVEit Freely:</p>
+
+<pre>FTPS [-e:sslmode] [args] [hostname [port]]</pre>
+
+<p>...where args is zero or more of:
+
+<ul>
+  <li><strong><samp>-a </samp></strong>starts the program in passive
+    mode.&nbsp; By default, the program is in active mode.&nbsp; This
+    can be changed during a session with the passive command.</li>
+  <li><code><strong>-c:connect_timeout_secs</strong></code> to set the connect
+    timeout in seconds.&nbsp; This is the amount of time that the program will
+    wait for a successful connection to the server.&nbsp; The default is 30
+    seconds.</li>
+  <li><strong><samp>-csn:store </samp></strong>to set the name of an alternate Microsoft Certificate Store
+    from which an optional SSL client certificate (with private key) will be selected.
+    .&nbsp; This defaults to &quot;MY&quot; (a.k.a. "Personal"), which is the name
+      Windows stores certificates for the
+    currently-logged-in user.&nbsp; This option is very rarely used, because
+    when client certificates are used, they are usually in the default location.</li>
+  <li><strong><samp>-ccn:common_name </samp></strong>to specify the Common Name (CN)
+    of an optional SSL client certificate; for example, &quot;Thawte Freemail
+    Member&quot;.&nbsp; This must be specified in order to enable client
+    certificates, and the named certificate must already be present in the current user's
+    Windows Certificate Store.&nbsp; (This is typically configured via Internet Explorer's <i>Tools
+    / Internet Options / Content / Certificates</i>.)&nbsp; The default is to
+    not support client certificates.&nbsp; This option should be used only if
+    the remote FTP server requires client certificates.&nbsp;
+    Because Common Names usually contain spaces, you will usually need to use
+    double quotes:&nbsp; &quot;-ccn:Thawte Freemail Member&quot;.
+    Some SSL hardware tokens, such as Aladdin's eToken, may also be used with MOVEit Freely
+    to provide credentials as long as the SSL hardware certificate store is accessible
+    through the Windows certificate store interface.&nbsp;
+    See also the <samp>-pfxfile:filename</samp>
+    option.</li>
+  <li><strong><samp>-d</samp></strong> to display commands sent to the server.&nbsp;Passwords, however, are still masked when this mode is in use.</li>
+  <li><strong><samp>-e:<i>sslmode</i></samp></strong> to select the SSL encryption
+    mode.&nbsp; <i>sslmode</i> must be one of:
+    <p><table border="1" cellspacing="1">
+      <tr>
+        <th valign="top" align="left">sslmode</th>
+        <th valign="top" align="left">Meaning</th>
+      </tr>
+      <tr>
+        <td valign="top"><code>off</code><br>
+          &nbsp;</td>
+        <td valign="top">no SSL encryption (default)</td>
+      </tr>
+      <tr>
+        <td valign="top"><code>tls-p</code> or <code>on</code></td>
+        <td valign="top">encrypts both control and data with the AUTH TLS and
+          PROT P commands. ("explicit")</td>
+      </tr>
+      <tr>
+        <td valign="top"><code>on-ccc</code></td>
+        <td valign="top">the same as &quot;on&quot;, except that after signon,
+          the CCC command is sent to switch the control connection to
+          unencrypted mode.&nbsp; Data connections will be
+          encrypted.&nbsp;&nbsp;With this option, the username and password are
+          encrypted, but other FTP commands are in cleartext.&nbsp;&nbsp;
+          <p>This option is used when a firewall between the client and the
+          server is using Network Address Translation to change the client's
+          view of the&nbsp; FTP server's IP address.&nbsp; This option the
+          firewall to inspect and rewrite PORT commands and PASV responses, to
+          account for this IP address mapping.&nbsp; Without this feature, if
+          you are using encrypted sessions with certain firewalls, you might
+          have to use the -natpasv or -natact:ip command-line options
+          instead.&nbsp;&nbsp;</p>
+          <p>The &quot;on-ccc&quot; option is not frequently used, because many
+          FTP servers do not support the CCC command.&nbsp;</p>
+        </td>
+      </tr>
+      <tr>
+        <td valign="top"><code>tls-c</code></td>
+        <td valign="top">encrypts only the control connection with the AUTH TLS command.&nbsp; Encryption of the data connection can be changed during
+          the session with the prot command.&nbsp;&nbsp;
+          <p>prot p sets data connections to be protected (encrypted);<br>
+          prot c sets data connections to be cleartext (unencrypted).</td>
+      </tr>
+      <tr>
+        <td valign="top"><code>tls-c-ccc</code></td>
+        <td valign="top">like &quot;tls-c&quot;, except that after signon,
+          the CCC command is sent to switch the control connection to
+          unencrypted mode.&nbsp; Data connections will not be
+          encrypted.&nbsp; See the above discussion of &quot;on-ccc&quot;.</td>
+      </tr>
+      <tr>
+        <td valign="top"><code>implicit</code></td>
+        <td valign="top">encrypts both connections without the use of an AUTH
+          command; usually to port 990.</td>
+      </tr>
+      <tr>
+        <td valign="top"><code>implicit-ccc</code>&nbsp;</td>
+        <td valign="top">the same as &quot;implicit&quot;, except that after
+          signon,
+          the CCC command is sent to switch the control connection to
+          unencrypted mode.&nbsp; Data connections will be
+          encrypted.&nbsp;&nbsp;See the above discussion of &quot;on-ccc&quot;.</td>
+      </tr>
+    </table>
+ </li>
+  <li><strong><samp>-n</samp></strong> to not prompt for username and password at startup.</li>
+  <li><b><samp>-natact:ip</samp></b>  to use ip as our IP address in "Client NAT" mode
+    in active (as opposed to passive) FTP mode.&nbsp; See <a href="#clientnat">Client
+    NAT</a>.</li>
+  <li><b><samp>-natpasv</samp></b>    to ignore the IP address in the PASV reply in "Client NAT" mode
+    when in passive FTP mode.&nbsp; Instead, use the address of the control
+    connection.&nbsp; See <a href="#clientnat">Client NAT</a>.</li>
+  <li><strong><samp>-password:pw </samp></strong>is the default password.&nbsp;
+    If this is not specified, the program will prompt for a password upon
+    initial connect.</li>
+  <li><samp><strong>-pfxfile:filename</strong></samp> specifies a file from
+    which a client certificate should be read.&nbsp; The first private
+    certificate in the file will be used.&nbsp; This is an alternative to the <samp>-ccn</samp>
+    parameter, for when the client certificate is not installed in a Windows
+    store.&nbsp; The filename must be in .PFX format (also known as .P12
+    format).&nbsp; If the file is protected by a password, use the <samp>-pfxpw</samp>
+    parameter.</li>
+  <li><strong><samp>-pfxpw:password</samp></strong> specifies the password to be
+    used with <samp>-pfxfile</samp>.&nbsp; See also <samp>-pfxpwfile</samp>.</li>
+  <li><strong><samp>-pfxpwfile:filename</samp></strong> specifies the name of a
+    file that contains the password to the file given by <samp>-pfxfile</samp>.&nbsp;
+    You should not use both <samp>-pfxpw</samp> and <samp>-pfxpwfile</samp>.</li>
+  <li><b><strong><samp>-ports:low-high</samp></strong></b> specifies the port
+    range to use on the client side of TCP data connections.&nbsp; For example,
+    you might specify <samp>-ports:8000-8009</samp>. MOVEit Freely will restrict
+    the port numbers it uses to be greater than or equal to <i>low</i>, and less
+    than or equal to <i>high</i>.&nbsp; For active mode, this restricts the port
+    numbers sent by the PORT command.&nbsp; For passive mode, this controls the
+    port number of the originating end of the connection.&nbsp; This very rarely
+    used option exists to accommodate highly restrictive firewall rules.&nbsp;
+    Without this option, MOVEit Freely will allow the operating system to choose
+    port numbers.&nbsp;&nbsp;</li>
+  <li><strong><samp>-quiterror</samp></strong> to quit on any error.&nbsp;
+    This will exit a script file without reading any more commands.</li>
+  <li><strong><samp>-resume</samp></strong> to attempt to resume transfers if the destination
+    files exist.</li>
+  <li><strong><samp>-s:<i>filename</i></samp></strong> to read commands from a script file (do
+    not use redirection).&nbsp; The default is to read commands from the console.</li>
+  <li><strong><samp>-t:data_timeout_secs</samp></strong> to set the data socket
+    timeout in
+    seconds.&nbsp; This applies to both the amount of time to wait for the
+    server to connect back (on a non-passive data port), and the amount of time to wait
+    without data before declaring a data socket dead.&nbsp; The default is 120 seconds.</li>
+  <li><strong><samp>-user:username </samp></strong>is the default
+    username.&nbsp; If this is not specified, the program will prompt for a
+    username upon initial connect.</li>
+  <li><strong><samp>-z</samp></strong> to not warn about problems with FTP server
+    certificates, instead accepting any certificate.&nbsp; By default, if there is a problem
+    with a certificate, MOVEit Freely will display a dialog, asking whether you want to accept
+    the certificate.&nbsp; The most common problem is that a certificate was issued by a
+    non-trusted certification authority, as happens with test certificates. </li>
+</ul>
+
+<p><b>hostname</b> is the domain name or numeric IP address of an FTP server.&nbsp; </p>
+
+<p><b>port</b> is the numeric TCP port number to use.&nbsp; The default is 21,
+unless -e:implicit has been specified, in which case the default is 990.</p>
+
+<p>If no hostname is given on the command line, MOVEit Freely starts without making a
+connection.&nbsp; In this case, you must issue an <b>open</b> command to connect to an FTP
+server.</p>
+
+<p>Here are some examples of this syntax in use:
+
+<ul>
+  <li>FTPS ftp.ipswitch.com<br>
+    <em>(Open an INSECURE, INTERACTIVE connection to &quot;ftp.ipswitch.com&quot;)</em></li>
+  <li>FTPS -e:on ftps.ipswitch.com<br>
+    <em>(Open a SECURE, INTERACTIVE connection to &quot;ftps.ipswitch.com&quot;)</em></li>
+  <li>FTPS -e:on -s:mybatch.txt ftps.ipswitch.com<br>
+    <em>(Open a SECURE, BATCH connection to &quot;ftps.ipswitch.com&quot;)</em></li>
+</ul>
+
+<h3>Compatibility with MOVEit Xfer and Microsoft's "ftp.exe" Client</h3>
+
+<p>MOVEit Xfer is a free, command-line application also written and distributed by Ipswitch
+to communicate with MOVEit DMZ servers using the firewall-friendly HTTPS protocol.
+(MOVEit Freely communicates with MOVEit DMZ server using the FTPS protocol.)
+The command-line syntax for MOVEit Xfer was based on existing MOVEit Freely command-line syntax.
+This uniformity allows people to convert most MOVEit Freely scripts to MOVEit Xfer scripts
+simply by replacing "ftps" with "xfer".
+</p>
+
+<p>MOVEit Freely command-line syntax was itself based on the command-line syntax of Microsoft's non-secure ftp.exe client.
+Once again, this uniformity allows people to convert many scripts based on "ftp.exe" to MOVEit Freely scripts
+simply by replacing "ftp" with "ftps".
+</p>
+
+<h2><a name='ProgramExitValues'>Program Exit Values</a></h2>
+
+<p>MOVEit Freely will return an exit value of zero (0) if no errors occurred during the
+processing of a file transfer session.&nbsp; See the example below for a batch file that checks
+the return code for errors.&nbsp; Several different exit codes are returned by MOVEit Freely.
+<ul>1 is returned for syntax errors in the command line parameters.
+<br>2 is returned if the -s: parameter points to a file or directory that does not exist.
+<br>3 is returned if any command during the session caused an error, either a
+4xx or 5xx response from the server or a syntax or file error detected by MOVEit Freely itself.
+<br>13 is returned if the -s: parameter points to a file whose sharing mode does not
+allow read access, or if the path is a directory, not a file.
+</ul>If the -quiterror parameter is specified, MOVEit Freely will exit immediately with an
+exit code of 3 as soon as an error occurs without reading any more commands from the script file
+or console.
+<br>&nbsp;
+
+<h2><a name="ResumingTransfers">Resuming Transfers</a></h2>
+
+<p>The -resume parameter can be used to cause MOVEit Freely to attempt to resume a transfer
+that may have been interrupted in a previous execution.&nbsp; Specifying -resume will change the
+way that get and put (also mget/mput) work.&nbsp; Resuming transfers requires support on the
+corresponding FTP server, but not all server implementations have that support.&nbsp; Here is
+how the -resume parameter works:
+<blockquote>When a <strong>get</strong> operation is performed,
+MOVEit Freely will first check to see if there is already a local file present.&nbsp; If so, a
+"REST xxxxx" command is sent to the server with "xxxxx" being the size in bytes of local copy
+of the file.&nbsp; Then, when the file is transferred, the first "xxxxx" number of bytes are skipped
+by the server and MOVEit Freely will write the data sent to the end of the local file.
+<p>When a <strong>put</strong> operation is performs, MOVEit Freely will first send a "SIZE (filename)"
+command to the server to ask for the number of bytes in the file.&nbsp; Next, MOVEit Freely will
+send a "REST xxxxx" command is to the server with "xxxxx" being the number of bytes to skip
+when the transfer takes place.&nbsp; The server is responsible for writing the data to the end
+of the file.
+</blockquote>
+It is important to note that use of the -resume parameter will cancel the ability of MOVEit
+Freely to overwrite a file if it already exists.&nbsp; A destination file, if it exists, is assumed to be
+a partially transferred version of the source file.&nbsp; If you often transfer different versions
+of a file with the same name with overwrite, you should not use -resume.
+<p>When MOVEit Freely "file integrity mode" is used with MOVEit DMZ, a partial transfer that is
+completed by using the -resume parameter is verified, by checksum, that the entire destination file
+matches the source file.
+<p>When using -resume for <strong>put</strong> operations with MOVEit DMZ, only files that have
+been detected by MOVEit DMZ as previously incomplete transfers can be resumed.&nbsp; That is, a
+file which was completely received by MOVEit DMZ cannot be extended using the -resume feature.
+<br>&nbsp;
+
+
+
+<h2>Commands<a name="commands"></a></h2>
+
+<p>Once MOVEit Freely is started, it prompts for and reads single-line commands.&nbsp; The
+commands are read from the console, or from the script filename if the <samp>-s</samp>
+parameter has been specified on the command line.&nbsp; If the -quiterror parameter has been
+used and an error is encountered, (either a 4xx or 5xx response from the server or a syntax
+or file error detected by MOVEit Freely itself), MOVEit Freely will exit without reading
+any more commands from the console or script file.</p>
+
+<p>If a command that has required parameters is entered without the parameters, MOVEit
+Freely will prompt for the parameters, using the same prompts as Windows 2000's FTP.EXE.&nbsp;&nbsp;</p>
+
+<p>For many commands, to enter a parameter containing spaces, you must enclose the parameter in
+double quotes.&nbsp; For instance, to retrieve a file named <samp>My
+Document.txt</samp>, you should say <samp>get&nbsp;&quot;My</samp>&nbsp;<samp>Document.txt&quot;</samp>.&nbsp;
+The only exceptions to this rule are the dir, lcd, ls, and quote commands, which
+do not require double quotes.</p>
+
+<p>Legal FTP commands are listed below.&nbsp; Optional parameters are enclosed in brackets
+([]).</p>
+
+<h3>![<i>cmd</i>]</h3>
+
+<p>Executes a shell command on the local machine.&nbsp; If cmd is not specified, a copy of
+the command interpreter is launched.&nbsp; You can type as many Windows commands as you
+like.&nbsp; When you are finished, type <samp>exit</samp> to return control to MOVEit
+Freely.&nbsp; If cmd is specified, that command is executed, then control is returned to
+MOVEit Freely, with no need to type exit.</p>
+
+<h3>?</h3>
+
+<p>Displays a list of the available MOVEit Freely commands.&nbsp;</p>
+
+<h3>about</h3>
+
+<p>Displays a brief description of MOVEit Freely, the current version, and a link to the
+vendor's website.</p>
+
+<h3>append localfilename <i>[remotefilename]</i></h3>
+
+<p>Appends a local file to an existing file on the server.&nbsp; If <em>remotefilename</em> is not specified,
+the name of the file on the remote&nbsp; system will be the same as <em>localfilename</em>.&nbsp;
+You may put &quot; around the filenames in order to include spaces in the names.&nbsp;
+If the remote file does not exist, many FTP servers will create a new one,
+treating the command as if it were a <b>put</b>.</p>
+
+<h3>ascii</h3>
+
+<p>Tells the FTP server to switch to ASCII transfer mode.</p>
+
+<h3>bell</h3>
+
+<p>Toggles the flag that says whether a bell should be sounded after the completion of
+certain commands.&nbsp; These commands are the commands that cause data to be
+transferred:&nbsp; dir, ls, get, put, mget, mput.</p>
+
+<h3>binary</h3>
+
+<p>Tells the FTP server to switch to binary transfer mode.</p>
+
+<h3>cd <i>directory</i></h3>
+
+<p>Changes the working directory on the server.</p>
+
+<h3>close</h3>
+
+<p>Closes the connection to the server without exiting the program.</p>
+
+<h3>debug</h3>
+
+<p>Toggles the flag which says whether commands sent to the FTP server should be echoed to
+the console.</p>
+
+<h3>delete <i>filename</i></h3>
+
+<p>Deletes a filename on the FTP server.</p>
+
+<h3>dir <i>[filemask] [outputfile]</i></h3>
+
+<p>Gets a directory listing from the FTP server.&nbsp; If <i>outputfile</i> is
+specified, the output goes to that file instead of to the console.</p>
+
+<h3>get <i>remotefilename [localfilename]</i></h3>
+
+<p>Retrieves a file.&nbsp; If <i> localfilename</i> is not specified, the file will be saved to
+the local system as <em>remotefilename</em>.&nbsp; You may put &quot; around the
+filenames in order to include spaces in the names.</p>
+
+<h3>hash</h3>
+
+<p>Toggles the flag that says whether to print a '#' for every 2048 bytes transferred.</p>
+
+<h3>help</h3>
+
+<p>Displays the list of commands accepted by MOVEit Freely.</p>
+
+<h3>lcd</h3>
+
+<p>Changes the local directory.</p>
+
+<h3>ls <i>[filemask] [outputfile]</i></h3>
+
+<p>Displays a list of files on the remote system, with file names only.&nbsp;&nbsp;If
+<i>outputfile</i> is specified, the output goes to that file instead of to the
+console.</p>
+
+<h3>mdelete<i> remotefilemask</i></h3>
+
+<p>Deletes multiple files from the remote system.&nbsp; MOVEit Freely implements this by
+executing the equivalent of an &quot;ls&quot; command, then doing a delete for
+each filename returned.&nbsp; If prompting is on, MOVEit Freely prompts for whether to actually
+delete the
+file.&nbsp; The response should be &quot;y&quot; or just &lt;Enter&gt; to fetch that file,
+q to quit,
+or anything else to not delete the file.</p>
+
+<h3>mget <i>remotefilemask</i></h3>
+
+<p>Retrieves multiple files from the remote system.&nbsp; MOVEit Freely implements this by
+executing the equivalent of an &quot;ls&quot; command, then doing a get for each filename
+returned.&nbsp; If prompting is on, MOVEit Freely prompts for whether to actually get the
+file.&nbsp; The response should be &quot;y&quot; or just &lt;Enter&gt; to fetch that file,
+q to quit, or anything else to not transfer the file.</p>
+
+<p>Examples of <em>remotefilemask</em>:
+
+<ul>
+  <li>*.*&nbsp; (Get all files - however some remote systems omit files without
+    &quot;extensions&quot;)</li>
+  <li>* (Get all files - however some remote systems omit files with &quot;extensions&quot;)</li>
+  <li>*.txt (Get all files with an extension of &quot;txt&quot;)</li>
+</ul>
+
+<h3>mkdir <i>remotedirectory</i></h3>
+
+<p>Makes a directory on the remote system.</p>
+
+<h3>mput <i>localfilemask</i></h3>
+
+<p>Sends multiple files to the remote system.&nbsp; MOVEit Freely implements this by
+getting a list of local files matching the mask, then doing a put for each filename
+returned.&nbsp; If prompting is on, MOVEit Freely prompts for whether to actually put the
+file.&nbsp; The response should be &quot;y&quot; or just &lt;Enter&gt; to send that file,
+or anything else to not transfer the file.</p>
+
+<h3>open <i>hostname [port]</i></h3>
+
+<p>Connects to an FTP server.&nbsp; If <em>port</em> is not specified, MOVEit Freely will
+attempt to connect on port 21.</p>
+
+<h3>passive</h3>
+
+<p>Toggles the flag that says whether to use passive mode.&nbsp; In passive mode, the
+remote FTP server accepts data connections from MOVEit Freely for each data
+transfer.&nbsp; In the more traditional non-passive mode, MOVEit Freely accepts data
+connections from the remote FTP server.</p>
+
+<p>(Passive mode is often required by firewalls and proxy servers.)</p>
+
+<h3>prompt</h3>
+
+<p>Toggles the flag that says whether to prompt for transfers during an mget or mput.</p>
+
+<h3>put localfilename <i>[remotefilename]</i></h3>
+
+<p>Sends a file to a remote FTP server.&nbsp; If <em>remotefilename</em> is not specified,
+the name of the file on the remote&nbsp; system will be the same as <em>localfilename</em>.&nbsp;
+You may put &quot; around the filenames in order to include spaces in the names.</p>
+
+<h3>pwd</h3>
+
+<p>Displays the working directory on the FTP server.</p>
+
+<h3>quit</h3>
+
+<p>Closes the connection, if any, and exits the program.</p>
+
+<h3>quote <i>remotecommand</i></h3>
+
+<p>Sends an arbitrary command to the remote system.</p>
+
+<h3>remotehelp</h3>
+
+<p>Displays a list of commands available on the remote FTP server.&nbsp; </p>
+
+<h3>rename <i>oldfilename newfilename</i></h3>
+
+<p>Renames a file on the remote system.</p>
+
+<p><b>rmdir <i>directory</i></b></p>
+
+<p>Removes a directory on the remote system.</p>
+
+<h3>status</h3>
+
+<p>Displays the status of various flags.</p>
+
+<h3>user</h3>
+
+<p>Prompts for username and password.&nbsp; Used when you are connected to an FTP server,
+but not necessarily logged in.</p>
+
+<h3>type [ascii | binary]</h3>
+
+<p>Displays the current transfer type.&nbsp; If <em>ascii</em> or <em>binary</em> are
+specified, first tells the FTP server to switch to that type.</p>
+
+<h3>verbose</h3>
+
+<p>Toggles the flag that says whether responses from the FTP server should be displayed on
+the console.&nbsp; There is rarely a reason to turn this mode off.</p>
+
+
+
+
+<h2>Examples<a name="examples"></a></h2>
+
+<h3><a name='SimpleScriptExample'>Simple Script Example</a></h3>
+
+<p>The following script and command line retrieve all files named *.rpt from the
+Incoming directory of an FTP server.&nbsp;&nbsp;Passive mode is used.&nbsp;&nbsp;</p>
+
+The command line is:
+<p>ftps -s:GetRpt.in ftp.bigcorp.com&nbsp;</p>
+
+<p>The contents of GetRpt.in are:</p>
+<blockquote>
+<pre>jsmith
+secret123
+cd Incoming
+passive
+prompt
+mget *.rpt
+quit</pre>
+</blockquote>
+<p>Note that the lines in the script are simply the lines of text
+that would be entered by the user if the transfer were done interactively
+rather than via a script.&nbsp; The
+&quot;prompt&quot; command is necessary to turn off prompting for use inside a
+script.
+</p>
+
+<h3><a name='BatchFiletoUploadaSingleFile'>Batch File to Upload a Single File</a></h3>
+
+<p>The following batch file lets a user upload a single file using a single command.  If you save the following snippet as "uploadit.bat", usage would be: "uploadit (hostname) (username) (password) (file_to_transfer)"</p>
+
+<blockquote>
+<pre>echo put %4 &gt; temp.txt
+echo quit &gt;&gt; temp.txt
+ftps -a -e:on -user:%2 -password:%3 -s:temp.txt %1
+del temp.txt</pre>
+</blockquote>
+
+
+<h3><a name='BatchFilethatChecksforErrors'>Batch File that Checks for Errors</a></h3>
+
+<p>This batch file checks the exit code from MOVEit Freely to see if any errors occurred.&nbsp; The
+-quiterror parameter will make the program exit as soon as there is an error without reading any more
+commands from the script file.
+
+<blockquote>
+<pre>ftps -user:dave -password:super -quiterror -s:script.txt myhost
+if %ERRORLEVEL%==0 goto great
+echo ftps returned error code: %ERRORLEVEL%
+if %ERRORLEVEL%==3 goto out
+if %ERRORLEVEL% GEQ 1 goto oops
+echo Unknown File Transfer Problem
+goto done
+:oops
+echo Error in File Transfer syntax
+goto done
+:out
+echo An error occurred in the File Transfer
+goto done
+:great
+echo The File Transfer completed successfully
+:done
+</pre>
+</blockquote>
+
+
+<h3><a name='SecureFTPHosttoInsecureFTPHost'>Secure FTP Host to Insecure FTP Host</a></h3>
+
+<p>Included with this documentation is a longer script example ("samplecopy.bat") which retrieves all the files from a folder on a secure FTP server and places them into a folder of an insecure FTP server.</p>
+
+<p>This batch file invokes MOVEit Freely twice (once for each of the two hosts).  Immediately before invoking the client, the batch file builds up a temporary command file.  These command files (as well as a temporary work folder) are deleted before the batch file exits.</p>
+
+<blockquote>
+<pre>echo off
+rem * * * * * * * * * * * * * * * * * * * * * * * * * * *
+rem * Simple script to pick up files from MOVEit DMZ
+rem * (via its FTP over SSL interface)
+rem * and upload those file to another host via FTP
+rem * * * * * * * * * * * * * * * * * * * * * * * * * * *
+rem *
+rem Fill out ALL the values below
+rem *
+SET MOVEitIP=securehost1
+SET MOVEitUser=username1
+SET MOVEitPassword=password1
+SET RemoteIP=insecurehost2
+SET RemoteUser=username2
+SET RemotePassword=password2
+rem *
+rem * * * * * * * * * * * * * * * * * * * * * * * * * * *
+echo Copying files from %MOVEitIP% as %MOVEitUser%
+echo Copying files to %RemoteIP% as %RemoteUser%
+mkdir work
+echo prompt &gt; frommoveit.txt
+echo lcd work &gt;&gt; frommoveit.txt
+echo mget *.* &gt;&gt; frommoveit.txt
+echo quit &gt;&gt; frommoveit.txt
+ftps -a -e:on -user:%MOVEitUser% -password:%MOVEitPassword% -s:frommoveit.txt %MOVEitIP%
+del frommoveit.txt
+echo prompt &gt; toremote.txt
+echo lcd work &gt;&gt; toremote.txt
+echo mput *.* &gt;&gt; toremote.txt
+echo quit &gt;&gt; toremote.txt
+ftps -user:%RemoteUser% -password:%RemotePassword% -s:toremote.txt %RemoteIP%
+del toremote.txt
+del work\*.* /Q
+rmdir work</pre>
+</blockquote>
+
+<h3><a name='PipingDirectoryListsandOtherOutputtoaFile'>Piping Directory Lists and Other Output to a File</a></h3>
+
+<p>People who write scripts around MOVEit Freely often find it useful to be able to write directory listings and other FTP output to a file.
+The standard Windows executable-level pipe makes this easy.</p>
+
+<p>Here is a one-line command which signs onto a secure FTP server, runs a script ("myscript.txt") and pipes all output to a file ("xxx.txt").</p>
+
+<blockquote>
+<pre>C:\&gt;ftps -e:on -a moveit.ipswitch.com -user:myuser -password:mypass -s:myscript.txt &gt; xxx.txt
+</pre>
+</blockquote>
+
+<p>The "myscript.txt" script file contains the following commands.</p>
+
+<blockquote>
+<pre>prompt
+cd home
+cd &quot;My User Folder&quot;
+pwd
+ls *.zip
+quit
+</pre>
+</blockquote>
+
+<p>The "xxx.txt" output file will contain output similar to the following.
+The directory list begins after the "150" response.
+Alternately, a "dir" command could be used in place of "ls" if the intent was to view a "column-view" directory listing.</p>
+
+<blockquote>
+<pre>220 Connected to MOVEit DMZ FTP server version 2.7.1.4
+234 SSL enabled start the negotiation
+Connected to moveit.ipswitch.com.
+331 Password required for myuser
+230-This area exists to provide our clients and business partners with secure,
+immediate access to key resources.  Anonymous access is NOT permitted - please
+contact Ipswitch for your complementary account
+230-All time and date stamps displayed on this site are GMT -5 unless otherwise
+specified.
+230-This server is configured to do passive mode transfers only.
+230 User myuser logged in.
+215 Windows_NT version 5.0 (MOVEit DMZ FTP 2.7.1.4)
+200 Integrity Mode Selected
+ftp&gt; Interactive mode Off .
+ftp&gt; 250 CWD command successful
+ftp&gt; 250 CWD command successful
+ftp&gt; 257 &quot;/home/My Home Folder&quot; is current directory
+ftp&gt; 227 Entering Passive Mode (66,170,5,143,46,224).
+150 Opening ASCII mode data connection
+backup.zip
+DMZ_2751_Patch.zip
+DMZ_NTFS_Advice.zip
+DMZ_Training_26.zip
+flbk.zip
+gnugpg.zip
+jgl_backup.zip
+personalfirewall.zip
+upload.zip
+Using Local SMTP Relay.zip
+ftp: 190 bytes received in 0.70Seconds 0.26Kbytes/sec.
+226 Transfer complete
+ftp&gt; 221 Goodbye
+</pre>
+</blockquote>
+
+
+<h2><a name="FTPProtocol101">FTP Protocol 101</a></h2>
+
+<p>Unlike most other Internet protocols FTP requires not one but TWO TCP/IP connections to
+function properly.&nbsp; The first connection is called the &quot;control channel&quot;
+and is initiated by an FTP client to an FTP server.&nbsp; (Nothing unusual so far.) &nbsp;
+FTP commands such as "USER" and "PWD" and simple responses are sent and received across this
+the control channel.&nbsp; </p>
+
+<p>The second connection is called the &quot;data channel&quot;.&nbsp; Actual file data
+- including DIRECTORY LISTINGS - is sent across the data channel.
+&nbsp; Unlike the control channel, the data channel does NOT remain connected throughout
+an FTP sessions, but is only connected and available when needed.</p>
+
+<p>Most FTP servers &quot;listen&quot; for control channel connections on TCP port 21.
+(Or port 990 when FTP over SSL implicit mode is used.)
+&nbsp; Data channels are not as predictable, however.&nbsp; </p>
+
+<p>In &quot;ACTIVE&quot;
+mode the CLIENT tells the SERVER which remote port to use and a data connection is
+opened by the SERVER from port 20 back to the CLIENT on a random &quot;high port&quot;.
+(A &quot;high port&quot; is a TCP port numbered 1024-65535).&nbsp; </p>
+
+<p><strong>"Active Mode" FTP</strong><br>
+<img src="images_MoveITFreely/FTPNormal.gif" width="423" height="162"
+alt="Non-Passive FTP"></p>
+
+<p>In &quot;PASSIVE&quot;
+mode the SERVER tells the CLIENT which remote port to use and a data connection is
+opened by the CLIENT from a random high port back to the SERVER on a random &quot;high port&quot;.</p>
+
+<p><strong>"Passive Mode" or "Firewall-Friendly" FTP</strong><br>
+<img src="images_MoveITFreely/FTPPassive.gif" alt="Passive FTP" width="413" height="140"></p>
+
+<p>Over the years, firewalls became increasingly involved in site-to-site file transfers,
+and most firewalls learned
+enough about the FTP protocol that they could DYNAMICALLY open up high ports
+for FTP data transfer without requiring addition configuration
+by actually reading FTP control channels.
+In other words, a firewall technician dealing with regular FTP
+would typically only need
+to define a single "FTP" rule on his firewall
+and would not need to define
+additional rules to cover the data ports.
+</p>
+
+
+<p><strong>FTP over SSL</strong></p>
+
+<p>
+With the introduction of FTP over SSL, however, FTP-aware firewalls lost the ability to
+dynamically open data ports because the firewalls could not longer read the control
+channels.  This meant that firewall technicians needed to start defining ranges of ports
+for FTP sessions to use.  The rules required to get FTP over SSL to work properly were
+often alarming to security people for good reason.  For example, a basic FTP over SSL
+"ACTIVE DATA PORT" rule might allow OUTBOUND connections from the FTP server to ANY high port
+ANYWHERE on the Internet.  A basic FTP over SSL "PASSIVE DATA PORT" rule might allow
+INBOUND connections from ANYWHERE on the Internet to ANY high port on the FTP server.
+Obviously, some improvements needed to be made.
+</p>
+
+<p>
+At this point we can safely discard the idea of using
+FTP over SSL in ACTIVE mode, however, because any FTP client which supports
+FTP over SSL also supports PASSIVE mode.  (FTP over SSL in ACTIVE mode also
+requires a great deal of holes to be poked in CLIENT firewalls, so it is
+good we do not need to deal with it.)  This leaves only FTP over SSL in
+PASSIVE mode to worry about.
+</p>
+
+<p>The knock against the FTP over SSL PASSIVE data port rule defined above is that
+it allows traffic from ANY Internet address to ANY high port on the FTP server.  It's easy
+to begin defining rules which restrict the ANY Internet addresses to SPECIFIC Internet
+addresses, but an address spoofer would still have access to ANY high port on the FTP server.
+(This is also really only an option for organizations which a finite number of users and
+do not have restrictions on immediately firewall changes.)  However, if you have a
+decent FTP server (e.g. <a href="http://www.ipswitchft.com/moveitdmz">MOVEit DMZ</a>),
+it is relatively
+easy to tell the FTP server itself to confine its passive data ports to a finite range
+(e.g. 15000-15020).  Now, your passive data port rule can have a finite range of ports too,
+and because the SERVER is in charge of port assignments during PASSIVE transfers, you
+never need to do anything to your FTP CLIENTS but tell them to use PASSIVE mode.  (Some CLIENT
+firewalls will need this range of ports configured in them too, but it's still less work than
+dealing with ACTIVE mode over SSL.)
+
+<p>MOVEit Freely complies with RFC 959 (regarding the FTP protocol) and uses SSL to
+encrypt both the control and data channels.&nbsp; (In particular, MOVEit Freely does not
+implement the single channel, usually port 22 &quot;secure FTP over SSH&quot; mode.)</p>
+
+<h2><a name="clientnat">Client NAT</a></h2>
+
+<p>MOVEit Freely provides a client Network Address Translation (&quot;client
+NAT&quot;) capability to help overcome problems with poorly-configured FTP
+servers and firewalls.&nbsp; These problems can prevent you from performing
+transfers over data ports, even if you can connect and login on the control
+port.&nbsp; These problems occur in two similar circumstances:</p>
+
+<ul>
+  <li>In active mode, the FTP server may be unable to connect to the client's IP
+    address due to an intervening network firewall.&nbsp;&nbsp;</li>
+  <li>In passive mode, you may not be able to connect to the FTP server because
+    the address it has told the client to connect to is not reachable by the
+    client.</li>
+</ul>
+<p>These problems are particularly likely to occur in secure mode.&nbsp; In
+non-secure mode, many firewalls will automatically make adjustments to the PORT
+and PASV transactions on-the-fly to compensate for the client and server being
+on different networks.&nbsp; This is not possible with secure connections,
+because the firewall is unable to decrypt and rewrite the transactions.</p>
+<p>Although these problems are best addressed by reconfiguring the FTP server
+and/or firewall, users of MOVEit Freely do not always have administrative access
+to do so.&nbsp; MOVEit Freely thus provides two command-line parameters that
+allow the user to work around these problems on the client end.</p>
+
+<ul>
+  <li>The <samp><b>-natact:ipaddr</b></samp> parameter tells MOVEit Freely to tell
+the FTP server, in active mode, to connect to MOVEit Freely on IP address &quot;ipaddr&quot;
+rather than the client's actual IP address.&nbsp; In order to use this
+parameter, you must know an address by which the server can access your PC.&nbsp;
+    Note:&nbsp; You cannot use this feature with MOVEit DMZ's FTP server in
+    active mode, because of a security feature in MOVEit DMZ which prevents the
+    &quot;hijacking&quot; of a data port.&nbsp; Use passive mode instead.</li>
+  <li>The <b><samp>-natpasv</samp></b>     parameter tells MOVEit Freely to ignore
+the IP address specified by the FTP server when the FTP server tells Freely to
+make a data connection in passive mode.&nbsp; Instead, when this parameter is
+specified, MOVEit Freely will connect to the IP address that it used to make the
+control connection.</li>
+</ul>
+
+<h2><a name="BasicTroubleshooting">Basic Troubleshooting</a></h2>
+
+<p>Ipswitch rarely deals with "control channel" problems
+encountered through MOVEit Freely because these problems provide such
+instant feedback to the user.
+For example, a user who cannot connect or sign on to an FTP server will usually
+contact the technician in charge of the particular FTP server rather than
+the client software vendor.</p>
+
+<p>The problems Ipswitch does hear about are typically "data channel" problems instead.
+Specifically, these involve the inability to start a data transfer or perform a directory listing.
+(Many people do not know that FTP directory listing are technically data transfers too.)</p>
+
+<p>To troubleshoot these problems, be sure you are running MOVEit Freely in DEBUG mode
+(so you can capture a log), try to replicate the problem and see if it is described by
+one of the situations described below.</p>
+
+<p><strong>"Six Octet" PORT Syntax</strong></p>
+
+<p>Before proceeding, however, you should know how to read "six octet" PORT syntax you will
+see using many clients and servers.  </p>
+
+<pre>227 Entering Passive Mode (192,168,3,15,15,180)</pre>
+
+<p>In this format, the first four octets are the IP address the remote machine is telling
+the client to connect to.  (i.e. "192.168.3.15")   The two remaining octets describe the port
+the remote machine is telling the client to connect to, but this calculation requires a
+calculator.  Take the fifth octet, multiply by 256 and add the sixth octet
+to get the complete port number.  (i.e. 15x256+180= "4020")</p>
+
+<p><strong>Blocked ACTIVE Data Channel</strong></p>
+
+<p>In this situation, the FTP client asks the FTP server to connect to a specific
+port on the FTP client, but access to that port is blocked by a client firewall
+or a server firewall. Note the "PORT" command being issued by the client.</a>
+
+<blockquote>
+<pre>
+C:\&gt;ftps -z -d -t:5 -e:implicit 192.168.3.15 -user:myuser -password:mypass
+Connected to 192.168.3.15.
+...
+ftp&gt; dir
+---&gt; PORT 192,168,3,165,12,195
+200 PORT command successful
+---&gt; LIST
+Timed out waiting for connection from server.
+ftp&gt;
+</pre>
+</blockquote>
+
+<p>Solution:
+<ul>
+  <li>If you are using FTP over SSL, consider using PASSIVE mode transfers instead.
+  <li>If you are not using FTP over SSL, consider switching to an "FTP-aware" firewall
+  or use explicit firewall rules to un-block the data channel ports.
+</ul>
+
+<p><strong>Blocked PASSIVE Data Channel</strong></p>
+
+<p>In this situation, the FTP server asks the FTP client to connect to a specific
+port on the FTP server, but access to that port is blocked by a client firewall
+or a server firewall. Note that there is no "PORT" command being issued by the client.
+Instead, the server sends its IP address to the client.</a>
+
+<blockquote>
+<pre>
+C:\&gt;ftps -a -z -d -e:implicit 192.168.3.15 -user:myuser -password:mypass
+Connected to 192.168.3.15.
+...
+ftp&gt; dir
+---&gt; PASV
+227 Entering Passive Mode (192,168,3,15,15,178).
+---&gt; LIST
+Unable to connect to server: The connection timed-out. timeout=5
+150 Opening ASCII mode data connection
+</pre>
+</blockquote>
+
+<p>Solution:
+<ul>
+  <li>If you are using FTP over SSL, use explicit rules to un-block the data channel ports.
+  <li>If you have control over the FTP server, consider limiting the PASSIVE data channel
+  ports to a specific range to avoid a confrontation with your security team.
+  <li>If you are not using FTP over SSL, consider switching to an "FTP-aware" firewall
+  or use explicit firewall rules to un-block the data channel ports.
+</ul>
+
+<p><strong>Incorrect Server Address using PASSIVE mode with FTP over SSL</strong></p>
+
+<p>In this situation, the FTP server returns an IP address (usually an internal IP address)
+to be used for passive data transfer which is different than the IP address to
+which you connected the client. (In the example below, "192.168.3.15" != "33.44.55.66")
+This is another situation which used to be taken care
+of automatically by "FTP aware" firewalls before FTP over SSL existed.</p>
+
+<blockquote>
+<pre>
+C:\&gt;ftps -a -z -d -e:implicit 192.168.3.15 -user:myuser -password:mypass
+Connected to 192.168.3.15.
+...
+ftp&gt; dir
+---&gt; PASV
+227 Entering Passive Mode (<font color=red>33,44,55,66</font>,15,178).
+---&gt; LIST
+Unable to connect to server: The connection timed-out. timeout=5
+150 Opening ASCII mode data connection
+ftp&gt;
+</pre>
+</blockquote>
+
+<p>Solution:
+<ul>
+  <li>If you have control over the FTP server, configure the correct
+  external NAT address on the server itself to avoid the need to deploy this fix
+  to all your clients.  (Major commercial FTP over SSL servers, including
+  <a href='http://www.ipswitchft.com/moveitdmz'>MOVEit DMZ</a>, have
+  the built-in ability to send the correct IP address to clients in a NAT environment.
+  <li>Use MOVEit Freely's <a href="#clientnat">Client NAT</a> capability.
+  <li>See Ipswitch <a href='http://www.ipswitchft.com/uploads/media/MOVEit_WhitePaper_FTPNAT.PDF'>Secure FTP v. NAT White Paper</a> for more information.
+</ul>
+
+
+
+
+
+
+<h2>Distribution<a name="distribution"></a></h2>
+
+<p>The standard MOVEit Freely
+installation packages will automatically
+set the "PATH" variable to include the folder into which MOVEit Freely was
+installed.  This allows users to invoke the MOVEit Freely client
+from any command line prompt.  You should use the standard MOVEit Freely
+installation packages for distribution if your clients will write their
+own scripts OR are replacing existing FTP client scripts.</p>
+
+<h3><a name="rollyourown">USB-Friendly "Portable" Deployment</a></h3>
+
+<p><i>"A portable app is a computer program that you can carry around with you on a
+portable device and use on any Windows computer. When your USB thumbdrive,
+portable hard drive, iPod or other portable device is plugged in, you have
+access to your software and personal data just as you would on your own PC.
+And when you unplug, none of your personal data is left behind."</i>
+(Rare Ideas, LLC, 2005)</p>
+
+<p>MOVEit Freely can be deployed/installed as a USB-Friendly "Portable" application.
+Simply copy the contents of a MOVEit Freely archive file (e.g., "MOVEitFreely.zip")
+into a folder on your USB drive or other portable device.
+</p>
+
+<p>With command line
+      applications, MOVEit Freely included, your personal information is
+      generally confined to what you have written in batch files or piped out
+      into log files.  Please remember to keep any such batch or log files on
+      the portable drive too.</p>
+
+<p>
+You may wish to add the portable directory in which you installed MOVEit Freely
+to your PATH if you want to be able to invoke MOVEit Freely from any folder
+without specifying a full path to the executable.  If you often find yourself
+running command-line applications in a portable environment, you will also
+probably want to create a portable "Launch Command Line" shortcut and/or batch
+file on your portable device so your favorite utilities are always available
+in command-line sessions.
+</p>
+
+<h3><a name="rollyourown">Custom Distribution</a></h3>
+
+<p>If you elect to roll your own distribution of MOVEit Freely, you MUST include:
+  <ul>
+    <li>THIS DOCUMENT, AND...</li>
+    <li>MOVEitOverview.pdf, AND...</li>
+    <li>ftps.exe</li>
+  </ul>
+  You will probably also wish to include the supporting images required by this document,
+  all of which are found in the "images_MoveITFreely" folder.
+
+<p>You will also probably want to include any custom batch files, script input files and/or documentation
+in your own distribution.  Usually all these files are placed into a single "archive"
+file (e.g., a "zip" file), but they may be bundled in other distributions
+as permitted by the license found in this document.</p>
+
+
+
+<h2><a name="othermoveitproducts">Other MOVEit Products</a></h2>
+
+<h3><a name="othermoveitproducts_central">Need MISSION-CRITICAL automation?</a></h3>
+
+<p>If you run more than 10 automated MOVEit Freely transfers or need mission-critical automated file-transfer,
+please consider using <b>MOVEit Central</b> instead of MOVEit Freely.
+MOVEit Central is a fully-automated, schedule and event driven file transfer engine.
+It can move files between FTP servers, SSH servers, Windows file shares, email servers and comes with enterprise features such as remote control, task configuration/execution delegation, and automatic retry/resume of failed transfers.
+(<a href="http://www.ipswitchft.com/moveitcentral" target="_blank">More info...</a>)</p>
+
+<h3><a name="othermoveitproducts_dmz">Need your own secure file transfer server?</a></h3>
+
+<p>The first Windows-based secure file transfer server to support all three modes of FTP over SSL, the first to add SSH support, and the first one to support both protocols plus browser-based (HTTPS) transfers was <b>MOVEit DMZ</b>. In addition to three secure IN TRANSIT protocols, MOVEit DMZ features integrated FIPS-140-validated AT REST encryption to protect files while they are stored on the server. Request an evalution and join the banks, governments, hospitals and others who have stepped up to MOVEit secure file transfer today!
+(<a href="http://www.ipswitchft.com/moveitdmz" target="_blank">More info...</a>)</p>
+
+<h2><a name="license">MOVEit Freely LICENSE</a></h2>
+
+
+<p><font size="-2">
+MOVEit ® Freely is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. MOVEit Freely is licensed, not sold.
+</font></p>
+
+<p><font size="-2">
+1. GRANT OF LICENSE. This license agreement grants you the following rights:
+</font></p>
+
+<p><font size="-2">
+Installation and Use. You may install and use MOVEit Freely for your personal or company use. There is no charge for such use.  You may also make copies of MOVEit Freely for backup and archival purposes.
+</font></p>
+
+<p><font size="-2">
+Distribution. You may make unlimited copies of and may distribute to any party the original MOVEit Freely installation package as long as such distribution is performed without charge. You may reproduce or distribute components of the product (e.g., just "ftps.exe") as long as all MOVEit Freely documentation (including "MOVEitOverview.pdf") accompanies the software.
+</font></p>
+
+<p><font size="-2">
+2. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS.
+</font></p>
+
+<p><font size="-2">
+Limitations on Reverse Engineering, Decompilation, and Disassembly. You may not reverse engineer, decompile, or disassemble MOVEit Freely, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding this limitation.
+</font></p>
+
+<p><font size="-2">
+Software Transfer. You may not transfer your rights under this license agreement.
+</font></p>
+
+<p><font size="-2">
+Termination. Without prejudice to any other rights, Ipswitch, Inc. may terminate this license agreement if you fail to comply with the terms and conditions of this license agreement. In such event, you must destroy all copies of MOVEit Freely and all of its component parts.
+</font></p>
+
+<p><font size="-2">
+Rental. You may not sell, rent, or lease MOVEit Freely.
+</font></p>
+
+<p><font size="-2">
+3. COPYRIGHT. All title and copyrights in and to MOVEit Freely, the accompanying printed materials, and any copies of MOVEit Freely are owned by Ipswitch, Inc.  MOVEit Freely is protected by copyright laws and international treaty provisions. Therefore, you must treat MOVEit Freely like any other copyrighted material.
+</font></p>
+
+<p><font size="-2">
+WARRANTY AND LIMITATION OF LIABILITY
+</font></p>
+
+<p><font size="-2">
+WARRANTY. MOVEit Freely is distributed on an "as is" basis with no warranty, either expressed or implied.
+</font></p>
+
+<p><font size="-2">
+OTHER WARRANTIES. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IPSWITCH, INC. AND ITS SUPPLIERS DISCLAIM ALL OTHER WARRANTIES AND CONDITIONS, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT, WITH REGARD TO MOVEit Freely, AND THE PROVISION OF OR FAILURE TO PROVIDE SUPPORT SERVICES. THIS LIMITED WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS. YOU MAY HAVE OTHERS, WHICH VARY FROM STATE/JURISDICTION TO STATE/JURISDICTION.
+</font></p>
+
+<p><font size="-2">
+LIMITATION OF LIABILITY. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL IPSWITCH, INC. OR ITS SUPPLIERS BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE USE OF OR INABILITY TO USE MOVEit Freely OR THE PROVISION OF OR FAILURE TO PROVIDE SUPPORT SERVICES, EVEN IF IPSWITCH, INC. HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN ANY CASE, IPSWITCH, INC.'S ENTIRE LIABILITY UNDER ANY PROVISION OF THIS EULA SHALL BE LIMITED TO THE GREATER OF THE AMOUNT ACTUALLY PAID BY YOU FOR MOVEit Freely OR U.S.$5.00; PROVIDED, HOWEVER, IF YOU HAVE ENTERED INTO A IPSWITCH, INC. SUPPORT SERVICES AGREEMENT, IPSWITCH, INC.'S ENTIRE LIABILITY REGARDING SUPPORT SERVICES SHALL BE GOVERNED BY THE TERMS OF THAT AGREEMENT. BECAUSE SOME STATES AND JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY, THE ABOVE LIMITATION MAY NOT APPLY TO YOU.
+</font></p>
+
+<p><font size="-2">
+TRADEMARKS. MOVEit is a registered trademark of Ipswitch, Inc. All names of products and companies used in this document, the software, or the enclosed documentation may be trademarks of their corresponding owners. Their use in this document is intended to be in compliance with the respective guidelines and licenses.
+</font></p>
+
+
+<h2>Contacting the Vendor<a name="contact"></a></h2>
+
+<p><b>MOVEit Freely is FREEWARE.
+Support for MOVEit Freely is normally only available
+to existing MOVEit DMZ customers and MOVEit DMZ evaluators.
+</b></p>
+
+
+<p>
+Live support is available
+between 8:00 am (0800) and 6:00 pm (1800) Central U.S. time zone,
+Monday through Friday, except U.S Holidays.
+Extended ("24/7") support is available for an additional charge,
+or as specified in your existing support agreement.
+</p>
+
+<h3>Via Email</h3>
+
+<p>Remember to use the support site at moveitsupport.ipswitch.com
+instead of insecure email for sensitive communications such as log files and
+test account information.</p>
+
+<b>Support: </b><a href="mailto:moveitsupport@ipswitch.com">moveitsupport@ipswitch.com</a>
+<br/>
+<b>Sales: </b><a href="mailto:moveitsales@ipswitch.com">moveitsales@ipswitch.com</a>
+
+<h3>Via Telephone/Facsimile</h3>
+
+<b>Phone: </b> 608.227.6110 (US)
+<br/>
+<b>Fax: </b> 608.227.6109 (US)
+
+<h3>Via Post</h3>
+
+Ipswitch,  Inc.<br/>
+344 S. Yellowstone Dr.<br/>
+Madison, WI 53705<br/>
+USA
+
+<h3>Via the Web</h3>
+
+<table>
+<tr>
+<td><b>Information site: &#160;</b></td>
+<td><a href="http://www.ipswitch.com">http://www.ipswitch.com</a> </td>
+</tr>
+<tr>
+<td><b>Support site:</b></td>
+<td><a href="https://moveitsupport.ipswitch.com">https://moveitsupport.ipswitch.com</a> </td>
+</tr>
+</table>
+</body>
+</html>

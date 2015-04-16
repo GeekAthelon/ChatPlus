@@ -1,0 +1,533 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>MOVEit Freely Release Notes</title>
+<style>
+<!--
+h1 { font-family: Arial; font-size: 14pt }
+h2 { font-family: Arial; font-size: 12pt }
+h3 { font-family: Arial, Georgia, Times; font-size: 12pt; font-style: italic }
+h4 { font-family: Arial; font-size: 11pt; font-style: italic }
+body { font-family: Verdana, Arial; font-size: 10pt }
+table { font-family: Verdana, Arial; font-size: 10pt }
+-->
+</style>
+
+</head>
+
+<body>
+<h1>MOVEit Freely Release Notes</h1>
+
+<p>This document describes changes to MOVEit Freely, a 32-bit Windows
+command-line FTP client that supports secure FTP and passive mode.&nbsp; It is
+intended as a drop-in replacement for the ftp.exe
+that comes with Windows.</p>
+
+<h2>Version 5.5.0.0&nbsp;- 18 June 2008</h2>
+
+<p>Change documentation and internal references from Standard Networks to Ipswitch.</p>
+
+<h2>Version 5.0.0.0&nbsp;- 24 October 2007</h2>
+
+<p>Official release version.</p>
+
+<h2>Version 4.9.0.0&nbsp;- 19 September 2007</h2>
+
+<p>Add the -ports:low-high parameter.&nbsp; This rarely-used parameter allows
+you to control the TCP port numbers used on the client side of data connections.</p>
+
+<h2>Version 4.5.1.2 - 7 June 2007</h2>
+<p>Add the -pfxpwfile parameter.</p>
+
+<h2>Version 4.5.1.1 - 5 June 2007</h2>
+<p>Fix a problem in which the -pfxfile:filename parameter did not work with the <code>dir</code>
+command.</p>
+
+<h2>Version 4.5.1.0 - 9 May 2007</h2>
+<p>Add the -pfxfile:filename and -pfxpw:password parameters, to support reading
+client certificates directly from files.</p>
+
+<h2>Version 4.5.0.0 - 9 May 2007</h2>
+<p>Recompile as version 4.5.</p>
+
+<h2>Version 4.0.0.3 - 26 January 2007</h2>
+<p>Interpret lines starting with # as comments.&nbsp; Do not display a prompt
+when reading comments or blanks lines from a script.</p>
+
+<h2>Version 4.0.0.1 - 6 December 2006</h2>
+<p>Fix a problem introduced in 4.0.0.0, in which MOVEit Freely would abruptly
+exit or otherwise return errors when uploading an uncompressible file to MOVEit
+DMZ FTP.</p>
+
+<h2>Version 4.0.0.0 - 14 November 2006</h2>
+<p>Use a more modern installer.&nbsp; The new setup program looks different, but
+acts similarly to previous versions.</p>
+
+<h2>Version 3.4.0.0 - 10 April 2006</h2>
+<p>Recompile as version 3.4.0.0.</p>
+
+<h2>Version 3.3.8.3 - 16 March 2006</h2>
+<p>Add the undocumented <code>sleep <i>nsecs</i></code> command.
+</p>
+
+<h2>Version 3.3.8.2 - 13 March 2006</h2>
+
+<p>Add the encryption methods &quot;-e:on-ccc&quot;, &quot;-e:tls-c-ccc&quot;, and &quot;-e:implicit-ccc&quot;.&nbsp;
+These are like the existing &quot;-e:on&quot;, &quot;-e:tls-c&quot;, and &quot;-e:implicit&quot;, but
+they issue the CCC command after login.&nbsp; This causes the rest of the
+control connection session to be unencrypted, while encrypting any data
+connections.&nbsp; The motivation for this feature is to allow firewalls to
+inspect and rewrite PORT commands and PASV responses, to account for IP address
+mapping.&nbsp; Without this feature, if you are using encrypted sessions with
+some firewalls, you might have to use the -natpasv or -natact:ip command-line
+options.</p>
+
+<h2>Version 3.3.0.2 - 10 January 2006</h2>
+
+<p>Fix an AUTH TLS compatibility issue with Sterling Commerce's
+Connect:Enterprise product.&nbsp; It appears that the bug may actually be in
+Connect:Enterprise, but a recent change to MOVEit Freely introduced the
+incompatibility.</p>
+
+<h2>Version 3.3.0.1 - 28 November 2005</h2>
+
+<p>Change the program's icon.</p>
+
+<h2>Version 3.3.0.0 - 14 November 2005</h2>
+
+<p>Recompile MOVEit Freely in preparation for the full release of version 3.3.</p>
+
+<h2>Version 3.2.3.2 - 27 October 2005</h2>
+
+<p>Recompile MOVEit Freely in preparation for the beta release of version 3.3.</p>
+
+<h2>Version 3.2.3.1 - 11 October 2005</h2>
+
+<p>If there is a problem getting a directory listing in passive mode, also
+display the port number in the error message.</p>
+
+<h2>Version 3.2.3.0 - 6 October 2005</h2>
+
+<p>When MOVEit Freely cannot establish an SSL connection, issue a different
+error message if the reason is related to client certificates.</p>
+
+<p>When getting a directory listing in passive mode, if there is a problem with
+the data connection, display both the connection-related error and the response
+from the server.&nbsp; Also display the IP address being used, and the message
+&quot;Check firewall rules.&nbsp; Also, if IP address listed above is
+unexpected, use '-natpasv' option&quot;.</p>
+
+<h2>Version 3.2.0.2 - 2 May 2005</h2>
+<p>Compile the SSL library into MOVEit Freely, so that the
+UTSecureLayer.dll file is no longer required.</p>
+
+<p>Fix an SSL problem when connecting to certain versions of the
+ProFtpd server.</p>
+
+<h2>Version 3.2.0.1 - 14 April 2005</h2>
+
+<p>Implement the rmdir command.</p>
+
+<h2>Version 3.2.0.0 - 30 March 2005</h2>
+
+<p>Fix a minor bug which affected sessions with invalid client
+certificates.&nbsp; MOVEit Freely would incorrectly claim that it had connected
+successfully, only to give an error when sending the first command.</p>
+
+<h2>Version 3.1.8.1 - 16 March 2005</h2>
+
+<p>Make a few trivial changes to the help you get via ftps /?.</p>
+
+<h2>Version 3.1.8.0 - 14 March 2005</h2>
+
+<p>Implement two new command-line parameters to provide a &quot;client NAT&quot;
+capability:&nbsp;</p>
+
+<p>The <samp><b>-natact:ipaddr</b></samp> parameter tells MOVEit Freely to tell
+the FTP server, in active mode, to connect to MOVEit Freely on IP address &quot;ipaddr&quot;
+rather than the client's actual IP address.&nbsp; In order to use this
+parameter, you must know an address by which the server can access your PC. </p>
+
+<p>The <b><samp>-natpasv</samp></b>     parameter tells MOVEit Freely to ignore
+the IP address specified by the FTP server when the FTP server tells Freely to
+make a data connection in passive mode.&nbsp; Instead, when this parameter is
+specified, MOVEit Freely will connect to the IP address that it used to make the
+control connection. </p>
+
+<h2>Version 3.1.7.6 - 11 March 2005</h2>
+
+<p>When echoing server commands to the console (e.g., due to the -d option), do
+not echo the password.&nbsp; Instead, say &quot;PASS (hidden)&quot;.</p>
+
+<p>Also, change the self-extracting install to run MISetup.exe rather than
+Setup.exe.&nbsp; Sometimes customers have remnants of installations of other
+products on their systems, and this can cause the MOVEit Freely extractor to run
+the wrong setup.</p>
+
+<h2>Version 3.1.7.5 - 2 March 2005</h2>
+
+<p>After connecting to a secure FTP server, send the <code>PBSZ 0</code>
+command just before the <code>PROT
+P</code>  command.&nbsp; Though most secure FTP servers do not require this, it
+is part of the proposed standard.</p>
+
+<h2>Version 3.1.7.4 - 23 February 2005</h2>
+
+<p>Fix a bug in the mget and mdelete commands:&nbsp; if the user did not specify
+a filemask, Freely would prompt for one, but then ignore it.&nbsp; As a result
+all files in the current directory would be selected, not just the ones matching
+the mask.</p>
+
+<p>Do not allow &quot;md&quot; to be interpreted as &quot;mdelete&quot;, even
+though it is a unique initial substring.&nbsp; This prevents tragedy for users
+who think that &quot;md&quot; stands for &quot;make directory&quot;.</p>
+
+<h2>Version 3.1.7.3 - 15 February 2005</h2>
+<p>When reading a password, don't backspace past the prompt.</p>
+
+<h2>Version 3.1.7.2 - 7 January 2005</h2>
+<p>Perform the PROT and Lumps handling whether or not we get a password prommpt.  This becomes
+important as DMZ supports client certs.
+Change Copyright to 2001-2005.</p>
+
+<h2>Version 3.1.7.1 - 3 January 2005</h2>
+<p>If there's an error appending, display a message.
+Add a build for linking with UTSecureLayerStatic.
+This was an attempt to investigate a problem whereby MOVEit Freely running under Windows XP is
+unable to append, even though it can put.  I was never able to figure this out.</p>
+
+<h2>Version 3.1.7.0 - 1 December 2004</h2>
+<p>Fix a problem which could cause active mode transfers to fail to
+create a data connection if there were many ports open.</p>
+
+<h2>Version 3.1.5.0 - 23 August 2004</h2>
+<p>Fix a bug which could cause FTPS to throw an access violation if
+the FTP server's response to a PASV command was invalid.</p>
+
+<h2>Version 3.1.0.0 - 10 May 2004</h2>
+<p>Recompile as version 3.1.0.0. </p>
+
+<h2>Version 3.0.9.1 - 07 April 2004</h2>
+
+<p>Flush output after every print to console.
+<p>Use the Connect Timeout as a Receive Timeout on the control connection.
+
+<h2>Version 3.0.8.2 - 05 March 2004</h2>
+
+<p>Changed the return value for command errors to 3 since 2 was already in use.
+<p>Fixed a byte count problem with resume mode.
+<p>Fixed Dundas FTP bug that ignored the data timeout on active-mode get.
+
+<h2>Version 3.0.8.1 - 03 March 2004</h2>
+
+<p>A new parameter, -resume,
+ causes all get and put (including mget/mput) to try to resume if the file exists.
+<p>Fixed to use a 64-bit number for the transfer size.
+<p>Freely will now return an errorcode of 2 if any of the commands returned an error.
+<br>This includes 4xx and 5xx responses to FTP dialog commands as well as syntax and
+file errors determined by the client itself.
+<p>A new parameter, -quiterror,
+ makes Freely exit on any command that gets an error.
+<br>This includes 4xx and 5xx responses to FTP dialog commands as well as syntax and
+file errors determined by the client itself.
+<p>ftps -?  now displays version in the usage:
+<ul><pre>MOVEit Freely 3.0.8.1 - Secure FTP Client
+  http://www.stdnet.com/moveitfreely
+Usage: FTPS [args] [hostname [port]]
+...</pre>
+</ul>
+
+<h2>Version 3.0.2.0 - 17 December 2003</h2>
+
+<p>Fixed a problem with mput and mget which could cause subsequent
+transfers to fail once one of the files in the group failed.
+</p>
+<p>When you open a connection with the open command, the port number
+now defaults to the port implied by the command line parameters.
+So, <pre>ftps -e:implicit
+open ftp.mycorp.net</pre>
+now causes the open to be to port 990, as implied by -e:implicit.
+
+<h2>Version 3.0.1.0 - 24 October 2003</h2>
+
+<p>Implemented an optional second argument to the "dir" and "ls" commands.
+A command like <tt>dir *.rpt out.txt</tt> will send the directory
+listing to the file out.txt rather than to the console.
+</p>
+<p>Fixed a typo in the word "Communications".</p>
+<p>Fixed a typo in the word "verification" in the UTSecureLayer.dll library.</p>
+
+<h2>Version 3.0.0.0 - 9 October 2003</h2>
+
+<p>Recompiled 2.7.6.1 with a new version number for the 3.0 release.</p>
+
+<h2>Version 2.7.6.1 - 24 September 2003</h2>
+
+<p>Addressed a problem that occurs when running the program under Windows 9x
+before the DSCLIENT.exe install has been run.&nbsp; The program gave an
+exception instead of a nice error message.&nbsp; (Recall that under Windows
+95/98, DSCLIENT is required for MOVEit Freely to run.)</p>
+
+<p>Enhanced the install program so that under Windows 9x, a line is added to
+AUTOEXEC.BAT placing MOVEit Freely in the path.</p>
+
+<h2>Version 2.7.6 - 11 August 2003</h2>
+
+<p>Added support for SSL client certificates, via two new command-line
+parameters:</p>
+
+<ul>
+  <li><strong><samp>-csn:store </samp></strong>is the name of the certificate
+    store.&nbsp; This defaults to &quot;MY&quot;, which is the name of the
+    location where Windows stores certificates for the currently-logged-in user.</li>
+  <li><strong><samp>-ccn:common_name </samp></strong>is the Common Name (CN) on
+    the certificate; for example, &quot;Thawte Freemail Member&quot;.&nbsp; This
+    must be specified in order to enable client certificates.&nbsp; The default
+    is to not support client certificates.</li>
+</ul>
+
+<h2>Version 2.7.0 - 9 April 2003</h2>
+
+<p>Relabeled 2.6.3 as 2.7.0 for release.</p>
+
+<h2>Version 2.6.3 - 7 April 2003</h2>
+
+<p>Implement the append command.</p>
+
+<h2>Version 2.6.2 - 11 March 2003</h2>
+
+<p>Fix UTSecureLayer.dll to work more reliably when used on Windows XP.</p>
+
+<h2>Version 2.6.0.4 - 7 March 2003</h2>
+
+<p>Don't send a SYST command to check the capabilities of the FTP server unless
+we are in secure mode.&nbsp; This works around problems with certain firewalls
+that explicitly block the SYST command and cause the session to hang.</p>
+
+<p>Remove documentation of the -cc command-line parameter.&nbsp; This parameter
+was unnecessary.&nbsp; However, the parameter is still implemented.</p>
+
+<h2>Version 2.6.0.3 - 18 February 2003</h2>
+
+<p>Implement a command-line parameter to suppress checking of the control
+connection.&nbsp; This is an obscure parameter needed for only a few unusual FTP
+servers.</p>
+
+<ul>
+  <li><strong><samp>-cc:off </samp></strong>tells the program to not check the
+    health of the control connection on every command.&nbsp; The default is on.</li>
+</ul>
+
+<h2>Version 2.6.0.2 - 14 February 2003</h2>
+
+<p>Implement command-line parameters to specify an initial username and
+password.</p>
+
+<ul>
+  <li><strong><samp>-user:username </samp></strong>is the default
+    username.&nbsp; If this is not specified, the program will prompt for a
+    username upon initial connect.</li>
+  <li><strong><samp>-password:pw </samp></strong>is the default password.&nbsp;
+    If this is not specified, the program will prompt for a password upon
+    initial connect.</li>
+</ul>
+
+<p>Also, the <strong><samp>-t:data_timeout_secs</samp></strong> parameter now
+also applies to the amount of time to wait for the
+    server to connect back (on a non-passive data port).&nbsp; The default is
+120 seconds.&nbsp; Previously, the amount of time to wait for the server to
+connect back was always 15 seconds.</p>
+
+<h2>Version 2.6.0.1 - 1 January 2003</h2>
+
+<p>Accommodate a certain buggy brand of FTP server by allowing the responses
+from NLST to be delimited by just LF rather than CR LF as called for by the FTP
+standard.&nbsp; This fixes the mget command on those FTP servers.&nbsp;</p>
+
+<h2>Version 2.6.0.0 - 20 December 2002</h2>
+
+<p>Default to port 990 if -e:implicit has been specified.</p>
+
+<h2>Version 2.5.2.1 - 11 November 2002</h2>
+
+<p>Fix a problem with UTSecureLayer.dll which could cause the program to abort
+during a GET under certain rare instances.&nbsp; This was observed only with the
+Sterling Software FTP server under AIX.</p>
+
+<h2>Version 2.5.2.0 - 8 November 2002</h2>
+
+<p>Fix a problem in which directory listings on non-passive secure connections
+would be truncated to 0 bytes.</p>
+
+<p>Use a new version of the secure communications DLL, which fixes a program
+abort when connecting to a server that does SSL negotiation incorrectly.&nbsp;
+(This was a rare occurrence, since nearly all secure FTP servers do negotiation
+correctly.)</p>
+
+<h2>Version 2.5.1.0 - 24 October 2002</h2>
+
+<p>Improve the program's ability to deal with slow connections by adding
+timeout-related enhancements.&nbsp; Previously, the program would timeout a
+connection attempt after 30 seconds, and also would timeout a data connection if
+no data was sent or received for 30 seconds.&nbsp; Now the default data
+connection timeout has changed to 120 seconds.&nbsp; Also, both of these timeout
+parameters can be specified on the command line:</p>
+
+<ul>
+  <li><code><strong>-c:connect_timeout_secs</strong></code> specifies the
+    connect timeout in seconds.&nbsp; This is the amount of time that the
+    program will wait for a successful connection to the server.&nbsp; The
+    default is 30 seconds.</li>
+  <li><strong><samp>-t:data_timeout_secs</samp></strong>  specifies the data socket
+    timeout in
+    seconds.&nbsp; The default is 120 seconds.</li>
+</ul>
+
+<h2>Version 2.5.0.0 - 21 October 2002</h2>
+
+<p>Add support for file integrity checking.&nbsp; This is a transfer mode that
+compresses files on-the-fly, and checks a file checksum to ensure that the file
+was transferred successfully.&nbsp; This mode is selected automatically when
+transferring to/from a MOVEit DMZ FTP server; it is not available with other types
+of servers.</p>
+
+<h2>Version 2.4.0.1 - 3 October 2002</h2>
+
+<p>Change the put command so that if only one argument is specified, the
+destination file is computed differently.&nbsp; If there is a pathname in the
+argument, strip it off.&nbsp; This fixes the problem in which the command put
+c:\tmp\myfile.txt did not work because the remote FTP server got the name
+&quot;c:\tmp\myfile.txt&quot; rather than &quot;myfile.txt&quot;.</p>
+
+<h2>Version 2.4.0.0 - 18 September 2002</h2>
+
+<p>Fix a problem in which mput sent 0-length files if the mask contained a
+directory name; e.g., c:\tmp\k*.jpg.</p>
+
+<h2>Version 2.3.0.0 - 1 August 2002</h2>
+
+<p>When running on Windows 9x, do not timeout when draining the control
+connection between commands.</p>
+
+<p>Change the installation program to detect if we are installing on Windows 95
+or Windows 98.&nbsp; If so, warn about the need to have IE 5.01 and Directory
+Services Client installed, and set the security provider key in the registry.</p>
+
+<h2>Version 2.2.2.1 - 11 July 2002</h2>
+
+<p>When doing a directory listing, be sure to temporarily set the transfer mode
+to ASCII.&nbsp; Otherwise, directory listings on UNIX server could be garbled,
+resulting in the failure of mget and similar commands.</p>
+
+<h2>Version 2.2.2.0 - 10 July 2002</h2>
+
+<p>Implement the mdelete command.</p>
+
+<h2>Version 2.2.1.2 - 12 June 2002</h2>
+
+<p>Display an error message if a transfer fails.</p>
+
+<h2>Version 2.2.1.1 - 6 June 2002</h2>
+
+<p>Fix a long-standing minor problem with the <samp>get</samp> command in passive mode.&nbsp;
+This command attempted to check the return code from the server before opening a
+data connection.&nbsp; This was not compatible with all FTP servers, and
+resulted in hangs to certain FTP servers.&nbsp; Also, enhance the code to drain
+the return code from the server in the case of a failed <samp>get</samp> or <samp>dir</samp>
+command.</p>
+
+<p>When parsing command arguments for certain commands, recognize two
+consecutive embedded double-quote marks as a single double-quote mark.&nbsp; For
+instance, <samp>get &quot;my&quot;&quot;.&quot;&quot;txt&quot;</samp> fetches
+the file my&quot;.&quot;txt.</p>
+
+<h2>Version 2.2.1.0 - 5 June 2002</h2>
+
+<p>Make a minor change to TLS-P encryption mode:&nbsp; If <samp>-e:tls-p</samp>
+is specified but the server will not accept AUTH TLS-P, try
+AUTH&nbsp;TLS-C.&nbsp; If that is accepted, send a PROT P command when the user
+logs in.</p>
+
+<p>This allows the program to work with a wider range of secure FTP servers.</p>
+
+<h2>Version 2.2.0.2 - 4 June 2002</h2>
+
+<p>Support two additional modes of encryption:&nbsp; TLS-C, which by default
+encrypts the control connection but not data, and implicit, which encrypts
+control and data without the use of an AUTH command.&nbsp; Implicit mode is
+usually used with an FTP server running at port 990.&nbsp; The -e command-line
+parameter has been enhanced to support the syntax -e:encmode where encmode is:</p>
+
+<table border="1" cellspacing="1">
+  <tr>
+    <th valign="top" align="left">encmode</th>
+    <th valign="top" align="left">Meaning</th>
+  </tr>
+  <tr>
+    <td valign="top"><code>            off</code><br>
+      &nbsp;</td>
+    <td valign="top">is the default--no encryption.</td>
+  </tr>
+  <tr>
+    <td valign="top"><code>tls-p</code> or <code> on</code></td>
+    <td valign="top">encrypts both control and data w/ AUTH TLS-P.</td>
+  </tr>
+  <tr>
+    <td valign="top"><code>tls-c</code></td>
+    <td valign="top">encrypts only control connection with the AUTH TLS-C
+      command.&nbsp; Encryption of the data connection can be changed during the
+      session with the prot command.&nbsp;&nbsp;
+      <p>prot p sets data connections to be protected (encrypted);<br>
+      prot c sets data connections to be cleartext (unencrypted).</td>
+  </tr>
+  <tr>
+    <td valign="top"><code>            implicit</code></td>
+    <td valign="top">    encrypts both connections without the use of an AUTH
+      command; usually to port 990.</td>
+  </tr>
+</table>
+<p>Implement the mkdir command.</p>
+
+<p>Implement the -a command-line parameter, which starts FTPS in passive
+mode.&nbsp; By default, the program is in active mode.&nbsp; As before, this can
+be changed during a session with the passive command.</p>
+
+<h2>Version 2.2.0.1 - 3 June 2002</h2>
+
+<p>Change the quote command so that it will accept multiple arguments in a way
+more compatible with Microsoft's client.&nbsp; Previously, the quote command
+required double quotes surrounding the arguments if there was a space in the
+arguments.&nbsp; This was incompatible with Microsoft's FTP client.&nbsp; In
+other words, previously you had to use a command like:</p>
+
+<p><code>quote &quot;FAM DISK&quot;</code></p>
+
+<p>but now you can use:</p>
+
+<p><code>quote FAM DISK</code></p>
+
+<h2>Version 2.2.0.0 - 23 May 2002</h2>
+
+<p>Change the put command to check to make sure that a file exists before trying
+to send it.&nbsp; Previously, a zero-byte file was sent if the local file did
+not exist.</p>
+
+<p>Allow arguments to be surrounded by double-quotes (&quot;).&nbsp; This allows
+you to get and put files whose names contain spaces.&nbsp; It is also more
+compatible with the Microsoft ftp.exe.</p>
+
+<h2>Version 2.1.8.0 - 10 May 2002</h2>
+
+<p>Fix an access violation which occurred when the FTP server returned an empty
+list in response to &quot;dir&quot;.</p>
+
+<h2>Version 2.1.0.0 - 13 February 2002</h2>
+
+<p>This was the first fully-supported external release.</p>
+
+</body>
+
+</html>

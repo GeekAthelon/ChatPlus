@@ -1,0 +1,21 @@
+(function() {
+  var response;
+  var updateUrl;
+  var out = [];
+  var cpCurrVer = document.getElementById('cp_version');
+  if (cpCurrVer) {
+    cpCurrVer = cpCurrVer.className.replace("_", "");
+    updateUrl = document.getElementById('cp_updateurl').className;
+    if (+cpCurrVer < ###VERSION###) {
+	  out.push("There is an update to ChatPlus available.");
+	  out.push("Would you like to upgrade to ###VERSION###");
+	  out.push("You are running version:" + cpCurrVer);
+	  
+	  out = out.join("\r\n");
+	  response = window.prompt(out);
+	  if (response !== null) {
+        window.location.href = updateUrl;
+	  }
+	}
+  }    
+}());

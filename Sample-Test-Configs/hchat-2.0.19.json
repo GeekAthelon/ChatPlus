@@ -1,0 +1,242 @@
+{
+ "all" : {
+ "fullName" : "Show all rooms",
+ "defaultMode" : "include",
+ "readOnly" : true,
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [],
+ "roomExclude" : [],
+ "controlRoom" : "",
+ "roomList" : [],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "unknown"
+},
+ "favs" : {
+ "fullName" : "My Favorites",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : ["ooccork@bwr", "z2cork@bwr", "chatplus@soi", "scotland@soi", "multiloc@soi", "z2cork@soi", "tocuddle@soi", "scove@soi", "sshh@soi", "dice@soi", "yahtzee2@soi"],
+ "roomExclude" : ["", "northumb@soi", "northumb@soi", "mecork@soi", "familia@soi"],
+ "controlRoom" : "",
+ "roomList" : [""],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "unknown"
+},
+ ":list:" : ["bambi", "favs", "girls", "pics", "blood", "ds9", "lez", "ewhere", "ngor", "keep", "ul", "thecity", "sbrew", "beware", "allbut", "all"],
+ ":masterSettings:" : {
+ "alwaysExclude" : [""],
+ "hotListView" : "line",
+ "showhp" : "false",
+ "ulinemode" : "reset",
+ "userNames" : ["athelon@soi", "drdover@soi", "lordgreycloak@soi", "theinept@soi"],
+ "buddyList" : ["justanna@soi", "mesti@soi", "dora@soi", "fianait@soi", "athelon@soi", "petslut@soi", "ayisha@soi"]
+},
+ "allbut" : {
+ "fullName" : "All But Crap",
+ "defaultMode" : "include",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "",
+ "roomList" : [""],
+ "excludeRealmRooms" : "yes",
+ "lastVisited" : "unknown"
+},
+ "girls" : {
+ "fullName" : "Girls",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : ["", "familia@soi", "pinewood@soi", "plays@soi", "chfarm@soi", "4daddy@soi", "bigpapa@soi"],
+ "roomExclude" : [""],
+ "controlRoom" : "",
+ "roomList" : [""],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "unknown"
+},
+ "thecity" : {
+ "fullName" : "The City",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "9thcork@soi",
+ "roomList" : ["9thcork@soi", "cityhp@soi", "5th@soi", "side@soi", "darkaley@soi", "bartons@soi", "highwy@soi", "drkalley@soi", "easyst@soi", "edgwater@soi", "ocean@soi", "layden@soi", "slumlow@soi", "slumave@soi", "parkway@soi", "mblane@soi", "michave@soi", "midwayav@soi", "northedg@soi", "primrose@soi", "redalley@soi", "remblvd@soi", "reynolds@soi", "reyncrt@soi", "richblvd@soi", "rt28@soi", "shadyln@soi", "statest@soi", "slumroad@soi", "subways@soi", "subway2@soi", "tlave@soi", "asplane@soi", "bayview@soi", "beachdr@soi", "bridgerd@soi", "circlewy@soi", "cotdrive@soi", "cntryrd@soi", "cldrive@soi", "endicott@soi", "harvest@soi", "hazelnut@soi", "ranchrd@soi", "santoblv@soi", "bardford@soi", "unigrnd@soi", "court@soi", "cityhall@soi", "remand@soi", "firehouz@soi", "kqoffice@soi", "acoffice@soi", "frclinic@soi", "fedcom@soi", "hospital@soi", "cityer@soi", "8thprec@soi", "citybook@soi", "reflex@soi", "womens@soi", "cityuni@soi", "emp1@soi", "votecity@soi", "cityvote@soi", "wchosp@soi", "141@soi", "sams2@soi", "3fingers@soi", "angelhom@soi", "26mabry@soi", "65mblane@soi", "pawsanon@soi", "bartapt@soi", "scofield@soi", "bwpark@soi", "bellas@soi", "9thdiner@soi", "diner@soi", "acondo@soi", "hairdo@soi", "chrlies@soi", "cityball@soi", "maintain@soi", "cleaners@soi", "citydsgn@soi", "ctpark@soi", "mailbox@soi", "realtors@soi", "citygirl@soi", "townsqr@soi", "clubred@soi", "dropin@soi", "legal@soi", "dansnoir@soi", "darkdays@soi", "path@soi", "drevsplc@soi", "edhamn@soi", "fleurs@soi", "heartstr@soi", "hellfyre@soi", "ilcielo@soi", "inprod@soi", "pictures@soi", "locos@soi", "marisapt@soi", "kingyum@soi", "nowzen@soi", "pandoras@soi", "phoenx@soi", "pkstudio@soi", "richies@soi", "rivervie@soi", "coffeehs@soi", "safeway@soi", "ccpent@soi", "carriage@soi", "citsto@soi", "motel@soi", "kalscars@soi", "artiste@soi", "emek@soi", "1010@soi", "ghome@soi", "blesdbe@soi", "brown@soi", "artgalry@soi", "ndchurch@soi", "gatehous@soi", "sshill@soi", "silkrope@soi", "toymedia@soi", "tracks@soi", "rowhouse@soi", "chinese@soi", "zeytinia@soi", "cwbar@soi", "amosoff@soi", "bgelshop@soi", "benje@soi", "tcmtv@soi", "branch@soi", "skate@soi", "dansnoir@soi", "80trax@soi", "sweettre@soi", "girlbar@soi", "gbapt@soi", "beachclb@soi", "igjoes@soi", "menage@soi", "romancea@soi", "antiques@soi", "spkeasy@soi", "exclusiv@soi", "greendor@soi", "sawyerg@soi", "magtheat@soi", "wcty@soi", "cityair@soi", "angies@soi", "jensen@soi", "bwlodge@soi", "lagoon@soi", "bunnyran@soi", "mortgage@soi", "ctycem@soi", "goldmoon@soi", "drivein@soi", "refinery@soi", "ocean3@soi", "wmconrad@soi", "dwhome@soi", "dwwpsp@soi", "dejraci@soi", "escobar@soi", "ferrari@soi", "gullisle@soi", "hawgwild@soi", "hillside@soi", "hooligan@soi", "minimart@soi", "majensen@soi", "jonashos@soi", "ljhome@soi", "resort@soi", "malejail@soi", "visiting@soi", "jmhome@soi", "usaf@soi", "mirhome@soi", "mountain@soi", "wma@soi", "machouse@soi", "notelmo@soi", "seapark@soi", "freight@soi", "crafty@soi", "wmaedu@soi", "roadhous@soi", "heliport@soi", "romanceo@soi", "cmhome@soi", "wmrefuge@soi", "thehome@soi", "seaview@soi", "mainmast@soi", "maupu@soi", "smith@soi", "solranch@soi", "rdhouse@soi", "thebay@soi", "channel@soi", "truckstp@soi", "2contruc@soi", "volta@soi", "wma@soi", "classsy@soi", "vlbcrib@soi", "inandout@soi", "9ball@soi", "hbc3@soi", "matrix@bwr", "room99@soi", "after@soi", "petals@bwr", "bjfilms@soi", "plush@soi", "salvarmy@soi", "adive@soi", "poodle@soi", "19waterv@soi", "psyc@soi", "stageset@soi", "ainvest@soi", "a2ads@soi", "bigjoes@soi", "blindtig@soi", "farnres@soi", "cafepoem@soi", "citybank@soi", "ctvoice@soi", "esoteric@soi", "espnzone@soi", "goldsgym@soi", "gophead@soi", "rockcafe@soi", "hillente@soi", "mimosa@soi", "glassart@soi", "jasminpk@soi", "jessiclo@soi", "jmshq@soi", "lalionne@soi", "slumfit@soi", "bbq@soi", "medoff@soi", "nicos@soi", "oasiswp@soi", "woolen@soi", "orlobby@soi", "orstudio@soi", "rashells@soi", "rsitower@soi", "sakamura@soi", "smoothfi@soi", "starbuck@soi", "kje@soi", "target@soi", "baywing@soi", "razmataz@soi", "sophias@soi", "wunew@soi", "parkview@soi", "philosoc@soi", "pplant@soi", "rednote@soi", "tww@soi", "wateredg@soi", "wildhors@soi", "wolfetow@soi", "xios@soi", "deadfall@soi", "ajpawn@soi", "vacant@soi", "boardwlk@soi", "ctbeach2@soi", "pantry@soi", "tugboat@soi", "pubmar@soi", "blueshos@soi", "shitkick@soi", "creamy@soi", "kppool@soi", "boxingym@soi", "outlets@soi", "floozlob@soi", "dockware@soi", "beachvue@soi", "grparrot@soi", "pub@soi", "javas@soi", "pizza@soi", "leftys@soi", "lindybhs@soi", "lunarpa@soi", "mcfadden@soi", "marina@soi", "mbwrst@soi", "choochoo@soi", "florist@soi", "import@soi", "unhotel@soi", "overlook@soi", "pier3@soi", "pier6@soi", "pier9@soi", "thequeen@soi", "rubys@soi", "singles@soi", "sodom@soi", "soulnhol@soi", "slcruise@soi", "tcpdware@soi", "baron@soi", "ctlight@soi", "cittav@soi", "agrove@soi", "rsyards@soi", "unionhal@soi", "turner@soi", "brconst@soi", "swamp@soi", "taproom@soi", "tapyard@soi", "velvetnc@soi", "cm1@soi", "vdaddys@soi", "mjsplace@soi", "404@soi", "driveway@soi", "greens@soi", "hearthm@soi", "alimo@soi", "artistes@soi", "zebeach@soi", "titus@soi", "lakehme@soi", "dbstable@soi", "ctydrive@soi", "mtnretre@soi", "kppool@soi", "brilani@soi", "cabcon@soi", "lopez@soi", "casamol@soi", "caseys@soi", "golfclub@soi", "clzoo@soi", "ndchapel@soi", "covelake@soi", "coveamp@soi", "cldock@soi", "lakestor@soi", "trails@soi", "cremngmt@soi", "dantepl@soi", "devbch@soi", "cmp@soi", "diaz@soi", "gdhouse@soi", "bchhse@soi", "beached@soi", "vichouse@soi", "earthenw@soi", "flw@soi", "gates@soi", "glr@soi", "tyhome@soi", "grayson@soi", "gigi2@soi", "sctc@soi", "jeffwu@soi", "salila@soi", "marsdale@soi", "ahjhome@soi", "lexplace@soi", "shorehse@soi", "12cvlake@soi", "kevinsrm@soi", "cardgame@soi", "whiteway@soi", "golfclub@soi", "leomel@soi", "levallie@soi", "tidal@soi", "beachhom@soi", "marwal@soi", "sumhome@soi", "modestpl@soi", "19covelk@soi", "jzmain@soi", "covehm@soi", "scbeach@soi", "nataar@soi", "nicis@soi", "bplace@soi", "noahs@soi", "cityfarm@soi", "beachome@soi", "prentis@soi", "zekes@soi", "quietns@soi", "rayshome@soi", "amuspark@soi", "jsmith@soi", "rhettspl@soi", "ndbeach@soi", "riverben@soi", "jennings@soi", "kriscor@soi", "gated@soi", "safehse@soi", "skestate@soi", "wolfgirl@soi", "lakeprop@soi", "sspa@soi", "lakehome@soi", "smanor@soi", "pennings@soi", "12vines@soi", "karens@soi", "stacies@soi", "stlands@soi", "rodeo@soi", "stonegat@soi", "tanrhome@soi", "tiahouse@soi", "tourneau@soi", "cedar@soi", "aquaview@soi", "onlymine@soi", "mccalls@soi", "conserv@soi", "alekseev@soi", "cove99@soi", "seaglass@soi", "windycor@soi", "windswpt@soi", "zoes@soi", "alexs@soi", "aban@soi", "shb13@soi", "hapsplac@soi", "adverts@soi", "wise@soi", "carvers@soi", "sagebar@soi", "chuys@soi", "history@soi", "zoned@soi", "citywelc@soi", "spatours@soi", "ahousing@soi", "crusader@soi", "slumbar@soi", "choppers@soi", "epod@soi", "flatfoot@soi", "sidedine@soi", "govindas@soi", "happyend@soi", "troy@soi", "icerink@soi", "ikeda@soi", "jessas@soi", "kdpac@soi", "kosmos@soi", "kwikstop@soi", "cottagea@soi", "lucklady@soi", "bbq@soi", "patchome@soi", "marchome@soi", "jandmad@soi", "slumpark@soi", "rehab@soi", "norahs@soi", "antique@soi", "strip@soi", "pizza1@soi", "mailbox@soi", "slumotel@soi", "slumroom@soi", "rummies@soi", "seaviewa@soi", "nannyhou@soi", "sfo@soi", "slumbeer@soi", "range@soi", "ravenite@soi", "oldhome@soi", "comcen@soi", "armcars@soi", "studioap@soi", "bigsexy@soi", "tgp@soi", "rogueden@soi", "catpjs@soi", "olcottag@soi", "ssbus@soi", "smshop@soi", "walmart@soi", "wchosp2@soi"],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "11/08/2009"
+},
+ "ul" : {
+ "fullName" : "Urban Legends",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "nysquare@soi",
+ "roomList" : ["gamecork@soi", "ulchars@soi", "blkint@soi", "xschool@soi", "cpark@soi", "cdoc@soi", "teacup@soi", "dazzrm@soi", "nyxcafe@soi", "shops@soi", "leesh@soi", "hishome@soi", "ulgym@soi", "blueston@soi", "pier60@soi", "nycport@soi", "uldtny@soi", "jgmelon@soi", "ulread@soi", "nyxhotel@soi", "nysquare@soi", "bookcafe@soi", "ulpzpad@soi", "lecafe@soi", "mavsps@soi", "bccrib@soi", "reillys@soi", "ulchtown@soi", "ulware@soi", "ctlipo@soi", "7lucky@soi", "ulorigsi@soi", "lensher@soi", "guesths@soi"],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "11/03/2010"
+},
+ "pics" : {
+ "fullName" : "Pictures, I guess.",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : ["", "papapic@soi", "picbook@soi", "igallery@soi"],
+ "roomExclude" : [""],
+ "controlRoom" : "",
+ "roomList" : [""],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "unknown"
+},
+ "sbrew" : {
+ "fullName" : "Strange Brew",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "bigbads@soi",
+ "roomList" : ["sbchar@soi", "thehub@soi", "sbooc@soi", "sbstory@soi", "marketst@soi", "sbmisc@soi", "pier23@soi", "digitblm@soi", "norbeach@soi", "sbpier39@soi", "fogcity@soi", "theopl@soi", "chinatwn@soi", "magicbox@soi", "encore@soi", "topmark@soi", "3strings@soi", "slayer@soi", "sbusquar@soi", "harker@soi", "bigbads@soi", "sbpub@soi", "sblib@soi", "cjspace@soi", "libertne@soi", "wishwell@soi", "missdis@soi", "spyagncy@soi", "neonjngl@soi", "morrocan@soi", "sbchurch@soi", "goldsart@soi", "harkhome@soi", "gatekeep@soi", "gapt@soi", "owenplc@soi", "sbbeach@soi", "3muses@soi", "sbslane@soi", "catspaw@soi", "ucsf@soi", "hoconch@soi", "goldgate@soi", "anasylum@soi", "rosearts@soi", "glamors@soi", "sbjava@soi", "mockbrd@soi", "unseelie@soi", "dougal@soi", "2sisters@soi", "marisova@soi", "3msketrs@soi", "sbfire@soi", "sbmetalz@soi", "tower@soi", "faerygle@soi", "faerealm@soi", "pixies@soi", "draak@soi"],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "11/03/2010"
+},
+ "beware" : {
+ "fullName" : "The Lands of Beware",
+ "defaultMode" : "exclude",
+ "tailInclude" : ["bwr"],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "",
+ "roomList" : [""],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "unknown"
+},
+ ":avatars:" : {
+ "athelon" : {
+ "athelon1_120_120.jpg" : {
+ "height" : 120,
+ "width" : 120,
+ "url" : "http://soiuser.hyperchat.com/athelon/athelon1_120_120.jpg"
+},
+ "athelon_120_150.gif" : {
+ "height" : 150,
+ "width" : 120,
+ "url" : "http://soiuser.hyperchat.com/athelon/athelon_120_150.gif"
+},
+ "athelon_mask_120_100.gif" : {
+ "height" : 100,
+ "width" : 120,
+ "url" : "http://soiuser.hyperchat.com/athelon/athelon_mask_120_100.gif"
+},
+ "barcode.png" : {
+ "height" : 131,
+ "width" : 90,
+ "url" : "http://soiuser.hyperchat.com/athelon/barcode.png"
+},
+ "highlander_1_th.gif" : {
+ "height" : 100,
+ "width" : 59,
+ "url" : "http://soiuser.hyperchat.com/athelon/highlander_1_th.gif"
+}
+},
+ "chatplus" : {
+ 
+},
+ "multiloc" : {
+ 
+},
+ "dice" : {
+ 
+}
+},
+ "keep" : {
+ "fullName" : "Shadow Keep",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "evcork@soi",
+ "roomList" : ["skchars@soi", "keepooc@soi", "evcork@soi", "atgarden@soi", "township@soi", "catacomb@soi", "church@soi", "woodland@soi", "vertigo@soi", "cork@soi", "tunnels@soi", "cell@soi", "darkden@soi", "guild@soi", "captive@soi", "valmont@soi", "cantbury@soi", "cantinn@soi", "cantpark@soi", "kent@soi", "thedock@soi", "montague@soi", "sktavern@soi", "erebus@soi", "skeep@soi", "skcity@soi", "evroom@soi", "slademan@soi", "skcottag@soi", "lilmonst@soi", "wow@soi", "gyves@soi", "menou@soi", "danger@soi", "estgrnds@soi", "vespring@soi", "temporum@soi", "vestable@soi", "concha@soi", "whiteros@soi"],
+ "excludeRealmRooms" : "no",
+ "lastVisited" : "11/03/2010"
+},
+ "ds9" : {
+ "fullName" : "Deep Space 9",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "stcork@soi",
+ "lastVisited" : "07/30/2011",
+ "roomList" : ["stcork@soi", "stchar@soi", "stooc@soi", "styork@soi", "stobs@soi", "interior@bwr", "10forwrd@soi", "stsick@soi", "stsci@bwr", "stholo2@bwr", "runabout@bwr", "stdym@bwr", "sttherap@soi", "droffice@bwr", "stvek@bwr"],
+ "excludeRealmRooms" : "no"
+},
+ "blood" : {
+ "fullName" : "Blood Noir",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "bncork@soi",
+ "lastVisited" : "03/03/2011",
+ "roomList" : ["bncork@soi", "bnchar@soi", "bnbye@soi", "bnsl@soi", "bnchat@soi", "sambart@soi", "tinydine@soi", "blooddol@soi", "clubrev@soi", "bellaoff@soi", "ecc@soi", "bngreek@soi", "bnisland@soi", "lalune@soi", "bnreve@soi", "magcafe@soi", "bnpub@soi", "bnbowl@soi", "bnpizza@soi", "bnsky@soi", "tribune@soi", "sluggers@soi", "bnhotel@soi", "bngreen@soi", "bnzoka@soi", "bnbpark@soi", "seactwn@soi", "hmcenter@soi", "kingmor@soi", "bnskate@soi", "pikeplac@soi", "portsea@soi", "bnalley@soi", "seacente@soi", "bnpd@soi", "rpitcork@soi", "bnwoods@soi", "bnsea@soi", "bnmisc@soi", "bnzoo@soi", "bnnest@soi", "nixiapt@soi", "nyahapt@soi", "reyhouse@soi", "crayhome@soi", "dubois@soi", "bnbears@soi", "wanagi@soi", "bnhyena@soi", "genoscrk@soi", "bnjags@soi", "echoclif@soi", "rpcork@soi", "bnpard@soi", "pardhunt@soi", "dbcork@soi", "bnpride@soi", "bnnoxhun@soi", "lioncork@soi", "primecom@soi", "bnhab@soi", "primecrk@soi", "bntiger@soi", "belowlun@soi", "bnvamp@soi", "bnpack@soi", "packback@soi", "bnlupe@soi", "bnwolf@soi"],
+ "excludeRealmRooms" : "no"
+},
+ "lez" : {
+ "fullName" : "Lesbian",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : ["", "grrlsrus@soi", "lesbosp@soi", "grrlsrus@soi", "subles@soi", "sapphic@soi", "bdsmles@soi"],
+ "roomExclude" : [""],
+ "controlRoom" : "",
+ "lastVisited" : "unknown",
+ "roomList" : [""],
+ "excludeRealmRooms" : "no"
+},
+ "ewhere" : {
+ "fullName" : "Everywhere",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "evercork@soi",
+ "lastVisited" : "07/14/2011",
+ "roomList" : ["evercork@soi", "everchar@soi", "everooc@soi", "evermail@soi", "movies1@soi", "alleys@soi", "everanc@soi", "salon@soi", "thebrit@soi", "havencas@soi", "highhill@soi", "hrsguard@soi", "everpark@soi", "leauber@soi", "mayfair@soi", "mayfairp@soi", "newken@soi", "ewclinic@soi", "everloft@soi", "evtrain@soi", "panclub@soi", "pcircus@soi", "everstre@soi", "indigent@soi", "wcorder@soi", "yarncafe@soi", "221b@soi", "panup@soi", "ewdulac@soi", "curtsey@soi", "oliviaqt@bwr", "everjunk@soi", "deadzone@soi", "sparoom@bwr", "bnapt@soi", "crafter@soi", "langdon@soi", "everfly@soi", "tentcity@soi", "tentbar@soi", "cavalry@soi", "gorgon@bwr", "wilding@soi", "balmoral@soi", "bmanor@soi", "dinas@soi", "cypress@soi", "abhos@soi", "station@soi", "evcarn@soi", "snake3@soi", "stmarks@soi", "wildhart@soi", "evermist@soi", "everbar@soi", "kcross@soi", "loch@soi", "mazeone@soi", "evercafe@soi", "floatm@soi", "foxdens@soi", "thehalls@bwr", "havenbel@soi", "hidgrott@bwr", "evermaze@soi", "raever@soi", "nbridge@soi", "gap@soi", "rpool@soi", "ruingate@soi", "everdive@soi", "forge@soi", "greenthr@soi", "barony@soi", "watch@soi", "artistry@soi", "khaus@soi", "mrai@soi", "corner@bwr", "stygian@soi", "rhayge@soi"],
+ "excludeRealmRooms" : "no"
+},
+ "ngor" : {
+ "fullName" : "Nifty Gor Places",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "avcork@jag",
+ "lastVisited" : "11/03/2010",
+ "roomList" : ["vixx@jag", "turia@jag", "jagcork@jag", "rtooc@jag", "wantyou@soi", "z2bared2@soi", "wantme2@soi", "agutter@soi", "analley@soi", "mild@soi", "mickie@soi", "sidheach@soi", "oocchat@jag", "avcork@jag"],
+ "excludeRealmRooms" : "no"
+},
+ "bambi" : {
+ "fullName" : "Bambie Isle",
+ "defaultMode" : "exclude",
+ "tailInclude" : [],
+ "tailExclude" : [],
+ "roomInclude" : [""],
+ "roomExclude" : [""],
+ "controlRoom" : "bambhunt@soi",
+ "lastVisited" : "12/02/2010",
+ "roomList" : ["bambhunt@soi", "huntarea@soi", "ebcamp@soi", "huntbios@soi", "bambibio@soi", "bambcork@soi"],
+ "excludeRealmRooms" : "no"
+}
+}

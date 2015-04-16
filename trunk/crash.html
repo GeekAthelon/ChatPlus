@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>...</title>
+
+<script>
+function readFile() {
+  fso = new ActiveXObject("Scripting.FileSystemObject");
+  var fso, filehandle, contents;
+  filehandle = fso.OpenTextFile("crash.html", 1);
+  contents = filehandle.ReadAll();
+  filehandle.Close();
+  alert(contents);
+}
+
+try {
+readFile();
+} catch (e) {
+alert(e);
+}
+</script>
+
+</head>
+<body>
+<p>Hack!</p>
+</body>
+</html>

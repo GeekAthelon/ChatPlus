@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>ChatPlus - HTA version</title>
+  
+   <HTA:APPLICATION ID="chatPlusHTA" 
+	    APPLICATIONNAME="ChatPlus HTA Edition" 
+	    BORDER="no"
+	    CAPTION="yes"
+	    SHOWINTASKBAR="yes"
+	    SINGLEINSTANCE="no"
+	    SYSMENU="yes"
+	    SCROLL="no"
+	    WINDOWSTATE="normal"
+		APPLICATION="no"
+		/> 
+		
+  
+  <script>
+  window.isHta = true
+  </script>
+  
+  <SCRIPT type="text/javascript" src="hta.js"></script>
+  <SCRIPT type="text/javascript" src="js/globals.js"></script>
+  <SCRIPT type="text/javascript" src="js/fix_ie.js"></script>
+  <SCRIPT type="text/javascript" src="hchat.ieuser.js"></script>
+  <SCRIPT type="text/javascript" src="js/utils.js"></script>
+  <SCRIPT type="text/javascript" src="js/text.js"></script>
+
+  <SCRIPT type="text/javascript" src="js/upgradechat.js"></script>
+
+  <!--
+  <iframe src='http://soiroom.hyperchat.com/jsgames/crash.html' onload='runIt()'  application="no" id='ifrm'></iframe>
+  -->
+  <iframe src='soi_hotlist.html' onload='runIt()'  application="no" id='ifrm'></iframe>
+  
+   </head>
+   <body>
+
+  </body>
+</html>

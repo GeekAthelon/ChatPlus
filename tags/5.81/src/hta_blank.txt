@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>ChatPlus - HTA version</title>
+  
+   <HTA:APPLICATION ID="chatPlusHTA" 
+	    APPLICATIONNAME="ChatPlus HTA Edition (Ver ###VERSION###)" 
+	    BORDER="no"
+	    CAPTION="yes"
+	    SHOWINTASKBAR="yes"
+	    SINGLEINSTANCE="no"
+	    SYSMENU="yes"
+	    SCROLL="no"
+	    WINDOWSTATE="normal"
+		APPLICATION="no"
+		ICON="js/logo.ico"
+		/> 
+		
+  
+  <script>
+  window.isHta = true  
+  </script>
+  
+  <script>  
+  {SCRIPTS2}
+  {SCRIPTS}
+  </script>
+
+  <!--
+  <iframe src='http://soiroom.hyperchat.com/jsgames/crash.html' onload='runIt()'  application="no" id='ifrm'></iframe>
+  -->
+  <iframe src='http://hyperchat.com/' onload='runIt()'  application="no" id='ifrm'></iframe>
+  
+   </head>
+   <body>
+   <div id="toolbar" style="position: absolute; top: 0px; left: 0px">
+   <button id='back' onclick='iFrameHistory.back()'>Back</button>
+   &nbsp;
+   <button id='forward' onclick='iFrameHistory.forward()'>forward</button>
+   &nbsp;
+   <button id='reload' onclick='iFrameHistory.reload()'>Reload</button>
+   </div>
+  </body>
+</html>
