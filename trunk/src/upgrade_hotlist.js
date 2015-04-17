@@ -349,7 +349,8 @@ upgrades.hotlist = (function() {
   var updateSeenTable = function(tblList) {
     var key;
     var realm;
-    var elem;
+    var realmCheckMark;
+	var realmTableDiv;
     var table;
     var realmHeader;
     var controlRoomElement;
@@ -363,11 +364,11 @@ upgrades.hotlist = (function() {
     for (var iii = 0; iii < realmList[":list:"].length; iii++) {
       key = realmList[":list:"][iii];
       realm = realmList[key];
-      elem = document.getElementById("id_HotListCheckBox2_" + key);
+      realmCheckMark = document.getElementById("id_HotListCheckBox2_" + key);
 
-      if (elem.checked) {
+      if (realmCheckMark.checked) {
         table = createNewHotList(tblList, key, realm);
-        elem = document.createElement('div');
+        //realmTableDiv = document.createElement('div');
         realmHeader = document.createElement('h3');
         realmHeader.appendChild(document.createTextNode(realm.fullName));
 
