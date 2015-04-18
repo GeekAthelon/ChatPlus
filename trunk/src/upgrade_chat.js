@@ -144,7 +144,7 @@ document.body.addEventListener('click', handleNicknameClick, false);
 
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms() {
-
+	
     var rBut;
     var resetTimerBut;
     var resetTimerDiv;
@@ -172,7 +172,7 @@ upgrades.chatroom_auto = (function() {
         hr = hrs[i];
         next = hr.nextSibling;
         while (next && next.tagName && next.tagName.toLowerCase() !== "i") {
-          next = hr.nextSibling;
+          next = next.nextSibling;
         }
         str = next.textContent;
         m = !!str.match(re);
@@ -834,8 +834,10 @@ upgrades.chatroom = (function() {
     upgradeResetButton();
     createRealmButton();
 
-    //upgrades.chatroom_auto.upgrade();
-
+	if (!soiDetails.isCork) {
+      upgrades.chatroom_auto.upgrade();
+    }
+	
     if (soiDetails.formMail) {
       upgrades.mailroom.makeExtendedMailRoom();
     }
