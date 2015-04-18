@@ -7,6 +7,8 @@ QUnit.module("Control Room - FTP Files", {
     fixture.innerHTML = html;
 
     resetGlobals();
+    addGlobalListeners();
+
   },
   afterEach: function() {
     // clean up after each test

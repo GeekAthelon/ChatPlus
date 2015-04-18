@@ -9,6 +9,7 @@
       var html = template.innerHTML;
       fixture.innerHTML = html;
       resetGlobals();
+	  addGlobalListeners();
     },
     afterEach: function() {
       var popup = document.getElementById("popup");

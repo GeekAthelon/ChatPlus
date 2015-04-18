@@ -9,6 +9,7 @@ QUnit.module("ChatPlus Cork", {
     upgrades.cork.internals.nuke();
 
     resetGlobals();
+    addGlobalListeners();
   },
   afterEach: function() {
     upgrades.cork.internals.nuke();

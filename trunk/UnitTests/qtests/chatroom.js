@@ -48,6 +48,7 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
       fixture.innerHTML = html;
 
       resetGlobals();
+      addGlobalListeners();
     },
     afterEach: function() {
       // clean up after each test

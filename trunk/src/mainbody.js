@@ -1,3 +1,11 @@
+function addGlobalListeners() {
+  document.body.removeEventListener('click', handleNicknameClick, false);
+  document.body.addEventListener('click', handleNicknameClick, false);
+  
+  document.body.removeEventListener('click', handleRealmAddRemove, false);
+  document.body.addEventListener('click', handleRealmAddRemove, false);  
+}
+
 function testo() {
   "use strict";
   nameList = {}; // What names were found in the document.
@@ -10,7 +18,8 @@ function testo() {
 
   prepToolbar();
   setStyles(master);
-
+  addGlobalListeners();
+  
   if (soiDetails.isHot) {
     fixmyList(realmList);
     fixmyList(newRealm);
@@ -248,9 +257,7 @@ function runAll(document) {
   if (soiDetails.isSoi) {
     var ezz;
     doVersionCheck();
-    console.log("Pre testo");
     testo();
-    console.log("Post testo");
     userWindow.hchatVersion = myStats.version;
     userWindow.isTouched = true;
 

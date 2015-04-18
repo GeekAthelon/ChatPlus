@@ -142,6 +142,7 @@ QUnit.done(function(details) {
       return;
     }
     resetGlobals();
+    addGlobalListeners();
 
     var div = document.querySelectorAll("#hchat_toolbar");
     forEachNode(div, function() {

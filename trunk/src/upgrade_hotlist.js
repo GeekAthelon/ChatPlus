@@ -2,6 +2,30 @@ var nickTemplate = "<span title='{hint}' class='chatPlus_nick' data-nick='{soiFo
 
 var upgrades = upgrades || {};
 
+function handleRealmAddRemove(event) {
+  var action = event.target.getAttribute("data-hotlist-action");
+  if (!action) {
+    return;
+  }
+
+  var table = event.target;
+  while (table.nodeName.toLowerCase() !== "table") {
+    table = table.parentNode;
+  }
+
+  var saveData = {
+    realmName: table.getAttribute("data-realm-name"),
+    roomName: event.target.getAttribute("data-room")
+  };
+
+  if (action === "add-realm") {
+    controlPanel.addRoomToRealm(event, saveData);
+  } else {
+    controlPanel.removeRoomfromRealm(event, saveData);
+  }
+}
+
+
 upgrades.hotlist = (function() {
   "use strict";
 
@@ -35,32 +59,6 @@ upgrades.hotlist = (function() {
   roomTemplate += "    </td>";
   roomTemplate += "  </tr>";
   roomTemplate += "</table>";
-
-  function handleRealmAddRemove(event) {
-    var action = event.target.getAttribute("data-hotlist-action");
-    if (!action) {
-      return;
-    }
-
-    var table = event.target;
-    while (table.nodeName.toLowerCase() !== "table") {
-      table = table.parentNode;
-    }
-
-    var saveData = {
-      realmName: table.getAttribute("data-realm-name"),
-      roomName: event.target.getAttribute("data-room")
-    };
-
-    if (action === "add-realm") {
-      controlPanel.addRoomToRealm(event, saveData);
-    } else {
-      controlPanel.removeRoomfromRealm(event, saveData);
-    }
-  }
-
-  document.body.removeEventListener('click', handleRealmAddRemove, false);
-  document.body.addEventListener('click', handleRealmAddRemove, false);
 
   var placeHotPanel = function(paneldiv) {
     var logo;

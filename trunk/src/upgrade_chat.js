@@ -139,8 +139,7 @@ function handleNicknameClick(e) {
     //popupMenu.destroy();
   }
 }
-document.body.removeEventListener('click', handleNicknameClick, false);
-document.body.addEventListener('click', handleNicknameClick, false);
+
 
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {

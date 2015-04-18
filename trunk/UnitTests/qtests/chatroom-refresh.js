@@ -7,6 +7,7 @@ QUnit.module("Chat - Refresh mode", {
     fixture.innerHTML = html;
 
     resetGlobals();
+    addGlobalListeners();	
   },
   afterEach: function() {
     // clean up after each test

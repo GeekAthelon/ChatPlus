@@ -1,5 +1,5 @@
+
 upgrades.mailroom = (function() {
-  "use strict";
 
   var makeExtendedMailRoom = function() {
     var tmp;
