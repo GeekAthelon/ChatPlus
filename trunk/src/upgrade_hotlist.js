@@ -40,7 +40,7 @@ upgrades.hotlist = (function() {
 
   var roomTemplate = "";
   roomTemplate += "<table class='hotTable'>";
-  roomTemplate += "  <tr>";
+  roomTemplate += "  <tr data-for-room='{roomName}'>";
   roomTemplate += "    <td class='left'>";
   roomTemplate += "      <a href='{roomURL}'>{roomName}</a><br>{spiritCount}";
   roomTemplate += "      <br>";

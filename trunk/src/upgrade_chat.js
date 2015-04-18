@@ -94,6 +94,25 @@ function handleNicknameClick(e) {
     sendMailToUser(nick);
   }
 
+  function getNickInRooms(nick) {
+    var inRoomList = [];
+    var nickInRooms = document.querySelectorAll("[data-nick='" + nick + "']");
+    forEachNode(nickInRooms, function(nickEl) {
+      var tr = nickEl;
+      while (tr && tr.nodeName.toLowerCase() !== 'tr') {
+        tr = tr.parentNode;
+      }
+
+      if (tr) {
+        var roomName = tr.getAttribute("data-for-room");
+        if (roomName && inRoomList.indexOf(roomName) === -1) {
+          inRoomList.push(roomName);
+        }
+      }
+    });
+    return inRoomList;
+  }
+
   while (el && el.className !== 'chatPlus_nick') {
     if (el.className === "cp-popup-visible") {
       return;
@@ -133,6 +152,14 @@ function handleNicknameClick(e) {
       removeButton.id = 'cp-buddy-remove';
     }
 
+    var inRoomList = getNickInRooms(nick);
+
+    inRoomList.forEach(function(room) {
+      var link = myDom.createLinkToRoom(room);
+      menu.appendChild(link);
+      menu.appendChild(document.createElement("br"));
+    });
+
     popupMenu.show(outerDiv);
     e.stopPropagation();
   } else {
@@ -143,7 +170,7 @@ function handleNicknameClick(e) {
 
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {
-	
+
     var rBut;
     var resetTimerBut;
     var resetTimerDiv;
@@ -162,12 +189,12 @@ upgrades.chatroom_auto = (function() {
       var hrs = document.getElementsByTagName("hr");
       var re = /^[A-Za-z]{3}\s[A-Za-z]{3}\s\d\d\s\d\d:\d\d:\d\d$/;
       var posts = [];
-	  
-	  forEachNode(markers.actionLinks, function(actionLink) {
-	    var post = actionLink.previousElementSibling;
-		posts.push(post);
-	  });
-	  
+
+      forEachNode(markers.actionLinks, function(actionLink) {
+        var post = actionLink.previousElementSibling;
+        posts.push(post);
+      });
+
       return posts;
     }
 
@@ -818,10 +845,10 @@ upgrades.chatroom = (function() {
     upgradeResetButton();
     createRealmButton();
 
-	if (!soiDetails.isCork) {
+    if (!soiDetails.isCork) {
       upgrades.chatroom_auto.upgrade(markers);
     }
-	
+
     if (soiDetails.formMail) {
       upgrades.mailroom.makeExtendedMailRoom();
     }
