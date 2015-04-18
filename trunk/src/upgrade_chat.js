@@ -8,7 +8,7 @@ function createUserInfo(el) {
   "use strict";
 
   var soiDetails = identifySoi();
-  
+
   function cleanupName(name) {
     // Because of how funky the HTML can come back, its just easier to do cleanup work here
     // Remove any final ':' 
@@ -627,9 +627,9 @@ upgrades.chatroom = (function() {
       value: "n"
     }];
 
-	var newReset;
-	var newUndo;
-	
+    var newReset;
+    var newUndo;
+
     if (soiDetails.resetButton) {
       newReset = myDom.createATag("#", "Reset");
       newReset.id = "chatplus-reset";
@@ -639,7 +639,7 @@ upgrades.chatroom = (function() {
       soiDetails.resetButton.disabled = "true";
 
       addEvent(newReset, 'click', function() {
-        return function(/*event*/) {
+        return function( /*event*/ ) {
           modalWindow.confirm("Do you really want to reset?", buttons, function(answer) {
             if (answer === "y") {
               soiDetails.formMsg.reset();
@@ -664,7 +664,7 @@ upgrades.chatroom = (function() {
       myDom.insertAfter(document.createTextNode(" "), newReset);
 
       addEvent(newUndo, 'click', function() {
-        return function(/*event*/) {
+        return function( /*event*/ ) {
           modalWindow.confirm("Are you you sure you want to undo the last post?", buttons, function(answer) {
             if (answer === "y") {
               userWindow.location.href = oldUndo.href;
@@ -742,7 +742,7 @@ upgrades.chatroom = (function() {
         }
 
         var f = (function(_key, _name, _value) {
-          return function(/*event*/) {
+          return function( /*event*/ ) {
             var el = document.getElementsByName("vqxsp")[0];
             el.value += _value;
           };
