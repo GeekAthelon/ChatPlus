@@ -28,7 +28,7 @@ upgrades.hotlist = (function() {
   roomTemplate += "    <td class='right'>";
   roomTemplate += "      <b>{roomDesc}</b>";
   roomTemplate += "      <br>";
-  roomTemplate += "      <i>{roomHost}</i> - <i>{roomOpen}</i>";
+  roomTemplate += "      <i>{roomOpen}</i> - <i>{roomHost}</i>";
   roomTemplate += "      <br>";
   roomTemplate += "      <blockquote>{roomLongDesc}</blockquote>";
   roomTemplate += "      {folkHtml}";
@@ -36,32 +36,32 @@ upgrades.hotlist = (function() {
   roomTemplate += "  </tr>";
   roomTemplate += "</table>";
 
-  function handleRealmAddRemove(event)  {
+  function handleRealmAddRemove(event) {
     var action = event.target.getAttribute("data-hotlist-action");
-	if (!action) {
-	  return;	
-	}
-	
-	var table = event.target;
-	while (table.nodeName.toLowerCase() !== "table") {
-	  table = table.parentNode;
-	}
-		
+    if (!action) {
+      return;
+    }
+
+    var table = event.target;
+    while (table.nodeName.toLowerCase() !== "table") {
+      table = table.parentNode;
+    }
+
     var saveData = {
       realmName: table.getAttribute("data-realm-name"),
       roomName: action
     };
-				
+
     if (action === "add-realm") {
       controlPanel.addRoomToRealm(event, saveData);
     } else {
       controlPanel.removeRoomfromRealm(event, saveData);
-    }			
+    }
   }
-    
+
   document.body.removeEventListener('click', handleRealmAddRemove, false);
   document.body.addEventListener('click', handleRealmAddRemove, false);
-  
+
   var placeHotPanel = function(paneldiv) {
     var logo;
     logo = document.getElementById("hotDiv");
@@ -118,15 +118,11 @@ upgrades.hotlist = (function() {
       return tmpArray.join(folkSeparator);
     }
 
-	function addRemoveHideToHtml() {
-	roomTemplate += "      <br>";
-	}
-	
-    var tableHtml = roomTemplate;	
+    var tableHtml = roomTemplate;
     var folkMode = realmList[":masterSettings:"].hotListView;
-	tblData.folkHtml = nicksToHtml();
-	
-	tableHtml = stringFormat(tableHtml, tblData);
+    tblData.folkHtml = nicksToHtml();
+
+    tableHtml = stringFormat(tableHtml, tblData);
 
     var container = document.createElement("div");
     container.innerHTML = tableHtml;
@@ -162,7 +158,7 @@ upgrades.hotlist = (function() {
     eTable = document.createElement("table");
     eTable.className = "hotTable";
     eTable.setAttribute("data-realm-name", realmName);
-	
+
     eTbody = document.createElement("tbody");
     eTable.appendChild(eTbody);
 
@@ -426,7 +422,7 @@ upgrades.hotlist = (function() {
 
       var tblData = {
         folk: [],
-		hideButton: "",
+        hideButton: "",
         roomDesc: null,
         roomHost: "",
         roomLongDesc: "",
@@ -449,8 +445,17 @@ upgrades.hotlist = (function() {
       var link = thisTable.querySelector("td a");
       var longDescEl = dataTd.querySelector("blockquote");
 
-      var roomOpenEl = dataTd.querySelector("i + i");
-      var hostEl = dataTd.querySelector("i");
+      var roomOpenEl = dataTd.querySelector("i");
+      var hostEl = dataTd.querySelector("i + i");
+
+      if (hostEl) {
+        tblData.roomHost = hostEl.textContent.replace(", ", "").trim();
+        tblData.roomOpen = roomOpenEl.textContent;
+        //console.log(roomOpenEl.textContent, roomOpenEl.textContent.replace(", ", ""));
+      } else {
+        tblData.roomOpen = roomOpenEl.textContent;
+        tblData.roomHost = "";
+      }
 
       forEachNode(bolds, function(el, i) {
         if (i === 0) {
@@ -462,23 +467,13 @@ upgrades.hotlist = (function() {
         }
       });
 
-      if (roomOpenEl) {
-        tblData.roomOpen = roomOpenEl.textContent.replace(", ", "");
-        tblData.roomHost = hostEl.textContent;
-        //console.log(roomOpenEl.textContent, roomOpenEl.textContent.replace(", ", ""));
-      } else {
-        tblData.roomOpen = "",
-          tblData.roomHost = hostEl.textContent;
+      var hideButtonEl = thisTable.querySelector("input[type=submit]");
+      if (hideButtonEl) {
+        tmp = document.createElement("div");
+        tmp.appendChild(hideButtonEl.cloneNode(true));
+        tblData.hideButton = tmp.innerHTML + "<br>";
       }
 
-	  var hideButtonEl = thisTable.querySelector("input[type=submit]");
-	  if (hideButtonEl) {
-	    tmp = document.createElement("div");
-		tmp.appendChild(hideButtonEl.cloneNode(true));
-		tblData.hideButton = tmp.innerHTML + "<br>";
-	  }
-	  	  
-      tblData.roomHost = hostEl ? hostEl.textContent : "";
       tblData.roomLongDesc = longDescEl ? longDescEl.textContent : "";
       tblData.roomName = link.textContent;
       if (tblData.roomName.indexOf("@") === -1) {
