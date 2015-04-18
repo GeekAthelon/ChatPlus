@@ -4,6 +4,64 @@ var upgrades = upgrades || {};
 
 upgrades.hotlist = (function() {
   "use strict";
+
+  //   tblData.roomName    ==> The room name, including tail
+  //   tblData.roomURL     ==> Current URL to room -- do not cache
+  //   tblData.spiritCount ==> The count of Spirits
+  //   tblData.roomOpen    ==> Who the room is open to, if known
+  //   tlbData.roomHost    ==> Host of the room, if known.
+  //   tblData.roomDesc    ==> Short description of the room
+  //   tblData.folk        ==> Who is in the room, HTML nodes
+  //   tblData.hideButtonHtml
+  var nickTemplate = "<span title='{soiFormat} [Click for details]' class='chatPlus_nick' data-nick='{soiFormat}'><b>{html}</b></span>";
+
+  var roomTemplate = "";
+  roomTemplate += "<table class='hotTable'>";
+  roomTemplate += "  <tr>";
+  roomTemplate += "    <td class='left'>";
+  roomTemplate += "      <a href='{roomURL}'>{roomName}</a><br>{spiritCount}";
+  roomTemplate += "      <br>";
+  roomTemplate += "      <br>{hideButton}";
+  roomTemplate += "      <input type='button' value='Add' class='cpbutton' data-hotlist-action='add-realm' data-room='{roomName}'>";
+  roomTemplate += "      <input type='button' value='Remove' class='cpbutton' data-hotlist-action='remove-realm' data-room='{roomName}'>";
+  roomTemplate += "    </td>";
+  roomTemplate += "    <td class='right'>";
+  roomTemplate += "      <b>{roomDesc}</b>";
+  roomTemplate += "      <br>";
+  roomTemplate += "      <i>{roomHost}</i> - <i>{roomOpen}</i>";
+  roomTemplate += "      <br>";
+  roomTemplate += "      <blockquote>{roomLongDesc}</blockquote>";
+  roomTemplate += "      {folkHtml}";
+  roomTemplate += "    </td>";
+  roomTemplate += "  </tr>";
+  roomTemplate += "</table>";
+
+  function handleRealmAddRemove(event)  {
+    var action = event.target.getAttribute("data-hotlist-action");
+	if (!action) {
+	  return;	
+	}
+	
+	var table = event.target;
+	while (table.nodeName.toLowerCase() !== "table") {
+	  table = table.parentNode;
+	}
+		
+    var saveData = {
+      realmName: table.getAttribute("data-realm-name"),
+      roomName: action
+    };
+				
+    if (action === "add-realm") {
+      controlPanel.addRoomToRealm(event, saveData);
+    } else {
+      controlPanel.removeRoomfromRealm(event, saveData);
+    }			
+  }
+    
+  document.body.removeEventListener('click', handleRealmAddRemove, false);
+  document.body.addEventListener('click', handleRealmAddRemove, false);
+  
   var placeHotPanel = function(paneldiv) {
     var logo;
     logo = document.getElementById("hotDiv");
@@ -24,153 +82,55 @@ upgrades.hotlist = (function() {
   };
 
   var createTableRowHtml = function(realmName, tblData) {
-    var folk;
-    var folkList;
-    var tail;
-    var spiritCount;
-    var j;
-    var tmpArray;
-    var tag, tag2;
-    var folkTag;
+    function nicksToHtml() {
+      var folkNameStart = "";
+      var folkNameEnd = "";
+      var folkSeparator = "";
+      var folk;
+      if (folkMode !== "line") {
+        folkNameStart = "";
+        folkNameEnd = "";
+        folkSeparator = ", ";
+      } else {
+        folkNameStart = "<li>";
+        folkNameEnd = "</li>";
+        folkSeparator = "";
+        tableHtml = tableHtml.replace("{folkHtml}", "<ul>{folkHtml}</ul>");
+      }
+
+      var folkList = tblData.folk;
+      var tmpArray = [];
+      for (var j = 0; j < folkList.length; j++) {
+        folk = folkList[j].cloneNode(true);
+
+        var temp = document.createElement("div");
+        temp.appendChild(folk);
+        var info = createUserInfo(temp);
+
+        var html = stringFormat(nickTemplate, {
+          soiFormat: info.fullSoiStyleName,
+          html: info.html
+        });
+
+        tmpArray.push(folkNameStart + html + folkNameEnd);
+      }
+
+      return tmpArray.join(folkSeparator);
+    }
+
+	function addRemoveHideToHtml() {
+	roomTemplate += "      <br>";
+	}
+	
+    var tableHtml = roomTemplate;	
     var folkMode = realmList[":masterSettings:"].hotListView;
-    var folkNameIn = "";
-    var folkSeparator;
+	tblData.folkHtml = nicksToHtml();
+	
+	tableHtml = stringFormat(tableHtml, tblData);
 
-    var s = "";
-    var eTr = document.createElement("tr");
-    var eTd;
-
-    var createAddRemoveRealmButtons = function(realmName, roomName) {
-      var tag;
-      var e;
-
-      function createAddRemove(mode) {
-
-        tag = myDom.createATag("#", mode === "add" ? "Add" : "Remove");
-        addEvent(tag, 'click', (function(l1, l2, _mode) {
-
-          return function(event) {
-            var saveData = {
-              realmName: l1,
-              roomName: l2
-            };
-            var func;
-
-            if (_mode === "add") {
-              func = function() {
-                controlPanel.addRoomToRealm(event, saveData);
-              };
-            } else {
-              func = function() {
-                controlPanel.removeRoomfromRealm(event, saveData);
-              };
-            }
-            setTimeout(func, 1);
-            return true;
-          };
-        }(realmName, roomName, mode)));
-        e.appendChild(tag);
-
-      }
-      e = myDom.createTag("div");
-      createAddRemove("add");
-      createAddRemove("remove");
-      return e;
-    };
-
-    tail = getTail(tblData.roomName);
-
-    spiritCount = "";
-
-    j = tblData.folk.length;
-
-    if (j === 0) {
-      spiritCount = "No spirits -- but on the list?";
-    } else if (j === 1) {
-      spiritCount = "1 spirit";
-    } else {
-      spiritCount = "" + j + " spirits";
-    }
-
-    eTr.className = tail + " " + tblData.roomName;
-
-    eTd = document.createElement('td');
-    eTd.className = "left";
-
-    eTd.appendChild(myDom.createATag(tblData.roomURL, tblData.roomName));
-    eTd.appendChild(document.createElement("br"));
-    eTd.appendChild(document.createTextNode(spiritCount));
-    tag = createAddRemoveRealmButtons(realmName, tblData.roomName);
-    eTd.appendChild(tag);
-
-    if (tblData.hideShowButton && tblData.hideShowButton.name) {
-      tag = document.createElement("input");
-      tag.type = "submit";
-      tag.value = tblData.hideShowButton.value;
-      tag.name = tblData.hideShowButton.name;
-      eTd.appendChild(tag);
-    }
-
-    eTr.appendChild(eTd);
-
-    eTd = document.createElement('td');
-    eTd.className = "right";
-
-    eTd.appendChild(myDom.createTag("b", tblData.roomDesc));
-    eTd.appendChild(myDom.createTag("br"));
-    eTd.appendChild(myDom.createTag("br"));
-    eTd.appendChild(myDom.createTag("i", tblData.roomOpen));
-    eTd.appendChild(myDom.createTag("i", tblData.roomHost));
-    eTd.appendChild(myDom.createTag("blockquote", tblData.roomLong));
-
-    if (folkMode === "line") {
-      folkTag = myDom.createTag("ul");
-      folkNameIn = "li";
-      folkSeparator = "";
-    } else {
-      folkTag = myDom.createTag("div");
-      folkNameIn = "span";
-      folkSeparator = ", ";
-    }
-
-    folkList = tblData.folk;
-    tmpArray = [];
-    for (j = 0; j < folkList.length; j++) {
-      folk = folkList[j].cloneNode(true);
-	  
-      if (j > 0) {
-        folkTag.appendChild(document.createTextNode(folkSeparator));
-      }
-
-      s = folk.textContent;
-
-      /*	  
-         var nickTemplate = "<span title='{hint}' class='chatPlus_nick' data-nick='{soiFormat}'>{html}</span>";
-       */
-
-      var temp = document.createElement("div");
-      temp.appendChild(folk);
-      var info = createUserInfo(temp);
-
-      var html = stringFormat(nickTemplate, {
-        hint: info.text + " [Click for details]",
-        soiFormat: info.fullSoiStyleName,
-        html: info.html
-      });
-
-      tag2 = myDom.createTag("b", tag);
-      tag2.innerHTML = html;
-
-      highlightIfBuddy(tag2, s);
-
-      folkTag.appendChild(myDom.createTag(folkNameIn, tag2));
-      extractNameInfo(tag2, tail);
-    }
-
-    eTd.appendChild(folkTag);
-
-    eTr.appendChild(eTd);
-    return eTr;
+    var container = document.createElement("div");
+    container.innerHTML = tableHtml;
+    return container.querySelector("tr");
   };
 
   var createNewHotList = function(tblList, realmName, realm) {
@@ -201,7 +161,8 @@ upgrades.hotlist = (function() {
 
     eTable = document.createElement("table");
     eTable.className = "hotTable";
-
+    eTable.setAttribute("data-realm-name", realmName);
+	
     eTbody = document.createElement("tbody");
     eTable.appendChild(eTbody);
 
@@ -273,7 +234,7 @@ upgrades.hotlist = (function() {
     labelDiv.querySelector("input").setAttribute("data-action", "show-hidden");
 
     addEvent(labelDiv, 'click', (function(l1, _data) {
-      return function(/*event*/) {
+      return function( /*event*/ ) {
         var div = document.getElementById("exDiv_" + l1);
         var tag;
         var i, l = _data.length;
@@ -303,7 +264,7 @@ upgrades.hotlist = (function() {
     emptyLabelDiv.querySelector("input").setAttribute("data-action", "show-empty");
 
     addEvent(emptyLabelDiv, 'click', (function(l1, _data) {
-      return function(/*event*/) {
+      return function( /*event*/ ) {
         var i, l = _data.length;
         var div = document.getElementById("emptyDiv_" + l1);
         div.style.display = "block";
@@ -350,7 +311,7 @@ upgrades.hotlist = (function() {
     var key;
     var realm;
     var realmCheckMark;
-	var realmTableDiv;
+    var realmTableDiv;
     var table;
     var realmHeader;
     var controlRoomElement;
@@ -448,7 +409,6 @@ upgrades.hotlist = (function() {
       allTables.push(table);
     });
 
-
     for (var i = 0; i < allTables.length; i++) {
       tmp = undefined;
       thisTd = undefined;
@@ -466,10 +426,10 @@ upgrades.hotlist = (function() {
 
       var tblData = {
         folk: [],
-        hideShowButton: null,
+		hideButton: "",
         roomDesc: null,
         roomHost: "",
-        roomLong: "",
+        roomLongDesc: "",
         roomName: "",
         roomOpen: ""
       };
@@ -487,29 +447,53 @@ upgrades.hotlist = (function() {
       var dataTd = thisTable.querySelectorAll("td")[1];
       var bolds = dataTd.querySelectorAll("b");
       var link = thisTable.querySelector("td a");
-
       var longDescEl = dataTd.querySelector("blockquote");
-      var hostEl = dataTd.querySelector("i + i");
+
+      var roomOpenEl = dataTd.querySelector("i + i");
+      var hostEl = dataTd.querySelector("i");
+
       forEachNode(bolds, function(el, i) {
         if (i === 0) {
           tblData.roomDesc = el.textContent;
         } else {
-		  var d = document.createDocumentFragment();
-		  d.appendChild(el.cloneNode(el));
+          var d = document.createDocumentFragment();
+          d.appendChild(el.cloneNode(el));
           tblData.folk.push(d);
         }
       });
 
-      //tblData.hideShowButton = thisTable.querySelector("input[type=submit]")  ;
-      tblData.hideShowButton = {};
+      if (roomOpenEl) {
+        tblData.roomOpen = roomOpenEl.textContent.replace(", ", "");
+        tblData.roomHost = hostEl.textContent;
+        //console.log(roomOpenEl.textContent, roomOpenEl.textContent.replace(", ", ""));
+      } else {
+        tblData.roomOpen = "",
+          tblData.roomHost = hostEl.textContent;
+      }
+
+	  var hideButtonEl = thisTable.querySelector("input[type=submit]");
+	  if (hideButtonEl) {
+	    tmp = document.createElement("div");
+		tmp.appendChild(hideButtonEl.cloneNode(true));
+		tblData.hideButton = tmp.innerHTML + "<br>";
+	  }
+	  	  
       tblData.roomHost = hostEl ? hostEl.textContent : "";
-      tblData.roomLong = longDescEl ? longDescEl.textContent : "";
+      tblData.roomLongDesc = longDescEl ? longDescEl.textContent : "";
       tblData.roomName = link.textContent;
       if (tblData.roomName.indexOf("@") === -1) {
         tblData.roomName += "@" + soiDetails.blankTail;
       }
       tblData.roomURL = link.href;
-      tblData.roomOpen = dataTd.querySelector("i").textContent;
+      if (tblData.folk.length === 1) {
+        tblData.spiritCount = tblData.folk.length + " spirit";
+      } else {
+        tblData.spiritCount = tblData.folk.length + " spirits";
+      }
+
+
+
+
       defaultTail = tblData.roomName.split("@")[1];
 
       onlineBuddies = onlineBuddies || {};
@@ -644,7 +628,7 @@ upgrades.hotlist = (function() {
       placeHotPanel(link);
 
       updateHotList();
-      addEvent(link, "click", function(/*event*/) {
+      addEvent(link, "click", function( /*event*/ ) {
         link = makeCommandPanel(link);
         placeHotPanel(link);
         gmSetValue("isNewHot2", false);
