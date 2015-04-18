@@ -206,13 +206,13 @@ function prepToolbar() {
    style.push('.cp-popup-visible {');
    style.push('  visibility: visible;');
    style.push('  opacity: 1;');
-   style.push('  transition: opacity 1s linear;');
+   style.push('  transition: opacity 0.25s linear;');
    style.push('}');
 
    style.push('.cp-popup-hidden {');
    style.push('  visibility: hidden;');
    style.push('  opacity: 0;');
-   style.push('  transition: visibility 0s 0.5s, opacity 0.5s linear;');
+   style.push('  transition: visibility 0s 0.25s, opacity 0.25s linear;');
    style.push('}');
 
    style.push('.cp-popup-visible > div,');
