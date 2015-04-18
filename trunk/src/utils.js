@@ -967,6 +967,7 @@ var modalWindow = (function() {
     });
     s += "</center>";
 
+	var chooseViewModelViews = document.getElementById("chooseViewModelViews");
     chooseViewModelViews.innerHTML = s;
 
     var buts = chooseViewModelViews.querySelectorAll("button");
@@ -1009,8 +1010,6 @@ var modalWindow = (function() {
     confirm: confirm
   };
 }());
-
-modalWindow.create();
 
 var popupMenu = (function() {
   "use strict";

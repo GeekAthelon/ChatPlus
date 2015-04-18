@@ -3,7 +3,9 @@ function addGlobalListeners() {
   document.body.addEventListener('click', handleNicknameClick, false);
   
   document.body.removeEventListener('click', handleRealmAddRemove, false);
-  document.body.addEventListener('click', handleRealmAddRemove, false);  
+  document.body.addEventListener('click', handleRealmAddRemove, false);
+  
+  modalWindow.create();
 }
 
 function testo() {

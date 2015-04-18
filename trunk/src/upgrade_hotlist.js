@@ -25,7 +25,6 @@ function handleRealmAddRemove(event) {
   }
 }
 
-
 upgrades.hotlist = (function() {
   "use strict";
 
