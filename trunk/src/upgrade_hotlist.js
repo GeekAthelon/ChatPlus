@@ -49,7 +49,7 @@ upgrades.hotlist = (function() {
 
     var saveData = {
       realmName: table.getAttribute("data-realm-name"),
-      roomName: action
+      roomName: event.target.getAttribute("data-room")
     };
 
     if (action === "add-realm") {

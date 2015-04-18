@@ -272,6 +272,33 @@
     assert.strictEqual(hotListEntries.length, cbs.length + 1, "Checked boxes - HOT list modified");
   });
 
+  QUnit.test("Testing Realm Add/Remove button", function(assert) {
+    var i;
+    var cb;
+    upgrades.hotlist.upgrade();
+
+	assert.equal(realmList.favs.roomInclude.indexOf("jhnchat@soi"), -1, "jhnchat@soi was not found in `favs`");
+	assert.notEqual(realmList.break1.roomInclude.indexOf("sshh@soi"), -1, "sshh@soi was found in `break1`");
+	
+	var saveRealmList = JSON.parse(JSON.stringify(realmList));
+	
+	var addTable = document.querySelector('table[data-realm-name="all"]');
+	var addButton = addTable.querySelector('[data-hotlist-action="add-realm"][data-room="jhnchat@soi"]');
+	
+	var removeTable = document.querySelector('table[data-realm-name="break1"]');
+	var removeButton = removeTable.querySelector('[data-hotlist-action="remove-realm"][data-room="sshh@soi"]');
+	
+	doClick(addButton);
+	document.getElementById("realmSelect").value = "favs"
+	doClick(document.getElementById("cp_Save Data"));	
+	assert.notEqual(realmList.favs.roomInclude.indexOf("jhnchat@soi"), -1, "jhnchat@soi was added to `favs`");
+		
+	doClick(removeButton);
+	doClick(document.getElementById("cp_Save Data"));
+	assert.equal(realmList.break1.roomInclude.indexOf("sshh@soi"), -1, "jhnchat@soi was removed from `break`");
+  });
+
+  
   QUnit.test("Test Active Buddy List", function(assert) {
     testNicknamePopup(assert, upgrades.hotlist.upgrade, "Aizen", "aizen@soi");
   });
