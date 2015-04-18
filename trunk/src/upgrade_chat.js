@@ -143,7 +143,7 @@ document.body.removeEventListener('click', handleNicknameClick, false);
 document.body.addEventListener('click', handleNicknameClick, false);
 
 upgrades.chatroom_auto = (function() {
-  function processRefreshRooms() {
+  function processRefreshRooms(markers) {
 	
     var rBut;
     var resetTimerBut;
@@ -161,29 +161,14 @@ upgrades.chatroom_auto = (function() {
 
     function findPosts(firstOnly) {
       var hrs = document.getElementsByTagName("hr");
-      var hr, next;
-      var i, l = hrs.length;
-      var str;
       var re = /^[A-Za-z]{3}\s[A-Za-z]{3}\s\d\d\s\d\d:\d\d:\d\d$/;
-      var m;
       var posts = [];
-
-      for (i = 0; i < l; i++) {
-        hr = hrs[i];
-        next = hr.nextSibling;
-        while (next && next.tagName && next.tagName.toLowerCase() !== "i") {
-          next = next.nextSibling;
-        }
-        str = next.textContent;
-        m = !!str.match(re);
-        if (m) {
-          posts.push(next);
-          if (firstOnly) {
-            break;
-          }
-        }
-        //alert([next, str, m]);
-      }
+	  
+	  forEachNode(markers.actionLinks, function(actionLink) {
+	    var post = actionLink.previousElementSibling;
+		posts.push(post);
+	  });
+	  
       return posts;
     }
 
@@ -192,7 +177,7 @@ upgrades.chatroom_auto = (function() {
     }
 
     function findLastTimeDateStamp() {
-      var p = findPosts(true);
+      var p = findPosts();
       if (!p.length) {
         return "Never";
       } else {
@@ -354,10 +339,10 @@ upgrades.chatroom = (function() {
 
   function getPostMarkers() {
     // Locate the '~' or '*' links by posts	
-    var actionLinks = document.querySelectorAll("hr + i + a");
+    var actionLinks = document.querySelectorAll("hr + i + a, hr + center table i + a");
 
     // The <whoever> [said|said to|whispered to] clusters
-    var dialogTags = document.querySelectorAll("hr + i + a ~ b");
+    var dialogTags = document.querySelectorAll("hr + i + a ~ b, hr + center table i + a ~ b");
 
     if (actionLinks.length !== dialogTags.length) {
       throw new Error("Mismatch between actionLinks and dialogTags");
@@ -835,7 +820,7 @@ upgrades.chatroom = (function() {
     createRealmButton();
 
 	if (!soiDetails.isCork) {
-      upgrades.chatroom_auto.upgrade();
+      upgrades.chatroom_auto.upgrade(markers);
     }
 	
     if (soiDetails.formMail) {
