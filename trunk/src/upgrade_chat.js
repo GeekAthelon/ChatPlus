@@ -118,6 +118,10 @@ function handleNicknameClick(e) {
       return;
     }
 
+	if (el.className && el.className.indexOf("chatPlus_popupok") !== -1) {
+	  return;
+	}
+	
     el = el.parentNode;
   }
 
@@ -163,7 +167,7 @@ function handleNicknameClick(e) {
     popupMenu.show(outerDiv);
     e.stopPropagation();
   } else {
-    //popupMenu.destroy();
+    popupMenu.destroy();
   }
 }
 
