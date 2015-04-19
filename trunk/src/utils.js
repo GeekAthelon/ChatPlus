@@ -963,10 +963,12 @@ var modalWindow = (function() {
 
   function hide() {
     window.location.hash = "";
+	modalDiv.style.display = "none";
   }
 
   function promptTextToSpeach(message, details, cb) {
-    function getTextValues() {
+   modalDiv.style.display = "";
+   function getTextValues() {
 	  return {
 	    text: document.getElementById("modal-window-prompt").value,
 	    voice: document.getElementById("modal-window-prompt-voice").value
@@ -1020,6 +1022,7 @@ var modalWindow = (function() {
   
   
   function confirm(message, buttons, cb) {
+	modalDiv.style.display = "";
     var s = "";
     s += "<div><strong>" + message + "</strong></div>";
 
@@ -1052,7 +1055,11 @@ var modalWindow = (function() {
     window.location.hash = "#chooseViewModal";
   }
 
+  var modalDiv = null;
   function createModalWindow() {
+    if (modalDiv) {
+	  return modalDiv;
+	}
     var a = [];
     a[a.length] = '<div id="chooseViewModal" class="modalDialog">';
     a[a.length] = '<div>';
@@ -1064,8 +1071,10 @@ var modalWindow = (function() {
     var div = document.createElement("div");
     div.innerHTML = a.join("");
     document.body.appendChild(div);
-
-    return div;
+    
+	modalDiv = div.querySelector("div");
+	modalDiv.style.display = "none";
+    return modalDiv;
   }
 
   return {
