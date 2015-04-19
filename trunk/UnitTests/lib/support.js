@@ -123,7 +123,8 @@ function resetGlobals() {
       "ulinemode": "reset"
     },
     ":avatars:": {},
-    ":macros:": {}
+    ":macros:": {},
+	":roomAnnouncements:": {}	
   };
   
   elementIndex = {};

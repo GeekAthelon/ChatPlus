@@ -22,10 +22,8 @@ function testo() {
   setStyles(master);
   addGlobalListeners();
   
-  if (soiDetails.isHot) {
-    fixmyList(realmList);
-    fixmyList(newRealm);
-  }
+  fixmyList(realmList);
+  fixmyList(newRealm);
 
   if (soiDetails.isHot) {
     upgrades.hotlist.upgrade();

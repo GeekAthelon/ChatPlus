@@ -803,7 +803,7 @@ function getRoomUrlLink() {
 
 function fixmyList(myList) {
   "use strict";
-
+  
   function touchProperty(obj, key, theDefault) {
     var a;
     if (!obj[key]) {
@@ -850,6 +850,10 @@ function fixmyList(myList) {
         continue;
       }
 
+	  if (key.charAt(0) === ":") {
+	    continue;
+	  }
+	  
       trace(10, "MYKEY: " + key);
       realm = myList[key];
 
@@ -888,6 +892,7 @@ function fixmyList(myList) {
   touchProperty(myList[":masterSettings:"], "buddyList", []);
   touchProperty(myList, ":avatars:", {});
   touchProperty(myList, ":macros:", {});
+  touchProperty(myList, ":roomAnnouncements:", {});
 
 }
 
@@ -948,6 +953,11 @@ function forEachNode(nodelist, cb) {
   }
 }
 
+function textToSpeach(textValues) {
+  var msg = new SpeechSynthesisUtterance(textValues.text);
+  msg.voice = speechSynthesis.getVoices().filter(function(_voice) { return _voice.name === textValues.voice; })[0];
+  window.speechSynthesis.speak(msg);    
+}
 
 var modalWindow = (function() {
   "use strict";
@@ -956,6 +966,60 @@ var modalWindow = (function() {
     window.location.hash = "";
   }
 
+  function promptTextToSpeach(message, details, cb) {
+    function getTextValues() {
+	  return {
+	    text: document.getElementById("modal-window-prompt").value,
+	    voice: document.getElementById("modal-window-prompt-voice").value
+      };
+	}
+  
+    var s = "";
+    s += "<div><strong>" + message + "</strong></div>";
+    s += "<center>";
+    s += "Message: <input id='modal-window-prompt'>";
+	s += "<br>";
+	s += "Voice: <select id='modal-window-prompt-voice'></select>";
+	s += "<br>";
+    s += "&nbsp;<button id='modal-window-prompt-ok' class='cpbutton'>OK</button>&nbsp;";
+	s += "&nbsp;<button id='modal-window-prompt-play' class='cpbutton'>Play</button>&nbsp;";
+    s += "</center>";
+		
+	var chooseViewModelViews = document.getElementById("chooseViewModelViews");
+    chooseViewModelViews.innerHTML = s;
+
+	speechSynthesis.getVoices().forEach(function(voice) {
+	  var desc = voice.name + (voice.default ? ' (default)' :'');
+	  var option = new Option(desc, voice.name);
+      document.getElementById("modal-window-prompt-voice").options.add(option);
+    });
+		
+	if (details) {
+	  document.getElementById("modal-window-prompt").value = details.text;
+	  document.getElementById("modal-window-prompt-voice").value = details.voice;
+    }	
+
+    var close = document.querySelector(".modalDialogClose");
+    addEvent(close, "click", function() {
+      cb(null);
+      hide();
+    });
+
+    var ok = document.querySelector("#modal-window-prompt-ok");
+    addEvent(ok, "click", function() {
+      cb(getTextValues());
+      hide();
+    });	
+
+    var play = document.querySelector("#modal-window-prompt-play");
+    addEvent(play, "click", function() {	
+	  textToSpeach(getTextValues());
+	});
+	
+    window.location.hash = "#chooseViewModal";	
+  }
+  
+  
   function confirm(message, buttons, cb) {
     var s = "";
     s += "<div><strong>" + message + "</strong></div>";
@@ -1007,7 +1071,8 @@ var modalWindow = (function() {
 
   return {
     create: createModalWindow,
-    confirm: confirm
+    confirm: confirm,
+	promptTextToSpeach: promptTextToSpeach
   };
 }());
 

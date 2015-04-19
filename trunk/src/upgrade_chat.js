@@ -118,10 +118,10 @@ function handleNicknameClick(e) {
       return;
     }
 
-	if (el.className && el.className.indexOf("chatPlus_popupok") !== -1) {
-	  return;
-	}
-	
+    if (el.className && el.className.indexOf("chatPlus_popupok") !== -1) {
+      return;
+    }
+
     el = el.parentNode;
   }
 
@@ -176,6 +176,7 @@ upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {
 
     var rBut;
+    var announcementButton;
     var resetTimerBut;
     var resetTimerDiv;
 
@@ -225,9 +226,13 @@ upgrades.chatroom_auto = (function() {
 
     function setMode(mode) {
       status.innerHTML = "";
+      if (announcementButton) {
+        announcementButton.parentNode.removeChild(announcementButton);
+      }
       rBut.parentNode.removeChild(rBut);
       roomStampData.alertMode = mode;
       makeButtonChoice();
+      makeAnnouncementButton();
       saveValues();
     }
 
@@ -257,6 +262,23 @@ upgrades.chatroom_auto = (function() {
       });
       roomWatchDiv.appendChild(rBut);
     };
+
+    makeAnnouncementButton = function() {
+      if (!('speechSynthesis' in window)) {
+        return;
+      }
+
+      announcementButton = myDom.createATag("#", "Current Announcement: ---");
+      addEvent(announcementButton, 'click', function() {
+        var details = realmList[":roomAnnouncements:"][soiDetails.fullRoomName];
+        modalWindow.promptTextToSpeach("What shall I say?", details, function(answer) {
+          realmList[":roomAnnouncements:"][soiDetails.fullRoomName] = answer;
+          saveRealmList();
+        });
+      });
+      roomWatchDiv.appendChild(announcementButton);
+    };
+
 
     function setRefreshStatus() {
       if (roomStampData.alertMode) {
@@ -297,7 +319,18 @@ upgrades.chatroom_auto = (function() {
           resetTimerBut = myDom.createATag("#", "Clear alert and wait for next message");
           rBut.title = "Clear the alert and wait for the next message";
 
+          var voiceDetails = realmList[":roomAnnouncements:"][soiDetails.fullRoomName];
+          if (voiceDetails && voiceDetails.text) {
+            var lastVoiceDetails = gmGetValue("roomAnnouncements-" + soiDetails.fullRoomName, "")
+            if (lastVoiceDetails !== roomStampData.lastStampOnRecord) {
+
+              textToSpeach(voiceDetails);
+              gmSetValue("roomAnnouncements-" + soiDetails.fullRoomName, roomStampData.lastStampOnRecord);
+            }
+          }
+
           addEvent(resetTimerBut, 'click', function() {
+            roomStampData.playedVoice = false;
             resetTimerDiv.parentNode.removeChild(resetTimerDiv);
             saveLastTimeStamp();
             setMode(!roomStampData.alertMode);
@@ -311,6 +344,7 @@ upgrades.chatroom_auto = (function() {
         }
       }
     } else {
+      roomStampData.playedVoice = false;
       saveLastTimeStamp();
     }
   }
@@ -684,7 +718,6 @@ upgrades.chatroom = (function() {
             if (answer === "y") {
               userWindow.location.href = oldUndo.href;
             }
-
           });
         };
       }());
