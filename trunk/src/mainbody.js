@@ -10,10 +10,7 @@ function addGlobalListeners() {
 
 function testo() {
   "use strict";
-  nameList = {}; // What names were found in the document.
-  elementIndex = {};
-  elementIndex.element = [];
-  elementIndex.name = [];
+  var soiDetails = identifySoi();
 
   realmList = getRealmList();
   var master = realmList[":masterSettings:"];
@@ -196,7 +193,7 @@ function identifySoi() {
 function runAll(document) {
   "use strict";
 
-  soiDetails = identifySoi();
+  var soiDetails = identifySoi();
 
   function injectScript(src) {
     var headID = document.getElementsByTagName("head")[0];
@@ -236,7 +233,6 @@ function runAll(document) {
   }
 
   userWindow = unsafeWindow ? unsafeWindow : window;
-  chatPlusLocal = !!userWindow.chatPlusLocal;
 
   var homeUrl = "http://soiroom.hyperchat.com/chatplus/";
   //homeUrl = "http://127.0.0.1/chatplus/";
@@ -252,7 +248,6 @@ function runAll(document) {
   if (document.getElementById("istouched")) {
     soiDetails.isSoi = false;
   }
-
 
   if (soiDetails.isSoi) {
     var ezz;
