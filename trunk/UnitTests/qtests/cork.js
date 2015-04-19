@@ -3,6 +3,8 @@ QUnit.module("ChatPlus Cork", {
     var fixture = document.getElementById("qunit-fixture");
     var template = document.getElementById("cork-template");
 
+    //window.soiDetails = identifySoi(); //jshint ignore:line
+
     var html = template.innerHTML;
     fixture.innerHTML = html;
 
@@ -459,14 +461,21 @@ QUnit.test("Testing save/restore/nuke", function(assert) {
   test1 = upgrades.cork.internals.getBucket(test);
   assert.deepEqual(test, test1, "Saved and restored value");
 
-
   upgrades.cork.internals.nuke();
   test1 = upgrades.cork.internals.getBucket();
   assert.deepEqual({}, test1, "Nuke worked");
 });
 
-
 QUnit.test("Checking for new posts", function(assert) {
+  var test1 = {
+    "Mon Feb 02 18:11": {
+      reactions: 3,
+      isNew: false,
+    }
+  };
+
+  upgrades.cork.internals.saveBucket(test1);
+
   upgrades.cork.upgrade();
 
   assert.deepEqual(document.querySelectorAll(".chatplus_cork_count").length, 67, "Post counts found");
@@ -517,6 +526,29 @@ QUnit.test("Testing Click Handler", function(assert) {
   links = document.querySelectorAll("[data-cp-cork-reactions='8']");
   assert.deepEqual(links.length, 1, "Still One post found 8 unread messages");
   assert.deepEqual(links[0].getAttribute("data-cp-cork-flag"), "-", "Has the read flag");
+});
+
+QUnit.test("Testing purging of expired cork data", function(assert) {
+  upgrades.cork.upgrade();
+  
+  // CLICK all the things, make sure that our bucket is prepped.
+  var allCorkPosts = document.querySelectorAll("[data-cp-cork-reactions]");
+  forEachNode(allCorkPosts, function() {
+    doClick(this);
+  });
+    
+  var corkEntryLink = document.querySelector("[data-cp-cork-reactions='8']");  
+  var oldList = upgrades.cork.internals.getBucket();
+  
+  var corkEntryLink = document.querySelector("[data-cp-cork-reactions]");
+  var corkEntryLi = corkEntryLink.parentNode;
+  corkEntryLi.parentNode.removeChild(corkEntryLi);
+
+  doClick(corkEntryLink);  
+  var newList = upgrades.cork.internals.getBucket();
+    
+  assert.notDeepEqual(newList, oldList, "Pre-Remove bucket and Post-Remove bucket do not match");  
+  assert.deepEqual(Object.keys(newList).length, Object.keys(oldList).length-1, "Item removed from list");  
 });
 
 QUnit.test("Test Active Buddy List", function(assert) {

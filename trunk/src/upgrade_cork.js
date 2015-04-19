@@ -5,7 +5,7 @@ upgrades.cork = (function() {
 
   var corkPosts;
   window.soiDetails = identifySoi();
-  
+
   function nuke() {
     saveBucket({});
   }
@@ -59,8 +59,26 @@ upgrades.cork = (function() {
   function createClickHandler(post) {
     return function(_post) {
       var userHasSeen = getBucket();
-      var lastLook = userHasSeen[_post.timeStamp];
+      var lastLook = userHasSeen[_post.timeStamp] || {};
       lastLook.reactions = _post.reactions;
+      lastLook.isNew = false;
+      userHasSeen[_post.timeStamp] = lastLook;
+
+      // Have any posts expired?
+      var dateElements = document.querySelectorAll("li > a");
+      var dates = [];
+      forEachNode(dateElements, function(dateElement) {
+        var date = dateElement.textContent.substring(0, 16);
+        dates.push(date);
+      });
+
+      Object.keys(userHasSeen).forEach(function(date) {
+        if (dates.indexOf(date) === -1) {
+          delete userHasSeen[date];
+          //console.log("Deleting memory of cork entry: " + date);
+        }
+      });
+
       saveBucket(userHasSeen);
     }(post);
   }
@@ -113,18 +131,14 @@ upgrades.cork = (function() {
         createClickHandler(post);
       });
 
-      userHasSeen[post.timeStamp] = {
-        reactions: post.reactions
-      };
-	  
-	  var name = link.parentNode.querySelector("a + b");
-	  if (name) {
-		var info = createUserInfo(name);
-	    name.className += "chatPlus_nick";
-		name.title = info.text;
-		name.setAttribute("data-nick", info.fullSoiStyleName);
-	  }
-	  
+      var name = link.parentNode.querySelector("a + b");
+      if (name) {
+        var info = createUserInfo(name);
+        name.className += "chatPlus_nick";
+        name.title = info.text;
+        name.setAttribute("data-nick", info.fullSoiStyleName);
+      }
+
     });
 
     saveBucket(userHasSeen);
