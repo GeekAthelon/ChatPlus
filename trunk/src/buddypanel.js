@@ -39,16 +39,16 @@ var buddyList = (function() {
 
 function sendMailToUser(fullSoiStyleName) {
   "use strict";
-  // Hack up the soiDetails.formFind to send us to a modified URL.
-  var action = soiDetails.formFind.action;
+  // Hack up the window.soiDetails.formFind to send us to a modified URL.
+  var action = window.soiDetails.formFind.action;
   var hash = "#msg" + "_" + fullSoiStyleName;
   fakeHash = hash;
   action = action.replace("#newtalk", hash);
 
-  soiDetails.formFind.setAttribute("action", action);
+  window.soiDetails.formFind.setAttribute("action", action);
   // The mail room is called 'm'
-  soiDetails.formFind.elements.namedItem('vqxfi').value = 'm';
-  soiDetails.formFind.submit();
+  window.soiDetails.formFind.elements.namedItem('vqxfi').value = 'm';
+  window.soiDetails.formFind.submit();
 }
 
 function makeMessagePlayerAction(ninfo) {
@@ -57,9 +57,9 @@ function makeMessagePlayerAction(ninfo) {
 
 function updateBuddyPanel() {
   "use strict";
-  var soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
 
-  if (!soiDetails.isHot) {
+  if (!window.soiDetails.isHot) {
     return;
   }
 

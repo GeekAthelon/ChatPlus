@@ -4,7 +4,7 @@ upgrades.cork = (function() {
   "use strict";
 
   var corkPosts;
-  var soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
   
   function nuke() {
     saveBucket({});
@@ -12,11 +12,11 @@ upgrades.cork = (function() {
 
   function saveBucket(v) {
     var s = JSON.stringify(v);
-    localStorage.setItem("cork_" + soiDetails.fullRoomName, s);
+    localStorage.setItem("cork_" + window.soiDetails.fullRoomName, s);
   }
 
   function getBucket() {
-    var s = localStorage.getItem("cork_" + soiDetails.fullRoomName);
+    var s = localStorage.getItem("cork_" + window.soiDetails.fullRoomName);
     if (!s) {
       return {};
     }

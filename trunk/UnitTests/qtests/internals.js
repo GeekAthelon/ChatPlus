@@ -57,7 +57,7 @@
 
   QUnit.test("getTail", function(assert) {
     assert.strictEqual(getTail("jjs@jjs"), "jjs", "Valid tail passed");
-    assert.strictEqual(getTail("jjs"), soiDetails.blankTail, "No tail passed");
+    assert.strictEqual(getTail("jjs"), window.soiDetails.blankTail, "No tail passed");
   });
 
   QUnit.test("normalizeToSoiShortNick", function(assert) {

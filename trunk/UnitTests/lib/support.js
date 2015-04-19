@@ -127,7 +127,7 @@ function resetGlobals() {
 	":roomAnnouncements:": {}	
   };
   
-  soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
 }
 
 QUnit.assert.validConfig = function(soi, expected) {

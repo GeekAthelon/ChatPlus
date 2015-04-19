@@ -140,9 +140,9 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
 
     var expectedResult = "<pre>&lt;<b></b>b<b></b>&gt;<b></b>T<b></b>h<b></b>i<b></b>s<b></b> <b></b>s<b></b>h<b></b>o<b></b>u<b></b>l<b></b>d<b></b> <b></b>b<b></b>e<b></b><br><b></b>T<b></b>r<b></b>a<b></b>n<b></b>s<b></b>l<b></b>a<b></b>t<b></b>e<b></b>d<b></b> <b></b>r<b></b>i<b></b>g<b></b>h<b></b>t<b></b>.<b></b>&lt;<b></b>/<b></b>b<b></b>&gt;</pre>";
 
-    soiDetails.formMsg.elements.namedItem("vqxsp").value = "<b>This should be\r\nTranslated right.</b>";
+    window.soiDetails.formMsg.elements.namedItem("vqxsp").value = "<b>This should be\r\nTranslated right.</b>";
     window.qunit.chat.convertToCode();
-    var result = soiDetails.formMsg.elements.namedItem("vqxsp").value;
+    var result = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
 
     assert.strictEqual(expectedResult, result, "Converted code matches expected result");
   });

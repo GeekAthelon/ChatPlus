@@ -3,7 +3,7 @@ var upgrades = upgrades || {};
 upgrades.control_nicknames = (function() {
   "use strict";
 
-  var soiDetails = identifySoi(); //jshint ignore:line
+  window.soiDetails = identifySoi(); //jshint ignore:line
 
   function addNickPreview() {
     var nickDiv = document.createElement("span");

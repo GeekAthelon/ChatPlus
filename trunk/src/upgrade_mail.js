@@ -36,7 +36,7 @@ upgrades.mailroom = (function() {
       ccElem.disabled = mode;
       bccElem.disabled = mode;
 
-      soiDetails.formMail.elements.namedItem("vqxha")
+      window.soiDetails.formMail.elements.namedItem("vqxha")
         .readOnly = !mode;
     }
 
@@ -56,7 +56,7 @@ upgrades.mailroom = (function() {
           if (a[1]) {
             n += "@" + normalizeToSoiShortNick(a[1]);
           } else {
-            n += "@" + soiDetails.blankTail;
+            n += "@" + window.soiDetails.blankTail;
           }
           if (names[n]) {
             err.push("Duplicate name `" + n + "'");
@@ -101,7 +101,7 @@ upgrades.mailroom = (function() {
         setBulkMailStatusWait(msg);
         fullData = objectToUrlArray(data);
 
-        action = fixFormAction(soiDetails.formMail);
+        action = fixFormAction(window.soiDetails.formMail);
 
         var o = {
           method: "POST",
@@ -142,7 +142,7 @@ upgrades.mailroom = (function() {
         return;
       }
 
-      data = serializeFormUrlencoded(soiDetails.formMail);
+      data = serializeFormUrlencoded(window.soiDetails.formMail);
       data.vqvaj = urlencode("Talk/Listen"); // Force in the button press.
       if (ccList.length) {
         toList = ccList;
@@ -241,7 +241,7 @@ upgrades.mailroom = (function() {
 
     statusBar = document.createElement("span");
     statusBar.className = "chatplus_replace";
-    myDom.insertAfter(statusBar, soiDetails.formMail.elements.namedItem("vqxsp"));
+    myDom.insertAfter(statusBar, window.soiDetails.formMail.elements.namedItem("vqxsp"));
     setBulkMailStatus("");
 
 
@@ -255,7 +255,7 @@ upgrades.mailroom = (function() {
       setBulkMailStatusWait("Checking identify");
 
       var nickInfo = {
-        nick: soiDetails.formMail.elements.namedItem("vqxha").value.split("@")[0],
+        nick: window.soiDetails.formMail.elements.namedItem("vqxha").value.split("@")[0],
         onsuccess: function() {
           setBulkMailStatus("");
           prepSendBulk();
@@ -319,7 +319,7 @@ upgrades.mailroom = (function() {
       }
 
       var nick = nickInfo.nick;
-      var data = serializeFormUrlencoded(soiDetails.formMail);
+      var data = serializeFormUrlencoded(window.soiDetails.formMail);
       data.vqxha = urlencode(nick);
 
       makeIframe();
@@ -331,7 +331,7 @@ upgrades.mailroom = (function() {
       hash = fakeHash || hash;
       if (hash.indexOf("#msg_") === 0) {
         n = hash.split("_")[1];
-        soiDetails.formMail.elements.namedItem("vqxto")
+        window.soiDetails.formMail.elements.namedItem("vqxto")
           .value = n;
       }
     }
@@ -348,7 +348,7 @@ upgrades.mailroom = (function() {
       var domainGood = false;
 
       if (domain) {
-        select = soiDetails.formMail.elements.namedItem("vqvck");
+        select = window.soiDetails.formMail.elements.namedItem("vqvck");
         if (select && select.options && select.options.length) {
           options = select.options;
           for (i = 0; i < options.length; i++) {
@@ -368,10 +368,10 @@ upgrades.mailroom = (function() {
         }
       }
 
-      soiDetails.formMail.elements.namedItem("vqxha").value = _from;
-      soiDetails.formMail.elements.namedItem("vqxto").value = _to;
+      window.soiDetails.formMail.elements.namedItem("vqxha").value = _from;
+      window.soiDetails.formMail.elements.namedItem("vqxto").value = _to;
       userWindow.location.hash = "chatmark";
-      soiDetails.formMail.elements.namedItem("vqxsp").focus();
+      window.soiDetails.formMail.elements.namedItem("vqxsp").focus();
     };
   }
 
@@ -390,7 +390,7 @@ upgrades.mailroom = (function() {
     if (!document.getElementById("nameSetupPrompt")) {
       msgSpan = myDom.createTag("div", myDom.createTag("strong", "To make reply work, goto " + "[ChatPlus Controls] [Master Controls]"));
       msgSpan.id = "nameSetupPrompt";
-      myDom.insertAfter(msgSpan, soiDetails.formMail.elements.namedItem("vqxsp"));
+      myDom.insertAfter(msgSpan, window.soiDetails.formMail.elements.namedItem("vqxsp"));
     }
 
     // If the user has name list setup, then make sure the "to" name is

@@ -7,7 +7,7 @@ var upgrades = upgrades || {};
 function createUserInfo(nickNameElement) {
   "use strict";
 
-  var soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
 
   function cleanupName(name) {
     // Because of how funky the HTML can come back, its just easier to do cleanup work here
@@ -47,7 +47,7 @@ function createUserInfo(nickNameElement) {
     nameNoTail = decoratedName.replace(p, "");
   } else {
     nameNoTail = decoratedName;
-    tail = soiDetails.blankTail;
+    tail = window.soiDetails.blankTail;
   }
   soiStyleName = normalizeToSoiShortNick(nameNoTail);
 
@@ -174,7 +174,7 @@ function handleNicknameClick(e) {
 
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {
-    var soiDetails = identifySoi(); //jshint ignore:line
+    window.soiDetails = identifySoi(); //jshint ignore:line
 	
     var rBut;
     var announcementButton;
@@ -238,7 +238,7 @@ upgrades.chatroom_auto = (function() {
 
     function saveLastTimeStamp() {
       roomStampData.lastStampOnRecord = findLastTimeDateStamp();
-      allStampData[soiDetails.fullRoomName] = roomStampData;
+      allStampData[window.soiDetails.fullRoomName] = roomStampData;
       saveValues();
     }
 
@@ -270,9 +270,9 @@ upgrades.chatroom_auto = (function() {
 
       announcementButton = myDom.createATag("#", "Change Announcement");
       addEvent(announcementButton, 'click', function() {
-        var details = realmList[":roomAnnouncements:"][soiDetails.fullRoomName];
+        var details = realmList[":roomAnnouncements:"][window.soiDetails.fullRoomName];
         modalWindow.promptTextToSpeach("What shall I say?  (Leave blank to stay quiet.)", details, function(answer) {
-          realmList[":roomAnnouncements:"][soiDetails.fullRoomName] = answer;
+          realmList[":roomAnnouncements:"][window.soiDetails.fullRoomName] = answer;
           saveRealmList();
         });
       });
@@ -288,17 +288,17 @@ upgrades.chatroom_auto = (function() {
       }
     }
 
-    if (soiDetails.formMsg && !soiDetails.formMsg.querySelector("textarea")) {
+    if (window.soiDetails.formMsg && !window.soiDetails.formMsg.querySelector("textarea")) {
 
       // Wrap the span in a roomWatchDiv tag to fix an IE rendering issue.
       roomWatchDiv = document.createElement("div");
       status = document.createElement("div");
       roomWatchDiv.appendChild(status);
 
-      soiDetails.formMsg.parentNode.appendChild(roomWatchDiv);
+      window.soiDetails.formMsg.parentNode.appendChild(roomWatchDiv);
       askKey = "cp_refresh_alert2"; // Invalidate the old alerts by changing name.
       allStampData = gmGetValue(askKey, {});
-      roomStampData = allStampData[soiDetails.fullRoomName];
+      roomStampData = allStampData[window.soiDetails.fullRoomName];
 
       if (!roomStampData) {
         roomStampData = {
@@ -319,13 +319,13 @@ upgrades.chatroom_auto = (function() {
           resetTimerBut = myDom.createATag("#", "Clear alert and wait for next message");
           rBut.title = "Clear the alert and wait for the next message";
 
-          var voiceDetails = realmList[":roomAnnouncements:"][soiDetails.fullRoomName];
+          var voiceDetails = realmList[":roomAnnouncements:"][window.soiDetails.fullRoomName];
           if (voiceDetails && voiceDetails.text) {
-            var lastVoiceDetails = gmGetValue("roomAnnouncements-" + soiDetails.fullRoomName, "")
+            var lastVoiceDetails = gmGetValue("roomAnnouncements-" + window.soiDetails.fullRoomName, "")
             if (lastVoiceDetails !== roomStampData.lastStampOnRecord) {
 
               textToSpeach(voiceDetails);
-              gmSetValue("roomAnnouncements-" + soiDetails.fullRoomName, roomStampData.lastStampOnRecord);
+              gmSetValue("roomAnnouncements-" + window.soiDetails.fullRoomName, roomStampData.lastStampOnRecord);
             }
           }
 
@@ -358,13 +358,12 @@ upgrades.chatroom_auto = (function() {
 
 upgrades.chatroom = (function() {
   "use strict";
-  var soiDetails;
-  
+    
   window.qunit.chat = {};
 
   var special = (function() {
     function convertToCode() {
-      var txt = soiDetails.formMsg.elements.namedItem("vqxsp").value;
+      var txt = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
 
       var n, o;
       var re;
@@ -388,7 +387,7 @@ upgrades.chatroom = (function() {
       if (txt.length > 11000) {
         window.alert("Converted length too long.");
       } else {
-        soiDetails.formMsg.elements.namedItem("vqxsp")
+        window.soiDetails.formMsg.elements.namedItem("vqxsp")
           .value = txt;
       }
     }
@@ -503,7 +502,7 @@ upgrades.chatroom = (function() {
       rBut.id = "chatplus-realm";
       rBut.setAttribute("data-realm-type", type);
 
-      var fButton = soiDetails.formFind.elements.namedItem("vqvak");
+      var fButton = window.soiDetails.formFind.elements.namedItem("vqvak");
       myDom.insertAfter(rBut, fButton);
 
       addEvent(rBut, "click", function(event) {
@@ -680,19 +679,19 @@ upgrades.chatroom = (function() {
     var newReset;
     var newUndo;
 
-    if (soiDetails.resetButton) {
+    if (window.soiDetails.resetButton) {
       newReset = myDom.createATag("#", "Reset");
       newReset.id = "chatplus-reset";
 
-      myDom.insertAfter(newReset, soiDetails.resetButton);
-      soiDetails.resetButton.style.display = "none";
-      soiDetails.resetButton.disabled = "true";
+      myDom.insertAfter(newReset, window.soiDetails.resetButton);
+      window.soiDetails.resetButton.style.display = "none";
+      window.soiDetails.resetButton.disabled = "true";
 
       addEvent(newReset, 'click', function() {
         return function( /*event*/ ) {
           modalWindow.confirm("Do you really want to reset?", buttons, function(answer) {
             if (answer === "y") {
-              soiDetails.formMsg.reset();
+              window.soiDetails.formMsg.reset();
             }
 
           });
@@ -705,7 +704,7 @@ upgrades.chatroom = (function() {
       oldUndo.style.display = "none";
     }
 
-    if (soiDetails.formMsg && oldUndo && newReset) {
+    if (window.soiDetails.formMsg && oldUndo && newReset) {
       newUndo = myDom.createATag("#", "Undo");
       newUndo.id = "chatplus-undo";
 
@@ -738,7 +737,7 @@ upgrades.chatroom = (function() {
         el[0].style.display = "none";
       }
 
-      soiDetails.resetButton.scrollIntoView(true);
+      window.soiDetails.resetButton.scrollIntoView(true);
     }
 
     function setMode() {
@@ -747,7 +746,7 @@ upgrades.chatroom = (function() {
     }
 
     var url = getRoomUrlLink();
-    var keyName = "cp_auto_room_" + soiDetails.fullRoomName;
+    var keyName = "cp_auto_room_" + window.soiDetails.fullRoomName;
     var mode = gmGetValue(keyName, false);
     var txt;
     var button;
@@ -817,13 +816,13 @@ upgrades.chatroom = (function() {
       }
     }
 
-    if (soiDetails.resetButton) {
+    if (window.soiDetails.resetButton) {
       specialButton = myDom.createATag("#", "Special ...");
       specialButton.className += " chatPlus_popupok";
       specialButton.id = "chatplus-special";
 
-      soiDetails.resetButton.parentNode.insertBefore(specialButton, soiDetails.resetButton);
-      soiDetails.resetButton.parentNode.insertBefore(document.createTextNode(" "), soiDetails.resetButton);
+      window.soiDetails.resetButton.parentNode.insertBefore(specialButton, window.soiDetails.resetButton);
+      window.soiDetails.resetButton.parentNode.insertBefore(document.createTextNode(" "), window.soiDetails.resetButton);
 
       addEvent(specialButton, 'click', function() {
         var outerDiv = popupMenu.createFor(specialButton);
@@ -867,7 +866,7 @@ upgrades.chatroom = (function() {
       // Delete the original
       this.parentNode.removeChild(this);
 
-      if (soiDetails.formMail) {
+      if (window.soiDetails.formMail) {
         upgrades.mailroom.makeReplyButton(result, markers.actionLinks[i]);
       }
 
@@ -875,7 +874,7 @@ upgrades.chatroom = (function() {
   }
 
   function upgrade() {
-    soiDetails = identifySoi(); //jshint ignore:line
+    window.soiDetails = identifySoi(); //jshint ignore:line
 
     var markers = upgrades.chatroom.internal.getPostMarkers();
    
@@ -885,11 +884,11 @@ upgrades.chatroom = (function() {
     upgradeResetButton();
     createRealmButton();
 
-    if (!soiDetails.isCork) {
+    if (!window.soiDetails.isCork) {
       upgrades.chatroom_auto.upgrade(markers);
     }
 
-    if (soiDetails.formMail) {
+    if (window.soiDetails.formMail) {
       upgrades.mailroom.makeExtendedMailRoom();
     }
   }

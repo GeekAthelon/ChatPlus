@@ -10,7 +10,7 @@ function addGlobalListeners() {
 
 function testo() {
   "use strict";
-  var soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
 
   realmList = getRealmList();
   var master = realmList[":masterSettings:"];
@@ -22,23 +22,23 @@ function testo() {
   fixmyList(realmList);
   fixmyList(newRealm);
 
-  if (soiDetails.isHot) {
+  if (window.soiDetails.isHot) {
     upgrades.hotlist.upgrade();
   }
 
-  if (soiDetails.isNickRoom) {
+  if (window.soiDetails.isNickRoom) {
     upgrades.control_nicknames.upgrade();
   }
 
-  if (soiDetails.isFtpRoom) {
+  if (window.soiDetails.isFtpRoom) {
     upgrades.control_ftp_files.upgrade();
   }
 
-  if (soiDetails.isChatRoom) {
+  if (window.soiDetails.isChatRoom) {
     upgrades.chatroom.upgrade();
   }
 
-  if (soiDetails.isCork) {
+  if (window.soiDetails.isCork) {
     upgrades.cork.upgrade();
   }
 }
@@ -193,7 +193,7 @@ function identifySoi() {
 function runAll(document) {
   "use strict";
 
-  var soiDetails = identifySoi();
+  window.soiDetails = identifySoi();
 
   function injectScript(src) {
     var headID = document.getElementsByTagName("head")[0];
@@ -228,7 +228,7 @@ function runAll(document) {
   }
 
 
-  if (!soiDetails.isSoi) {
+  if (!window.soiDetails.isSoi) {
     return;
   }
 
@@ -246,10 +246,10 @@ function runAll(document) {
   // Weird IE bug that sometimes causes ChatPlus to run twice.
   // Seems to be related to the MultiLoc code.
   if (document.getElementById("istouched")) {
-    soiDetails.isSoi = false;
+    window.soiDetails.isSoi = false;
   }
 
-  if (soiDetails.isSoi) {
+  if (window.soiDetails.isSoi) {
     var ezz;
     doVersionCheck();
     testo();

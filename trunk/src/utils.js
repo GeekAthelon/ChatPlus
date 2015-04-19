@@ -171,12 +171,12 @@ function MakeMyDom() {
       desc = room;
     }
 
-    var soiDetails = identifySoi();
+    window.soiDetails = identifySoi();
 	
     var a = this.createTag("span", desc);
     a.style.textDecoration = "underline";
     a.style.cursor = "pointer";
-    var f = soiDetails.formFind;
+    var f = window.soiDetails.formFind;
 
     addEvent(a, 'click', (function(_room) {
 
@@ -416,7 +416,7 @@ function highlightIfBuddy(el, s) {
   "use strict";
   var n = normalizeToSoiShortNick(s);
   if (n.indexOf("@") === -1) {
-    n += "@" + soiDetails.blankTail;
+    n += "@" + window.soiDetails.blankTail;
   }
 
   if (realmList[":masterSettings:"].buddyList.indexOf(n) !== -1) {
@@ -438,7 +438,7 @@ function getTail(s) {
   // Get the tail of a room like "z2@soi" and return "soi"
   var i = s.lastIndexOf("@");
   if (i === -1) {
-    return soiDetails.blankTail;
+    return window.soiDetails.blankTail;
   } else {
     return s.substr(i + 1, s.length);
   }
@@ -514,11 +514,11 @@ function makeRoomLink(txt, url) {
 
   data = {};
 
-  setPropertyFromDom(data, soiDetails.formFind, "vqxus"); // Last name chatted under
-  setPropertyFromDom(data, soiDetails.formFind, "vqxha"); // Last name chatted under
-  setPropertyFromDom(data, soiDetails.formFind, "roomsite"); // Tail of the room we are in
-  setPropertyFromDom(data, soiDetails.formFind, "vqxti"); // time stamp
-  setPropertyFromDom(data, soiDetails.formFind, "vqvak"); // Find button
+  setPropertyFromDom(data, window.soiDetails.formFind, "vqxus"); // Last name chatted under
+  setPropertyFromDom(data, window.soiDetails.formFind, "vqxha"); // Last name chatted under
+  setPropertyFromDom(data, window.soiDetails.formFind, "roomsite"); // Tail of the room we are in
+  setPropertyFromDom(data, window.soiDetails.formFind, "vqxti"); // time stamp
+  setPropertyFromDom(data, window.soiDetails.formFind, "vqvak"); // Find button
   data.vqxfi = document.getElementsByName("vqxro")[0].value; // Name of the room we are in
   dataArray = [];
 

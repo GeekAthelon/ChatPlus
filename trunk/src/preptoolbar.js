@@ -18,7 +18,7 @@ function prepToolbar() {
  }
 
    
-   var soiDetails = identifySoi(); //jshint ignore:line
+   window.soiDetails = identifySoi(); //jshint ignore:line
    var bar = document.createElement("div");
    var inn = "span";
    var logo = document.createElement(inn);
@@ -51,7 +51,7 @@ function prepToolbar() {
 
  function setStyles(master) {
    "use strict";
-   var soiDetails = identifySoi(); //jshint ignore:line
+   window.soiDetails = identifySoi(); //jshint ignore:line
 
    var style = [];
    style.push('div.hchat {');
@@ -162,7 +162,7 @@ function prepToolbar() {
 
 
    style.push('.chatPlus_nick {');
-   if (soiDetails.isChatRoom && master.showhp !== "false") {
+   if (window.soiDetails.isChatRoom && master.showhp !== "false") {
      style.push('border-bottom-style:dotted;');
    }
    style.push(' cursor: pointer;');

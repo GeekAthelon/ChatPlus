@@ -168,34 +168,34 @@ QUnit.done(function(details) {
       "ver": +"###VERSION###"
     };
 
-    soiDetails = identifySoi();
+    window.soiDetails = identifySoi();
 
     var master = realmList[":masterSettings:"];
     prepToolbar();
     setStyles(master);
 
-    if (soiDetails.isHot) {
+    if (window.soiDetails.isHot) {
       fixmyList(realmList);
       fixmyList(newRealm);
     }
 
-    if (soiDetails.isHot) {
+    if (window.soiDetails.isHot) {
       upgrades.hotlist.upgrade();
     }
 
-    if (soiDetails.isNickRoom) {
+    if (window.soiDetails.isNickRoom) {
       upgrades.control_nicknames.upgrade();
     }
 
-    if (soiDetails.isFtpRoom) {
+    if (window.soiDetails.isFtpRoom) {
       upgrades.control_ftp_files.upgrade();
     }
 
-    if (soiDetails.isChatRoom) {
+    if (window.soiDetails.isChatRoom) {
       upgrades.chatroom.upgrade();
     }
 
-    if (soiDetails.isCork) {
+    if (window.soiDetails.isCork) {
       var test1 = {
         "Mon Feb 02 18:11": {
           reactions: 3

@@ -28,7 +28,6 @@ function handleRealmAddRemove(event) {
 upgrades.hotlist = (function() {
   "use strict";
 
-  var soiDetails;
   //   tblData.roomName    ==> The room name, including tail
   //   tblData.roomURL     ==> Current URL to room -- do not cache
   //   tblData.spiritCount ==> The count of Spirits
@@ -369,7 +368,7 @@ upgrades.hotlist = (function() {
 
 
   var parseHotList = function() {
-    soiDetails = identifySoi(); // For testing...
+    window.soiDetails = identifySoi(); // For testing...
 
     var tblList = [];
 
@@ -476,7 +475,7 @@ upgrades.hotlist = (function() {
       tblData.roomLongDesc = longDescEl ? longDescEl.textContent : "";
       tblData.roomName = link.textContent;
       if (tblData.roomName.indexOf("@") === -1) {
-        tblData.roomName += "@" + soiDetails.blankTail;
+        tblData.roomName += "@" + window.soiDetails.blankTail;
       }
       tblData.roomURL = link.href;
       if (tblData.folk.length === 1) {
@@ -591,7 +590,7 @@ upgrades.hotlist = (function() {
   };
 
   var upgrade = function() {
-    soiDetails = identifySoi();
+    window.soiDetails = identifySoi();
 
     if (!onlineBuddies) {
       onlineBuddies = {};

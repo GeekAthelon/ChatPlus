@@ -6,7 +6,7 @@ upgrades.control_ftp_files = (function() {
   var imageExts = ["gif", "jpg", "png"];
   var editableExts = ["css", "js", "txt", "html"];
 
-  var soiDetails = identifySoi(); //jshint ignore:line
+  window.soiDetails = identifySoi(); //jshint ignore:line
   var maxEditSize = 20000;
 
   var newalist = {}; // Build a list that shows just the things that exist.
