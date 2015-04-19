@@ -224,17 +224,15 @@ upgrades.chatroom_auto = (function() {
       } else {
         makeStartButton();
       }
+      makeAnnouncementButton();
     }
 
     function setMode(mode) {
       status.innerHTML = "";
-      if (announcementButton) {
-        announcementButton.parentNode.removeChild(announcementButton);
-      }
+      announcementButton.parentNode.removeChild(announcementButton);
       rBut.parentNode.removeChild(rBut);
       roomStampData.alertMode = mode;
       makeButtonChoice();
-      makeAnnouncementButton();
       saveValues();
     }
 
@@ -270,10 +268,10 @@ upgrades.chatroom_auto = (function() {
         return;
       }
 
-      announcementButton = myDom.createATag("#", "Current Announcement: ---");
+      announcementButton = myDom.createATag("#", "Change Announcement");
       addEvent(announcementButton, 'click', function() {
         var details = realmList[":roomAnnouncements:"][soiDetails.fullRoomName];
-        modalWindow.promptTextToSpeach("What shall I say?", details, function(answer) {
+        modalWindow.promptTextToSpeach("What shall I say?  (Leave blank to stay quiet.)", details, function(answer) {
           realmList[":roomAnnouncements:"][soiDetails.fullRoomName] = answer;
           saveRealmList();
         });
