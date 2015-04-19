@@ -171,6 +171,8 @@ function MakeMyDom() {
       desc = room;
     }
 
+    var soiDetails = identifySoi();
+	
     var a = this.createTag("span", desc);
     a.style.textDecoration = "underline";
     a.style.cursor = "pointer";
@@ -486,10 +488,7 @@ function extractNameInfo(nameElement, defaultTail) {
 
   ninfo.soiStyleName = normalizeToSoiShortNick(ninfo.nameNoTail);
   ninfo.fullSoiStyleName = ninfo.soiStyleName + "@" + ninfo.tail;
-  nameList[ninfo.decoratedName] = ninfo;
 
-  elementIndex.element.push(nameElement);
-  elementIndex.name.push(ninfo.decoratedName);
   return ninfo;
 }
 

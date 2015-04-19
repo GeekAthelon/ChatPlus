@@ -4,7 +4,7 @@ window.qunit.chat.namesList = [];
 
 var upgrades = upgrades || {};
 
-function createUserInfo(el) {
+function createUserInfo(nickNameElement) {
   "use strict";
 
   var soiDetails = identifySoi();
@@ -24,7 +24,7 @@ function createUserInfo(el) {
   // so we wrap the element in a span to make everything there children.
 
   var container = document.createElement("span");
-  container.appendChild(el.cloneNode(true));
+  container.appendChild(nickNameElement.cloneNode(true));
   var decoratedName = cleanupName(container.textContent);
 
   var tail;
@@ -52,13 +52,13 @@ function createUserInfo(el) {
   soiStyleName = normalizeToSoiShortNick(nameNoTail);
 
   var user = {
-    html: el.innerHTML,
-    text: cleanupName(el.textContent),
+    html: nickNameElement.innerHTML,
+    text: cleanupName(nickNameElement.textContent),
     soiStyleName: normalizeToSoiShortNick(nameNoTail),
     fullSoiStyleName: soiStyleName + "@" + tail
   };
 
-  user.element = el;
+  user.element = nickNameElement;
 
   return user;
 }
@@ -174,7 +174,8 @@ function handleNicknameClick(e) {
 
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {
-
+    var soiDetails = identifySoi(); //jshint ignore:line
+	
     var rBut;
     var announcementButton;
     var resetTimerBut;
@@ -187,6 +188,7 @@ upgrades.chatroom_auto = (function() {
     var askKey;
     var makeStartButton;
     var makeStopButton;
+	var makeAnnouncementButton;
     var allStampData = {};
     var roomStampData = {};
 
@@ -358,7 +360,8 @@ upgrades.chatroom_auto = (function() {
 
 upgrades.chatroom = (function() {
   "use strict";
-
+  var soiDetails;
+  
   window.qunit.chat = {};
 
   var special = (function() {
@@ -874,8 +877,10 @@ upgrades.chatroom = (function() {
   }
 
   function upgrade() {
-    var markers = upgrades.chatroom.internal.getPostMarkers();
+    soiDetails = identifySoi(); //jshint ignore:line
 
+    var markers = upgrades.chatroom.internal.getPostMarkers();
+   
     upgradeDialogTags(markers);
     createAuto2Button();
     createSpecialButton();

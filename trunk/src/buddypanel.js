@@ -57,6 +57,8 @@ function makeMessagePlayerAction(ninfo) {
 
 function updateBuddyPanel() {
   "use strict";
+  var soiDetails = identifySoi();
+
   if (!soiDetails.isHot) {
     return;
   }

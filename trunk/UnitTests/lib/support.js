@@ -127,12 +127,6 @@ function resetGlobals() {
 	":roomAnnouncements:": {}	
   };
   
-  elementIndex = {};
-  elementIndex.element = [];
-  elementIndex.name = [];
-
-  nameList = [];
-
   soiDetails = identifySoi();
 }
 

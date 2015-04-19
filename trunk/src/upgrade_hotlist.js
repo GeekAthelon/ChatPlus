@@ -28,6 +28,7 @@ function handleRealmAddRemove(event) {
 upgrades.hotlist = (function() {
   "use strict";
 
+  var soiDetails;
   //   tblData.roomName    ==> The room name, including tail
   //   tblData.roomURL     ==> Current URL to room -- do not cache
   //   tblData.spiritCount ==> The count of Spirits

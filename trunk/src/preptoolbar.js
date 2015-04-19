@@ -50,7 +50,9 @@ function prepToolbar() {
  }
 
  function setStyles(master) {
- "use strict";
+   "use strict";
+   var soiDetails = identifySoi(); //jshint ignore:line
+
    var style = [];
    style.push('div.hchat {');
    style.push('margin: 0 auto 0 auto;');

@@ -8,6 +8,8 @@
 /* exported onlineBuddies */
 /* exported myStatus */
 /* exported getOptionValue */
+/* exported allKnownTails */
+/* exported myStats  */
 
 var $$_MACRO_KEY_LIST = "1234567890abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -25,3 +27,6 @@ var onlineBuddies;
 
 // Function that can only run after the DOM is ready
 var getOptionValue;
+
+var allKnownTails;
+var myStats;
