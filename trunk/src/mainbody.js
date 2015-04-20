@@ -13,15 +13,15 @@ function testo() {
   window.soiDetails = identifySoi();
 
   realmList = getRealmList();
+  fixmyList(realmList);
+  fixmyList(newRealm);
+
   var master = realmList[":masterSettings:"];
 
   prepToolbar();
   setStyles(master);
   addGlobalListeners();
   
-  fixmyList(realmList);
-  fixmyList(newRealm);
-
   if (window.soiDetails.isHot) {
     upgrades.hotlist.upgrade();
   }
