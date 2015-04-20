@@ -5799,5 +5799,12 @@
     "build_date": "Sun Apr 19 21:23:49 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.01,
+    "build_number": 868,
+    "build_date": "Sun Apr 19 21:36:31 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
   }
 ]
