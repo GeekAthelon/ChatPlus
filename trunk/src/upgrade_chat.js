@@ -229,7 +229,9 @@ upgrades.chatroom_auto = (function() {
 
     function setMode(mode) {
       status.innerHTML = "";
-      announcementButton.parentNode.removeChild(announcementButton);
+      if (announcementButton) {
+        announcementButton.parentNode.removeChild(announcementButton);
+      }
       rBut.parentNode.removeChild(rBut);
       roomStampData.alertMode = mode;
       makeButtonChoice();
