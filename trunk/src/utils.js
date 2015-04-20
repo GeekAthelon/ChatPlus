@@ -18,7 +18,6 @@
 /* exported humanFileSize */
 /* exported walkTheDOM */
 /* exported popupMenu */
-
 var NODE_TYPE = {
   ELEMENT_NODE: 1,
   ATTRIBUTE_NODE: 2,
@@ -49,7 +48,7 @@ if (typeof GM_setValue === "function") {
 }
 
 function addEvent(element, type, handler) {
-    element.addEventListener(type, handler, false);
+  element.addEventListener(type, handler, false);
 }
 
 
@@ -153,7 +152,7 @@ function MakeMyDom() {
   //////////////////////////////////////////////////////////////////////////
   // Create a tag fill it with the contents, if passed.
   //TESTED
-  this.createTag = function(tag, text) {  
+  this.createTag = function(tag, text) {
     var t = document.createElement(tag);
     if (typeof text === "undefined") {
       text = text;
@@ -172,7 +171,7 @@ function MakeMyDom() {
     }
 
     window.soiDetails = identifySoi();
-	
+
     var a = this.createTag("span", desc);
     a.style.textDecoration = "underline";
     a.style.cursor = "pointer";
@@ -180,7 +179,7 @@ function MakeMyDom() {
 
     addEvent(a, 'click', (function(_room) {
 
-      return function(/*event*/) {
+      return function( /*event*/ ) {
         if (f) {
           f.elements.namedItem("vqxfi").value = _room;
           f.submit();
@@ -322,7 +321,7 @@ function MakeMyDom() {
 
     if (0) {
       var close = this.createTag("b", "[X]");
-      addEvent(close, "click", function(/*event*/) {
+      addEvent(close, "click", function( /*event*/ ) {
         var div = document.getElementById('popup');
         if (!div) {
           return;
@@ -362,9 +361,9 @@ function MakeMyDom() {
 
   this.nextElementSibling = function(el) {
     if (el.nextElementSibling) {
-	  return el.nextElementSibling;
-	}
-	
+      return el.nextElementSibling;
+    }
+
     do {
       el = el.nextSibling;
     } while (el && el.nodeType !== 1);
@@ -802,7 +801,7 @@ function getRoomUrlLink() {
 
 function fixmyList(myList) {
   "use strict";
-  
+
   function touchProperty(obj, key, theDefault) {
     var a;
     if (!obj[key]) {
@@ -849,10 +848,10 @@ function fixmyList(myList) {
         continue;
       }
 
-	  if (key.charAt(0) === ":") {
-	    continue;
-	  }
-	  
+      if (key.charAt(0) === ":") {
+        continue;
+      }
+
       trace(10, "MYKEY: " + key);
       realm = myList[key];
 
@@ -954,8 +953,10 @@ function forEachNode(nodelist, cb) {
 
 function textToSpeach(textValues) {
   var msg = new SpeechSynthesisUtterance(textValues.text);
-  msg.voice = speechSynthesis.getVoices().filter(function(_voice) { return _voice.name === textValues.voice; })[0];
-  window.speechSynthesis.speak(msg);    
+  msg.voice = speechSynthesis.getVoices().filter(function(_voice) {
+    return _voice.name === textValues.voice;
+  })[0];
+  window.speechSynthesis.speak(msg);
 }
 
 var modalWindow = (function() {
@@ -963,66 +964,88 @@ var modalWindow = (function() {
 
   function hide() {
     window.location.hash = "";
-	modalDiv.style.display = "none";
+    modalDiv.style.display = "none";
+  }
+
+  function unloadWarning(e) {
+    var confirmationMessage = "Here is your chance to finish entering things.  You'll have to manually refresh the page when done.";
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage;
+  }
+
+  function clearUnloadWarning() {
+    console.log("Clearing onload");
+    window.removeEventListener("beforeunload", unloadWarning, false);
+  }
+
+  function setUnloadWarning() {
+    console.log("Setting onload");
+    clearUnloadWarning();
+    window.addEventListener("beforeunload", unloadWarning, false);
   }
 
   function promptTextToSpeach(message, details, cb) {
-   modalDiv.style.display = "";
-   function getTextValues() {
-	  return {
-	    text: document.getElementById("modal-window-prompt").value,
-	    voice: document.getElementById("modal-window-prompt-voice").value
+    modalDiv.style.display = "";
+
+    function getTextValues() {
+      return {
+        text: document.getElementById("modal-window-prompt").value,
+        voice: document.getElementById("modal-window-prompt-voice").value
       };
-	}
-  
+    }
+
     var s = "";
     s += "<div><strong>" + message + "</strong></div>";
     s += "<center>";
     s += "Message: <input id='modal-window-prompt'>";
-	s += "<br>";
-	s += "Voice: <select id='modal-window-prompt-voice'></select>";
-	s += "<br>";
+    s += "<br>";
+    s += "Voice: <select id='modal-window-prompt-voice'></select>";
+    s += "<br>";
     s += "&nbsp;<button id='modal-window-prompt-ok' class='cpbutton'>OK</button>&nbsp;";
-	s += "&nbsp;<button id='modal-window-prompt-play' class='cpbutton'>Play</button>&nbsp;";
+    s += "&nbsp;<button id='modal-window-prompt-play' class='cpbutton'>Play</button>&nbsp;";
     s += "</center>";
-		
-	var chooseViewModelViews = document.getElementById("chooseViewModelViews");
+
+    var chooseViewModelViews = document.getElementById("chooseViewModelViews");
     chooseViewModelViews.innerHTML = s;
 
-	speechSynthesis.getVoices().forEach(function(voice) {
-	  var desc = voice.name + (voice.default ? ' (default)' :'');
-	  var option = new Option(desc, voice.name);
-      document.getElementById("modal-window-prompt-voice").options.add(option);
-    });
+    window.speechSynthesis.onvoiceschanged = function() {
+      speechSynthesis.getVoices().forEach(function(voice) {
+        var desc = voice.name + (voice.default ? ' (default)' : '');
+        var option = new Option(desc, voice.name);
+        document.getElementById("modal-window-prompt-voice").options.add(option);
+      });
+    };
 		
-	if (details) {
-	  document.getElementById("modal-window-prompt").value = details.text;
-	  document.getElementById("modal-window-prompt-voice").value = details.voice;
-    }	
+    if (details) {
+      document.getElementById("modal-window-prompt").value = details.text;
+      document.getElementById("modal-window-prompt-voice").value = details.voice;
+    }
 
     var close = document.querySelector(".modalDialogClose");
     addEvent(close, "click", function() {
       cb(null);
       hide();
+      clearUnloadWarning();
     });
 
     var ok = document.querySelector("#modal-window-prompt-ok");
     addEvent(ok, "click", function() {
       cb(getTextValues());
       hide();
-    });	
+      clearUnloadWarning();
+    });
 
     var play = document.querySelector("#modal-window-prompt-play");
-    addEvent(play, "click", function() {	
-	  textToSpeach(getTextValues());
-	});
-	
-    window.location.hash = "#chooseViewModal";	
+    addEvent(play, "click", function() {
+      textToSpeach(getTextValues());
+    });
+
+    setUnloadWarning();
+    window.location.hash = "#chooseViewModal";
   }
-  
-  
+
   function confirm(message, buttons, cb) {
-	modalDiv.style.display = "";
+    modalDiv.style.display = "";
     var s = "";
     s += "<div><strong>" + message + "</strong></div>";
 
@@ -1033,7 +1056,7 @@ var modalWindow = (function() {
     });
     s += "</center>";
 
-	var chooseViewModelViews = document.getElementById("chooseViewModelViews");
+    var chooseViewModelViews = document.getElementById("chooseViewModelViews");
     chooseViewModelViews.innerHTML = s;
 
     var buts = chooseViewModelViews.querySelectorAll("button");
@@ -1056,10 +1079,11 @@ var modalWindow = (function() {
   }
 
   var modalDiv = null;
+
   function createModalWindow() {
     if (modalDiv) {
-	  return modalDiv;
-	}
+      return modalDiv;
+    }
     var a = [];
     a[a.length] = '<div id="chooseViewModal" class="modalDialog">';
     a[a.length] = '<div>';
@@ -1071,16 +1095,16 @@ var modalWindow = (function() {
     var div = document.createElement("div");
     div.innerHTML = a.join("");
     document.body.appendChild(div);
-    
-	modalDiv = div.querySelector("div");
-	modalDiv.style.display = "none";
+
+    modalDiv = div.querySelector("div");
+    modalDiv.style.display = "none";
     return modalDiv;
   }
 
   return {
     create: createModalWindow,
     confirm: confirm,
-	promptTextToSpeach: promptTextToSpeach
+    promptTextToSpeach: promptTextToSpeach
   };
 }());
 
@@ -1128,4 +1152,3 @@ var popupMenu = (function() {
     destroy: destroyMenu
   };
 }());
-
