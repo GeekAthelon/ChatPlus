@@ -94,14 +94,15 @@ upgrades.control_ftp_files = (function() {
   }
 
   function upgradeImageDetails(link) {
+    var thisNick = currentNick();
   
     // Get the Avatar List
     var aalist = realmList[":avatars:"];
-    if (aalist[currentNick] === undefined) {
-      aalist[currentNick] = {};
+    if (aalist[thisNick] === undefined) {
+      aalist[thisNick] = {};
     }
 
-    var alist = aalist[currentNick]; // All avatars - may include ones that have been deleted
+    var alist = aalist[thisNick]; // All avatars - may include ones that have been deleted
     
     function makeAddOrRemove(elem, _mode) {
       return function(event) {
@@ -110,7 +111,7 @@ upgrades.control_ftp_files = (function() {
 
         var data = {
           fname: url,
-          nick: currentNick,
+          nick: thisNick,
           sname: elem.textContent
         };
 
@@ -157,7 +158,7 @@ upgrades.control_ftp_files = (function() {
       upgradeEditButton(link);
 
     }
-    realmList[":avatars:"][currentNick] = newalist;
+    realmList[":avatars:"][thisNick] = newalist;
 
     upgradeSaveButton();
     saveRealmList();
