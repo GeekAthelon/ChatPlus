@@ -148,6 +148,8 @@ upgrades.control_ftp_files = (function() {
   }
 
   function updateAvatarList() {
+    var thisNick = currentNick();
+
     var actionLinks = document.querySelectorAll("table a");
 
     for (var i = 0; i < actionLinks.length; i++) {

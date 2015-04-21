@@ -5841,5 +5841,19 @@
     "build_date": "Tue Apr 21 00:42:36 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.02,
+    "build_number": 874,
+    "build_date": "Tue Apr 21 15:30:23 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.03,
+    "build_number": 875,
+    "build_date": "Tue Apr 21 15:30:39 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
   }
 ]
