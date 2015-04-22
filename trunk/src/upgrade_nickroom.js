@@ -45,7 +45,7 @@ upgrades.control_nicknames = (function() {
 
     div.appendChild(myDom.createTag("i", "Goto FTP_FILES to add avatars to " + "this list, or to clean out ghosts."));
 
-    var avalist = realmList[":avatars:"][nick];
+    var avalist = realmList[":avatars:"][nick] || {};
 	
     form = document.getElementsByName("avaurl")[0];
     while (form.tagName.toLowerCase() !== "form") {
@@ -59,14 +59,9 @@ upgrades.control_nicknames = (function() {
 
     opt = new Option("***** Choose one *****", "");
     sel.options.add(opt);
-
+	
 	var avaArray = [];
-    for (key in avalist) {
-      if (avalist.hasOwnProperty(key)) {
-	    avaArray.push(key);
-      }
-    }
-
+	avaArray = Object.keys(avalist);
 	avaArray.sort();
 	
 	avaArray.forEach(function(item) {
