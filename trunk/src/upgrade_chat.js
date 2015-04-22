@@ -84,10 +84,13 @@ function handleNicknameClick(e) {
     return button;
   }
 
-  function gotoHomePage(nick) {
+  function createHomePageLink(nick) {
     var n = nick.split("@");
     var url = makePlayerHomePageUrl(n[0], n[1]);
-    window.location = url;
+	var link = document.createElement("a");
+	link.href = url;
+	link.appendChild(document.createTextNode("Homepage"));
+    return link;
   }
 
   function sendUserMessage(nick) {
@@ -136,10 +139,6 @@ function handleNicknameClick(e) {
     n.appendChild(document.createTextNode(nick));
     menu.appendChild(n);
 
-    addMenuItem(menu, "See Home Page", function() {
-      gotoHomePage(nick);
-    });
-
     addMenuItem(menu, "Send a MSG", function() {
       sendUserMessage(nick);
     });
@@ -156,6 +155,9 @@ function handleNicknameClick(e) {
       removeButton.id = 'cp-buddy-remove';
     }
 
+    menu.appendChild(createHomePageLink(nick));
+    menu.appendChild(document.createElement("br"));
+
     var inRoomList = getNickInRooms(nick);
 
     inRoomList.forEach(function(room) {
@@ -164,6 +166,7 @@ function handleNicknameClick(e) {
       menu.appendChild(document.createElement("br"));
     });
 
+	
     popupMenu.show(outerDiv);
     e.stopPropagation();
   } else {
