@@ -5869,5 +5869,33 @@
     "build_date": "Wed Apr 22 17:23:29 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.03,
+    "build_number": 878,
+    "build_date": "Wed Apr 22 17:34:16 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.03,
+    "build_number": 879,
+    "build_date": "Wed Apr 22 18:11:21 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.03,
+    "build_number": 880,
+    "build_date": "Wed Apr 22 18:15:38 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.03,
+    "build_number": 881,
+    "build_date": "Wed Apr 22 18:16:57 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
   }
 ]

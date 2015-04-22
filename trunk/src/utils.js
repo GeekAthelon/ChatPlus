@@ -171,11 +171,29 @@ function MakeMyDom() {
     }
 
     window.soiDetails = identifySoi();
-
+    var f = window.soiDetails.formFind;
+	if (f) {
+      f.elements.namedItem("vqxfi").value = room;
+      var results = serializeFormUrlencoded(f);	
+	  
+	  var array = [];
+	  Object.keys(results).forEach(function(key) {
+	    array.push(key + "=" + results[key]);
+	  });
+	  	  
+	  var formAction = f.action.split("#")[0];
+	  var formHash = f.action.split("#")[1];
+	  
+	  f.elements.namedItem("vqxfi").value = "";
+	  var link = document.createElement("a");
+	  link.href = formAction + "?" + array.join("&") + "#" + formHash;
+	  link.appendChild(document.createTextNode(desc));
+	  return link;
+	}
+	
     var a = this.createTag("span", desc);
     a.style.textDecoration = "underline";
     a.style.cursor = "pointer";
-    var f = window.soiDetails.formFind;
 
     addEvent(a, 'click', (function(_room) {
 
