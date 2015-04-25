@@ -224,6 +224,8 @@ function prepToolbar() {
    style.push('  /* Put any padding, border, min-height, etc. here. */');
    style.push('}');
 
+   style.push('.cp-popup-visible a:link, .cp-popup-visible a:visited, .cp-popup-visible a:hover, .cp-popup-visible a:active { color:WindowText; } ');
+   
    style.push('.cp-popup-nickname-menu {');
    style.push('  border: 1px solid WindowFrame;');
    style.push('  padding: 0.5em;');

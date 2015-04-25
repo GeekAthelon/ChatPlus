@@ -5932,5 +5932,12 @@
     "build_date": "Sat Apr 25 16:19:01 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.06,
+    "build_number": 887,
+    "build_date": "Sat Apr 25 16:30:45 EDT 2015",
+    "build_comments": "Fixed popup list colors",
+    "status": "build success"
   }
 ]
