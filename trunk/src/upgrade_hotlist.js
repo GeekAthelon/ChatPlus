@@ -102,8 +102,9 @@ upgrades.hotlist = (function() {
 
         var temp = document.createElement("div");
         temp.appendChild(folk);
-        var info = createUserInfo(temp);
 
+        var info = createUserInfo(temp,  getRoomNameTail(tblData.roomName));
+		
         var html = stringFormat(nickTemplate, {
           soiFormat: info.fullSoiStyleName,
           html: info.html
@@ -126,6 +127,10 @@ upgrades.hotlist = (function() {
     return container.querySelector("tr");
   };
 
+  function getRoomNameTail(roomName) {
+    return roomName.split("@")[1];
+  }
+  
   var createNewHotList = function(tblList, realmName, realm) {
     var tblData;
     var i, l;
@@ -163,7 +168,7 @@ upgrades.hotlist = (function() {
     for (i = 0; i < l; i++) {
       tblData = tblList[i];
 
-      metaData[0] = getTail(tblData.roomName);
+      metaData[0] = getRoomNameTail(tblData.roomName);
       _roomName = tblData.roomName;
 
       j = unusedRooms.indexOf(_roomName);

@@ -169,7 +169,7 @@
       "roomDesc": "Yahtzee",
       "roomHost": "owned by \n      sumer",
       "roomLongDesc": "A non PG version of the game Yahtzee.",
-      "roomName": "yahtzee2@soi",
+      "roomName": "yahtzee2@jag",
       "roomOpen": "Citizens only",
       "roomURL": "http://ssomf.hyperchat.com/cgi-bin/somf.exe?EParms=ru%7Ckqw29tRmwmpkv%22ru%7Cvk9}elp~aa6Dwkm%22ru%7Cle9Rmwmpkv",
       "spiritCount": "1 spirit",

@@ -4,7 +4,7 @@ window.qunit.chat.namesList = [];
 
 var upgrades = upgrades || {};
 
-function createUserInfo(nickNameElement) {
+function createUserInfo(nickNameElement, blankTail) {
   "use strict";
 
   window.soiDetails = identifySoi();
@@ -42,13 +42,15 @@ function createUserInfo(nickNameElement) {
     }
   }
 
+  
   if (tail) {
     var p = new RegExp(tail + "$", "");
     nameNoTail = decoratedName.replace(p, "");
   } else {
-    nameNoTail = decoratedName;
-    tail = window.soiDetails.blankTail;
+    nameNoTail = decoratedName;	
+    tail = blankTail || window.soiDetails.blankTail;
   }
+  
   soiStyleName = normalizeToSoiShortNick(nameNoTail);
 
   var user = {
@@ -155,13 +157,17 @@ function handleNicknameClick(e) {
       removeButton.id = 'cp-buddy-remove';
     }
 
-    menu.appendChild(createHomePageLink(nick));
+	var homePageLink = createHomePageLink(nick);
+	homePageLink.className = "cp-popup-link";
+	
+    menu.appendChild(homePageLink);
     menu.appendChild(document.createElement("br"));
 
     var inRoomList = getNickInRooms(nick);
 
     inRoomList.forEach(function(room) {
       var link = myDom.createLinkToRoom(room);
+	  link.className = "cp-popup-link";
       menu.appendChild(link);
       menu.appendChild(document.createElement("br"));
     });
