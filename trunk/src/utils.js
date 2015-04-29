@@ -104,8 +104,6 @@ var cpConsole = (function() {
     });
   }
 
-  log("ChatPlus log started.");
-
   return {
     dump: dump,
     debug: debug,
@@ -295,7 +293,6 @@ function MakeMyDom() {
   // display Pop Up div element
   //DEFERRED
   this.displayPopupDiv = function(e, atTop) {
-    cpConsole.log("Opening popup window");
     this.hidePopupDiv();
     var posx = 0;
     var posy = 0;
@@ -374,7 +371,6 @@ function MakeMyDom() {
       return;
     }
     div.parentNode.removeChild(div);
-    cpConsole.log("Hiding popup window");
   };
 
   this.nextElementSibling = function(el) {

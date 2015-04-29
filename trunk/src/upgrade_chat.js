@@ -42,15 +42,15 @@ function createUserInfo(nickNameElement, blankTail) {
     }
   }
 
-  
+
   if (tail) {
     var p = new RegExp(tail + "$", "");
     nameNoTail = decoratedName.replace(p, "");
   } else {
-    nameNoTail = decoratedName;	
+    nameNoTail = decoratedName;
     tail = blankTail || window.soiDetails.blankTail;
   }
-  
+
   soiStyleName = normalizeToSoiShortNick(nameNoTail);
 
   var user = {
@@ -89,9 +89,9 @@ function handleNicknameClick(e) {
   function createHomePageLink(nick) {
     var n = nick.split("@");
     var url = makePlayerHomePageUrl(n[0], n[1]);
-	var link = document.createElement("a");
-	link.href = url;
-	link.appendChild(document.createTextNode("Homepage"));
+    var link = document.createElement("a");
+    link.href = url;
+    link.appendChild(document.createTextNode("Homepage"));
     return link;
   }
 
@@ -157,9 +157,9 @@ function handleNicknameClick(e) {
       removeButton.id = 'cp-buddy-remove';
     }
 
-	var homePageLink = createHomePageLink(nick);
-	homePageLink.className = "cp-popup-link";
-	
+    var homePageLink = createHomePageLink(nick);
+    homePageLink.className = "cp-popup-link";
+
     menu.appendChild(homePageLink);
     menu.appendChild(document.createElement("br"));
 
@@ -167,12 +167,12 @@ function handleNicknameClick(e) {
 
     inRoomList.forEach(function(room) {
       var link = myDom.createLinkToRoom(room);
-	  link.className = "cp-popup-link";
+      link.className = "cp-popup-link";
       menu.appendChild(link);
       menu.appendChild(document.createElement("br"));
     });
 
-	
+
     popupMenu.show(outerDiv);
     e.stopPropagation();
   } else {
@@ -184,7 +184,7 @@ function handleNicknameClick(e) {
 upgrades.chatroom_auto = (function() {
   function processRefreshRooms(markers) {
     window.soiDetails = identifySoi(); //jshint ignore:line
-	
+
     var rBut;
     var announcementButton;
     var resetTimerBut;
@@ -197,7 +197,7 @@ upgrades.chatroom_auto = (function() {
     var askKey;
     var makeStartButton;
     var makeStopButton;
-	var makeAnnouncementButton;
+    var makeAnnouncementButton;
     var allStampData = {};
     var roomStampData = {};
 
@@ -369,7 +369,7 @@ upgrades.chatroom_auto = (function() {
 
 upgrades.chatroom = (function() {
   "use strict";
-    
+
   window.qunit.chat = {};
 
   var special = (function() {
@@ -415,21 +415,53 @@ upgrades.chatroom = (function() {
   function getPostMarkers() {
     // Locate the '~' or '*' links by posts	
     var actionLinks = document.querySelectorAll("hr + i + a, hr + center table i + a");
+    var dialogTags;
+    var allowedDistance = 4;
+    //var dialogTags = document.querySelectorAll("hr + i + a ~ b, hr + center table i + a ~ b");
 
-    // The <whoever> [said|said to|whispered to] clusters
-    var dialogTags = document.querySelectorAll("hr + i + a ~ b, hr + center table i + a ~ b");
+    // Unforunately, we can't use a selector to dig out the dialog tags.  Sometimes
+    // there are other elements on the screen that would *appear* to be a dialog
+    // tag.
+    // Other times SOI gives out really really messed up HTML which mis-renders
+    // horribly in the browser.
+
+    // We can pass back an array instead of a NodeList and ChatPlus is OK with that.
+    // forEachNode will happily iterate over arrays since all we really need is 
+    // that all important length property.
+
+    // The approach: Loop through the actionLinks and then see if there is a 
+    // <b> element with allowedDistance elements.  We can't make this a fixed
+    // number because the Flaire code (one of my other toys) may add elements.
+    dialogTags = [];
+
+    forEachNode(actionLinks, function(link) {
+      var dialogTag = null;
+      var chaserElement = link;
+      for (var i = 0; i < allowedDistance; i++) {
+        if (chaserElement.tagName.toLowerCase() === "b") {
+          dialogTag = chaserElement;
+          break;
+        }
+        chaserElement = chaserElement.nextElementSibling;
+      }
+
+      dialogTags.push(dialogTag);
+    });
 
     if (actionLinks.length !== dialogTags.length) {
       throw new Error("Mismatch between actionLinks and dialogTags");
     }
 
-    return {
+    var ret = {
       actionLinks: actionLinks,
       dialogTags: dialogTags,
     };
+
+    return ret;
   }
 
   function splitDialogTag(tag) {
+
     var dialogSeparators = ["said to", "said", "whispered to", "EMAILEDx"];
 
     if (tag.tagName.toLowerCase() !== "b") {
@@ -440,9 +472,8 @@ upgrades.chatroom = (function() {
     var toEl;
     var sep;
 
-
-    var step = 0;
     var dest = document.createElement("span");
+
     // Rewrote this code to loop through childNodes rather
     // than using nextSibling.  IE and its pain-in-the-ass
     // empty text nodes was killing nextSibling.
@@ -451,25 +482,35 @@ upgrades.chatroom = (function() {
       var f = tag.childNodes[i];
 
       var nodeCopy = f.cloneNode(true);
-
       var txt = f.textContent;
 
       if ((dialogSeparators.indexOf(txt) !== -1) && f.tagName.toLowerCase() === "i") {
         sep = txt;
         fromEl = dest;
         dest = document.createElement("span");
-        step = 1;
       } else {
         dest.appendChild(nodeCopy);
       }
     }
     toEl = dest;
 
-    var r = {
-      from: createUserInfo(fromEl),
-      to: createUserInfo(toEl),
-      sep: sep
-    };
+    var r;
+
+	// Some folks simply have a nickname where the HTML is too far messed up
+	// for our poor parser to handle it so give up and gag.
+    try {
+      r = {
+        from: createUserInfo(fromEl),
+        to: createUserInfo(toEl),
+        sep: sep
+      };
+    } catch (err) {
+	  cpConsole.log("splitDialogTag Error: Can't make heads or tails of '" 
+	  + tag.textContent + "'  The HTML was too confusing.");
+      r = {
+        canUpgradeName: false
+      };
+    }
 
     return r;
   }
@@ -855,6 +896,11 @@ upgrades.chatroom = (function() {
 
     forEachNode(dialogTags, function(tag, i) {
       var result = splitDialogTag(this);
+	  
+	  if (result.canUpgradeName === false) {
+	    return;
+	  }
+
       window.qunit.chat.namesList.push(result.from.text);
       window.qunit.chat.namesList.push(result.to.text);
 
@@ -888,7 +934,7 @@ upgrades.chatroom = (function() {
     window.soiDetails = identifySoi(); //jshint ignore:line
 
     var markers = upgrades.chatroom.internal.getPostMarkers();
-   
+
     upgradeDialogTags(markers);
     createAuto2Button();
     createSpecialButton();
