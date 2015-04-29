@@ -167,7 +167,8 @@ function loadPages() {
       getHtml('pages/controls-nickname.html'),
       getHtml('pages/controls-ftp-files.html'),
       getHtml('pages/cork.html'),
-      getHtml('pages/chatroom-auto.html')
+      getHtml('pages/chatroom-auto.html'),
+	  getHtml('pages/chatroom-ssh-broken.html')
     ]).then(function(values) {
       fillTemplate("chatroom-template", values[0]);
       fillTemplate("hotlist-template", values[1]);
@@ -177,6 +178,7 @@ function loadPages() {
       fillTemplate("controls-ftp-files-template", values[5]);
       fillTemplate("cork-template", values[6]);
       fillTemplate("chatroom-auto-template", values[7]);
+	  fillTemplate("chatroom-ssh-broken-template", values[8]);
       resolve();
     });
   })
