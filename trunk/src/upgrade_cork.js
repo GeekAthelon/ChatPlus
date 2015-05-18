@@ -37,20 +37,27 @@ upgrades.cork = (function() {
     corkPosts = [];
 
     var results = [];
-    forEachNode(lis, function() {
-      var post = this.parentNode.parentNode;
-      corkPosts.push(post);
+    forEachNode(lis, function(el, idx) {
+      try {
+        var post = this;
+        while (post.tagName.toLowerCase() !== 'li') {
+          post = post.parentNode;
+        }
 
-      var result = {
-        timeStamp: post.querySelector("a").textContent.trim(),
-        isCitizenPost: null,
-        nickElement: post.querySelector("b").textContent,
-        title: post.querySelector("i ~ i").previousSibling.textContent,
-        reactions: parseInt(post.querySelector("i ~ i").textContent, 10)
-      };
+        var result = {};
 
-      result.title = result.title.slice(0, -3).trim();
-      results.push(result);
+        result.timeStamp = post.querySelector("a").textContent.trim();
+        result.isCitizenPost = null;
+        result.nickElement = post.querySelector("b").textContent;
+        result.title = post.querySelector("i ~ i").previousSibling.textContent;
+        result.reactions = parseInt(post.querySelector("i ~ i").textContent, 10);
+        result.title = result.title.slice(0, -3).trim();
+
+        corkPosts.push(post);
+        results.push(result);
+      } catch (err) {
+        cpConsole.log("parseCork: Died on cork entry - " + idx + 1);
+      }
     });
 
     return results;

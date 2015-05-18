@@ -5953,5 +5953,40 @@
     "build_date": "Wed Apr 29 01:29:31 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 890,
+    "build_date": "Mon May 18 09:03:14 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 891,
+    "build_date": "Mon May 18 09:03:21 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 892,
+    "build_date": "Mon May 18 09:07:53 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 893,
+    "build_date": "Mon May 18 09:08:52 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 894,
+    "build_date": "Mon May 18 09:13:13 EDT 2015",
+    "build_comments": "",
+    "status": "build success"
   }
 ]
