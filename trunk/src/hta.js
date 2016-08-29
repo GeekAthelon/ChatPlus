@@ -32,22 +32,22 @@ function getSaveDir() {
 }
 
 var gmGetValue = function (p1, p2) {
-    var p = getSaveDir();
-    var fname = p + "\\" + p1;
-    var r = ie_readFile(fname);
-    if (r === null) {
-      return p2;
-    } else {
-      return JSON.parse(r);
-    }
-  };
+  var p = getSaveDir();
+  var fname = p + "\\" + p1;
+  var r = ie_readFile(fname);
+  if (r === null) {
+    return p2;
+  } else {
+    return JSON.parse(r);
+  }
+};
 
 var gmSetValue = function (p1, p2) {
-    var p = getSaveDir();
-    var fname = p + "\\" + p1;
-    var v = JSON.stringify(p2);
-    var r = ie_writeFile(fname, v);
-  };
+  var p = getSaveDir();
+  var fname = p + "\\" + p1;
+  var v = JSON.stringify(p2);
+  var r = ie_writeFile(fname, v);
+};
 
 
 function GM_addStyle(css) {
@@ -198,20 +198,20 @@ window.onresize = function () {
 //                  Oyvind Sean Kinsey http://kinsey.no/blog (2010)
 //                  Victor Homyakov <victor-homyakov@users.sourceforge.net> (2010)
 /**
- * Main function giving a function stack trace with a forced or passed in Error
- *
- * @cfg {Error} e The error to create a stacktrace from (optional)
- * @cfg {Boolean} guess If we should try to resolve the names of anonymous functions
- * @return {Array} of Strings with functions, lines, files, and arguments where possible
- */
+* Main function giving a function stack trace with a forced or passed in Error
+*
+* @cfg {Error} e The error to create a stacktrace from (optional)
+* @cfg {Boolean} guess If we should try to resolve the names of anonymous functions
+* @return {Array} of Strings with functions, lines, files, and arguments where possible
+*/
 function printStackTrace(options) {
   options = options || {
     guess: true
   };
   var ex = options.e || null,
-    guess = !! options.guess;
+  guess = !! options.guess;
   var p = new printStackTrace.implementation(),
-    result = p.run(ex);
+  result = p.run(ex);
   return (guess) ? p.guessAnonymousFunctions(result) : result;
 }
 
@@ -219,9 +219,9 @@ printStackTrace.implementation = function () {};
 
 printStackTrace.implementation.prototype = {
   /**
-   * @param {Error} ex The error to create a stacktrace from (optional)
-   * @param {String} mode Forced mode (optional, mostly for unit tests)
-   */
+  * @param {Error} ex The error to create a stacktrace from (optional)
+  * @param {String} mode Forced mode (optional, mostly for unit tests)
+  */
   run: function (ex, mode) {
     ex = ex || this.createException();
     // examine exception properties w/o debugger
@@ -243,11 +243,11 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Mode could differ for different exception, e.g.
-   * exceptions in Chrome may or may not have arguments or stack.
-   *
-   * @return {String} mode of operation for the exception
-   */
+  * Mode could differ for different exception, e.g.
+  * exceptions in Chrome may or may not have arguments or stack.
+  *
+  * @return {String} mode of operation for the exception
+  */
   mode: function (e) {
     if (e['arguments'] && e.stack) {
       return 'chrome';
@@ -278,13 +278,13 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Given a context, function name, and callback function, overwrite it so that it calls
-   * printStackTrace() first with a callback and then runs the rest of the body.
-   *
-   * @param {Object} context of execution (e.g. window)
-   * @param {String} functionName to instrument
-   * @param {Function} function to call with a stack trace on invocation
-   */
+  * Given a context, function name, and callback function, overwrite it so that it calls
+  * printStackTrace() first with a callback and then runs the rest of the body.
+  *
+  * @param {Object} context of execution (e.g. window)
+  * @param {String} functionName to instrument
+  * @param {Function} function to call with a stack trace on invocation
+  */
   instrumentFunction: function (context, functionName, callback) {
     context = context || window;
     var original = context[functionName];
@@ -296,13 +296,13 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Given a context and function name of a function that has been
-   * instrumented, revert the function to it's original (non-instrumented)
-   * state.
-   *
-   * @param {Object} context of execution (e.g. window)
-   * @param {String} functionName to de-instrument
-   */
+  * Given a context and function name of a function that has been
+  * instrumented, revert the function to it's original (non-instrumented)
+  * state.
+  *
+  * @param {Object} context of execution (e.g. window)
+  * @param {String} functionName to de-instrument
+  */
   deinstrumentFunction: function (context, functionName) {
     if (context[functionName].constructor === Function && context[functionName]._instrumented && context[functionName]._instrumented.constructor === Function) {
       context[functionName] = context[functionName]._instrumented;
@@ -310,11 +310,11 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Given an Error object, return a formatted Array based on Chrome's stack string.
-   *
-   * @param e - Error object to inspect
-   * @return Array<String> of function calls, files and line numbers
-   */
+  * Given an Error object, return a formatted Array based on Chrome's stack string.
+  *
+  * @param e - Error object to inspect
+  * @return Array<String> of function calls, files and line numbers
+  */
   chrome: function (e) {
     var stack = (e.stack + '\n').replace(/^\S[^\(]+?[\n$]/gm, '').
     replace(/^\s+at\s+/gm, '').
@@ -325,11 +325,11 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Given an Error object, return a formatted Array based on Firefox's stack string.
-   *
-   * @param e - Error object to inspect
-   * @return Array<String> of function calls, files and line numbers
-   */
+  * Given an Error object, return a formatted Array based on Firefox's stack string.
+  *
+  * @param e - Error object to inspect
+  * @return Array<String> of function calls, files and line numbers
+  */
   firefox: function (e) {
     return e.stack.replace(/(?:\n@:0)?\s+$/m, '').replace(/^\(/gm, '{anonymous}(').split('\n');
   },
@@ -340,9 +340,9 @@ printStackTrace.implementation.prototype = {
     // "called from line 7, column 4 in bar(n) in file://localhost/G:/js/test/functional/testcase1.html:\n"
     // "called from line 15, column 3 in file://localhost/G:/js/test/functional/testcase1.html:\n"
     var ANON = '{anonymous}',
-      lineRE = /^.*line (\d+), column (\d+)(?: in (.+))? in (\S+):$/;
+    lineRE = /^.*line (\d+), column (\d+)(?: in (.+))? in (\S+):$/;
     var lines = e.stacktrace.split('\n'),
-      result = [];
+    result = [];
 
     for (var i = 0, len = lines.length; i < len; i += 2) {
       var match = lineRE.exec(lines[i]);
@@ -362,9 +362,9 @@ printStackTrace.implementation.prototype = {
     // "printStackTrace([arguments not available])@file://localhost/G:/js/stacktrace.js:18\n" +
     // "@file://localhost/G:/js/test/functional/testcase1.html:15"
     var ANON = '{anonymous}',
-      lineRE = /^(.*)@(.+):(\d+)$/;
+    lineRE = /^(.*)@(.+):(\d+)$/;
     var lines = e.stacktrace.split('\n'),
-      result = [];
+    result = [];
 
     for (var i = 0, len = lines.length; i < len; i++) {
       var match = lineRE.exec(lines[i]);
@@ -378,18 +378,18 @@ printStackTrace.implementation.prototype = {
   },
 
   /**
-   * Given an Error object, return a formatted Array based on Opera 10's stacktrace string.
-   *
-   * @param e - Error object to inspect
-   * @return Array<String> of function calls, files and line numbers
-   */
+  * Given an Error object, return a formatted Array based on Opera 10's stacktrace string.
+  *
+  * @param e - Error object to inspect
+  * @return Array<String> of function calls, files and line numbers
+  */
   opera10a: function (e) {
     // "  Line 27 of linked script file://localhost/G:/js/stacktrace.js\n"
     // "  Line 11 of inline#1 script in file://localhost/G:/js/test/functional/testcase1.html: In function foo\n"
     var ANON = '{anonymous}',
-      lineRE = /Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i;
+    lineRE = /Line (\d+).*script (?:in )?(\S+)(?:: In function (\S+))?$/i;
     var lines = e.stacktrace.split('\n'),
-      result = [];
+    result = [];
 
     for (var i = 0, len = lines.length; i < len; i += 2) {
       var match = lineRE.exec(lines[i]);
@@ -407,9 +407,9 @@ printStackTrace.implementation.prototype = {
     // "  Line 43 of linked script file://localhost/G:/js/stacktrace.js\n"
     // "  Line 7 of inline#1 script in file://localhost/G:/js/test/functional/testcase1.html\n"
     var ANON = '{anonymous}',
-      lineRE = /Line (\d+).*script (?:in )?(\S+)/i;
+    lineRE = /Line (\d+).*script (?:in )?(\S+)/i;
     var lines = e.message.split('\n'),
-      result = [];
+    result = [];
 
     for (var i = 2, len = lines.length; i < len; i += 2) {
       var match = lineRE.exec(lines[i]);
@@ -424,370 +424,375 @@ printStackTrace.implementation.prototype = {
   // Safari, IE, and others
   other: function (curr) {
     var ANON = '{anonymous}',
-      fnRE = /function\s*([\w\-$]+)?\s*\(/i,
+    fnRE = /function\s*([\w\-$]+)?\s*\(/i,
       stack = [],
       fn, args, maxStackSize = 10;
-    while (curr && stack.length < maxStackSize) {
-      fn = fnRE.test(curr.toString()) ? RegExp.$1 || ANON : ANON;
-      args = Array.prototype.slice.call(curr['arguments'] || []);
-      stack[stack.length] = fn + '(' + this.stringifyArguments(args) + ')';
-      curr = curr.caller;
-    }
-    return stack;
-  },
+      while (curr && stack.length < maxStackSize) {
+        fn = fnRE.test(curr.toString()) ? RegExp.$1 || ANON : ANON;
+        args = Array.prototype.slice.call(curr['arguments'] || []);
+        stack[stack.length] = fn + '(' + this.stringifyArguments(args) + ')';
+        curr = curr.caller;
+      }
+      return stack;
+    },
 
-  /**
-   * Given arguments array as a String, subsituting type names for non-string types.
-   *
-   * @param {Arguments} object
-   * @return {Array} of Strings with stringified arguments
-   */
-  stringifyArguments: function (args) {
-    var result = [];
-    var slice = Array.prototype.slice;
-    for (var i = 0; i < args.length; ++i) {
-      var arg = args[i];
-      if (arg === undefined) {
-        result[i] = 'undefined';
-      } else if (arg === null) {
-        result[i] = 'null';
-      } else if (arg.constructor) {
-        if (arg.constructor === Array) {
-          if (arg.length < 3) {
-            result[i] = '[' + this.stringifyArguments(arg) + ']';
-          } else {
-            result[i] = '[' + this.stringifyArguments(slice.call(arg, 0, 1)) + '...' + this.stringifyArguments(slice.call(arg, -1)) + ']';
+    /**
+    * Given arguments array as a String, subsituting type names for non-string types.
+    *
+    * @param {Arguments} object
+    * @return {Array} of Strings with stringified arguments
+    */
+    stringifyArguments: function (args) {
+      var result = [];
+      var slice = Array.prototype.slice;
+      for (var i = 0; i < args.length; ++i) {
+        var arg = args[i];
+        if (arg === undefined) {
+          result[i] = 'undefined';
+        } else if (arg === null) {
+          result[i] = 'null';
+        } else if (arg.constructor) {
+          if (arg.constructor === Array) {
+            if (arg.length < 3) {
+              result[i] = '[' + this.stringifyArguments(arg) + ']';
+            } else {
+              result[i] = '[' + this.stringifyArguments(slice.call(arg, 0, 1)) + '...' + this.stringifyArguments(slice.call(arg, -1)) + ']';
+            }
+          } else if (arg.constructor === Object) {
+            result[i] = '#object';
+          } else if (arg.constructor === Function) {
+            result[i] = '#function';
+          } else if (arg.constructor === String) {
+            result[i] = '"' + arg + '"';
+          } else if (arg.constructor === Number) {
+            result[i] = arg;
           }
-        } else if (arg.constructor === Object) {
-          result[i] = '#object';
-        } else if (arg.constructor === Function) {
-          result[i] = '#function';
-        } else if (arg.constructor === String) {
-          result[i] = '"' + arg + '"';
-        } else if (arg.constructor === Number) {
-          result[i] = arg;
         }
       }
-    }
-    return result.join(',');
-  },
+      return result.join(',');
+    },
 
-  sourceCache: {},
+    sourceCache: {},
 
-  /**
-   * @return the text from a given URL
-   */
-  ajax: function (url) {
-    var req = this.createXMLHTTPObject();
-    if (req) {
+    /**
+    * @return the text from a given URL
+    */
+    ajax: function (url) {
+      var req = this.createXMLHTTPObject();
+      if (req) {
+        try {
+          req.open('GET', url, false);
+          req.send(null);
+          return req.responseText;
+        } catch (e) {}
+      }
+      return '';
+    },
+
+    /**
+    * Try XHR methods in order and store XHR factory.
+    *
+    * @return <Function> XHR function or equivalent
+    */
+    createXMLHTTPObject: function () {
+      var xmlhttp, XMLHttpFactories = [
+
+        function () {
+          return new XMLHttpRequest();
+        }, function () {
+          return new ActiveXObject('Msxml2.XMLHTTP');
+        }, function () {
+          return new ActiveXObject('Msxml3.XMLHTTP');
+        }, function () {
+          return new ActiveXObject('Microsoft.XMLHTTP');
+        }];
+        for (var i = 0; i < XMLHttpFactories.length; i++) {
+          try {
+            xmlhttp = XMLHttpFactories[i]();
+            // Use memoization to cache the factory
+            this.createXMLHTTPObject = XMLHttpFactories[i];
+            return xmlhttp;
+          } catch (e) {}
+        }
+      },
+
+      /**
+      * Given a URL, check if it is in the same domain (so we can get the source
+      * via Ajax).
+      *
+      * @param url <String> source url
+      * @return False if we need a cross-domain request
+      */
+      isSameDomain: function (url) {
+        return url.indexOf(location.hostname) !== -1;
+      },
+
+      /**
+      * Get source code from given URL if in the same domain.
+      *
+      * @param url <String> JS source URL
+      * @return <Array> Array of source code lines
+      */
+      getSource: function (url) {
+        // TODO reuse source from script tags?
+        if (!(url in this.sourceCache)) {
+          this.sourceCache[url] = this.ajax(url).split('\n');
+        }
+        return this.sourceCache[url];
+      },
+
+      guessAnonymousFunctions: function (stack) {
+        for (var i = 0; i < stack.length; ++i) {
+          var reStack = /\{anonymous\}\(.*\)@(.*)/,
+          reRef = /^(.*?)(?::(\d+))(?::(\d+))?(?: -- .+)?$/,
+          frame = stack[i],
+          ref = reStack.exec(frame);
+
+          if (ref) {
+            var m = reRef.exec(ref[1]),
+            file = m[1],
+            lineno = m[2],
+            charno = m[3] || 0;
+            if (file && this.isSameDomain(file) && lineno) {
+              var functionName = this.guessAnonymousFunction(file, lineno, charno);
+              stack[i] = frame.replace('{anonymous}', functionName);
+            }
+          }
+        }
+        return stack;
+      },
+
+      guessAnonymousFunction: function (url, lineNo, charNo) {
+        var ret;
+        try {
+          ret = this.findFunctionName(this.getSource(url), lineNo);
+        } catch (e) {
+          ret = 'getSource failed with url: ' + url + ', exception: ' + e.toString();
+        }
+        return ret;
+      },
+
+      findFunctionName: function (source, lineNo) {
+        // FIXME findFunctionName fails for compressed source
+        // (more than one function on the same line)
+        // TODO use captured args
+        // function {name}({args}) m[1]=name m[2]=args
+        var reFunctionDeclaration = /function\s+([^(]*?)\s*\(([^)]*)\)/;
+        // {name} = function ({args}) TODO args capture
+        // /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function(?:[^(]*)/
+        var reFunctionExpression = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function\b/;
+        // {name} = eval()
+        var reFunctionEvaluation = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(?:eval|new Function)\b/;
+        // Walk backwards in the source lines until we find
+        // the line which matches one of the patterns above
+        var code = "",
+        line, maxLines = Math.min(lineNo, 20),
+        m, commentPos;
+        for (var i = 0; i < maxLines; ++i) {
+          // lineNo is 1-based, source[] is 0-based
+          line = source[lineNo - i - 1];
+          commentPos = line.indexOf('//');
+          if (commentPos >= 0) {
+            line = line.substr(0, commentPos);
+          }
+          // TODO check other types of comments? Commented code may lead to false positive
+          if (line) {
+            code = line + code;
+            m = reFunctionExpression.exec(code);
+            if (m && m[1]) {
+              return m[1];
+            }
+            m = reFunctionDeclaration.exec(code);
+            if (m && m[1]) {
+              //return m[1] + "(" + (m[2] || "") + ")";
+              return m[1];
+            }
+            m = reFunctionEvaluation.exec(code);
+            if (m && m[1]) {
+              return m[1];
+            }
+          }
+        }
+        return '(?)';
+      }
+    };
+
+
+    var iFrameHistory = {
+      history: [],
+      pos: 0,
+      ignore: false,
+
+      updateUI: function () {
+        var el;
+
+        // Enable / disable back button?
+        el = document.getElementById('back');
+        if (iFrameHistory.pos === 1) el.className = 'disabled';
+        else el.className = '';
+
+        // Enable / disable forward button?
+        el = document.getElementById('forward');
+        if (iFrameHistory.pos >= iFrameHistory.history.length) el.className = 'disabled';
+        else el.className = '';
+      },
+
+      back: function () {
+        var newPos = Math.max(1, this.pos - 1);
+        if (newPos !== this.pos) {
+          this.pos = newPos;
+          this.ignore = true;
+          document.getElementById('ifrm').src = this.history[this.pos - 1];
+
+          this.updateUI();
+        }
+      },
+      forward: function () {
+        var newPos = Math.min(this.history.length, this.pos + 1);
+        if (newPos !== this.pos) {
+          this.pos = newPos;
+          this.ignore = true;
+          document.getElementById('ifrm').src = this.history[this.pos - 1];
+
+          this.updateUI();
+        }
+      },
+      reload: function () {
+        document.getElementById('ifrm').contentWindow.location.reload();
+      },
+      onload: function () {
+        if (!this.ignore) {
+          var href = document.getElementById('ifrm').contentWindow.location.href;
+          if (href !== this.history[this.pos - 1]) {
+            this.history.splice(this.pos, this.history.length - this.pos);
+            this.history.push(href);
+            this.pos = this.history.length;
+
+            this.updateUI();
+          }
+        } else {
+          this.ignore = false;
+        }
+      }
+    };
+
+    var ie_writeFile = function (fname, data) {
+      var fso, fileHandle;
       try {
-        req.open('GET', url, false);
-        req.send(null);
-        return req.responseText;
-      } catch (e) {}
-    }
-    return '';
-  },
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        fileHandle = fso.CreateTextFile(fname, true);
+        fileHandle.write(data);
+        fileHandle.close();
+      } catch (err) {
+        alert("writeFile " + fname + ":" + err.message);
+      }
+    };
 
-  /**
-   * Try XHR methods in order and store XHR factory.
-   *
-   * @return <Function> XHR function or equivalent
-   */
-  createXMLHTTPObject: function () {
-    var xmlhttp, XMLHttpFactories = [
-
-    function () {
-      return new XMLHttpRequest();
-    }, function () {
-      return new ActiveXObject('Msxml2.XMLHTTP');
-    }, function () {
-      return new ActiveXObject('Msxml3.XMLHTTP');
-    }, function () {
-      return new ActiveXObject('Microsoft.XMLHTTP');
-    }];
-    for (var i = 0; i < XMLHttpFactories.length; i++) {
+    var ie_readFile = function (fname) {
       try {
-        xmlhttp = XMLHttpFactories[i]();
-        // Use memoization to cache the factory
-        this.createXMLHTTPObject = XMLHttpFactories[i];
-        return xmlhttp;
-      } catch (e) {}
-    }
-  },
-
-  /**
-   * Given a URL, check if it is in the same domain (so we can get the source
-   * via Ajax).
-   *
-   * @param url <String> source url
-   * @return False if we need a cross-domain request
-   */
-  isSameDomain: function (url) {
-    return url.indexOf(location.hostname) !== -1;
-  },
-
-  /**
-   * Get source code from given URL if in the same domain.
-   *
-   * @param url <String> JS source URL
-   * @return <Array> Array of source code lines
-   */
-  getSource: function (url) {
-    // TODO reuse source from script tags?
-    if (!(url in this.sourceCache)) {
-      this.sourceCache[url] = this.ajax(url).split('\n');
-    }
-    return this.sourceCache[url];
-  },
-
-  guessAnonymousFunctions: function (stack) {
-    for (var i = 0; i < stack.length; ++i) {
-      var reStack = /\{anonymous\}\(.*\)@(.*)/,
-        reRef = /^(.*?)(?::(\d+))(?::(\d+))?(?: -- .+)?$/,
-        frame = stack[i],
-        ref = reStack.exec(frame);
-
-      if (ref) {
-        var m = reRef.exec(ref[1]),
-          file = m[1],
-          lineno = m[2],
-          charno = m[3] || 0;
-        if (file && this.isSameDomain(file) && lineno) {
-          var functionName = this.guessAnonymousFunction(file, lineno, charno);
-          stack[i] = frame.replace('{anonymous}', functionName);
-        }
+        fso = new ActiveXObject("Scripting.FileSystemObject");
+        var fso, filehandle, contents;
+        filehandle = fso.OpenTextFile(fname, 1);
+        contents = filehandle.ReadAll();
+        filehandle.Close();
+        return contents;
+      } catch (err) {
+        alert("readFile " + fname + ":" + err.message);
+        return null;
       }
-    }
-    return stack;
-  },
-
-  guessAnonymousFunction: function (url, lineNo, charNo) {
-    var ret;
-    try {
-      ret = this.findFunctionName(this.getSource(url), lineNo);
-    } catch (e) {
-      ret = 'getSource failed with url: ' + url + ', exception: ' + e.toString();
-    }
-    return ret;
-  },
-
-  findFunctionName: function (source, lineNo) {
-    // FIXME findFunctionName fails for compressed source
-    // (more than one function on the same line)
-    // TODO use captured args
-    // function {name}({args}) m[1]=name m[2]=args
-    var reFunctionDeclaration = /function\s+([^(]*?)\s*\(([^)]*)\)/;
-    // {name} = function ({args}) TODO args capture
-    // /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function(?:[^(]*)/
-    var reFunctionExpression = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*function\b/;
-    // {name} = eval()
-    var reFunctionEvaluation = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(?:eval|new Function)\b/;
-    // Walk backwards in the source lines until we find
-    // the line which matches one of the patterns above
-    var code = "",
-      line, maxLines = Math.min(lineNo, 20),
-      m, commentPos;
-    for (var i = 0; i < maxLines; ++i) {
-      // lineNo is 1-based, source[] is 0-based
-      line = source[lineNo - i - 1];
-      commentPos = line.indexOf('//');
-      if (commentPos >= 0) {
-        line = line.substr(0, commentPos);
-      }
-      // TODO check other types of comments? Commented code may lead to false positive
-      if (line) {
-        code = line + code;
-        m = reFunctionExpression.exec(code);
-        if (m && m[1]) {
-          return m[1];
-        }
-        m = reFunctionDeclaration.exec(code);
-        if (m && m[1]) {
-          //return m[1] + "(" + (m[2] || "") + ")";
-          return m[1];
-        }
-        m = reFunctionEvaluation.exec(code);
-        if (m && m[1]) {
-          return m[1];
-        }
-      }
-    }
-    return '(?)';
-  }
-};
-
-
-var iFrameHistory = {
-  history: [],
-  pos: 0,
-  ignore: false,
-
-  updateUI: function () {
-    var el;
-
-    // Enable / disable back button?
-    el = document.getElementById('back');
-    if (iFrameHistory.pos === 1) el.className = 'disabled';
-    else el.className = '';
-
-    // Enable / disable forward button?
-    el = document.getElementById('forward');
-    if (iFrameHistory.pos >= iFrameHistory.history.length) el.className = 'disabled';
-    else el.className = '';
-  },
-
-  back: function () {
-    var newPos = Math.max(1, this.pos - 1);
-    if (newPos !== this.pos) {
-      this.pos = newPos;
-      this.ignore = true;
-      document.getElementById('ifrm').src = this.history[this.pos - 1];
-
-      this.updateUI();
-    }
-  },
-  forward: function () {
-    var newPos = Math.min(this.history.length, this.pos + 1);
-    if (newPos !== this.pos) {
-      this.pos = newPos;
-      this.ignore = true;
-      document.getElementById('ifrm').src = this.history[this.pos - 1];
-
-      this.updateUI();
-    }
-  },
-  reload: function () {
-    document.getElementById('ifrm').contentWindow.location.reload();
-  },
-  onload: function () {
-    if (!this.ignore) {
-      var href = document.getElementById('ifrm').contentWindow.location.href;
-      if (href !== this.history[this.pos - 1]) {
-        this.history.splice(this.pos, this.history.length - this.pos);
-        this.history.push(href);
-        this.pos = this.history.length;
-
-        this.updateUI();
-      }
-    } else {
-      this.ignore = false;
-    }
-  }
-};
-
-var ie_writeFile = function (fname, data) {
-    var fso, fileHandle;
-    fso = new ActiveXObject("Scripting.FileSystemObject");
-    fileHandle = fso.CreateTextFile(fname, true);
-    fileHandle.write(data);
-    fileHandle.close();
-  };
-
-var ie_readFile = function (fname) {
-    try {
-      fso = new ActiveXObject("Scripting.FileSystemObject");
-      var fso, filehandle, contents;
-      filehandle = fso.OpenTextFile(fname, 1);
-      contents = filehandle.ReadAll();
-      filehandle.Close();
-      return contents;
-    } catch (err) {
-      return null;
-    }
-  };
+    };
 
 
 
 
-function XHConn() {
-  var xmlhttp, bComplete = false;
-  try {
-    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-  } catch (e) {
-    try {
-      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    } catch (e) {
+    function XHConn() {
+      var xmlhttp, bComplete = false;
       try {
-        xmlhttp = new XMLHttpRequest();
+        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
       } catch (e) {
-        xmlhttp = false;
-      }
-    }
-  }
-  if (!xmlhttp) return null;
-  this.connect = function (sURL, sMethod, sVars, fnDone) {
-    if (!xmlhttp) return false;
-    bComplete = false;
-    sMethod = sMethod.toUpperCase();
-    try {
-      if (sMethod == "GET") {
-        xmlhttp.open(sMethod, sURL + "?" + sVars, true);
-        sVars = "";
-      } else {
-        xmlhttp.open(sMethod, sURL, true);
-        xmlhttp.setRequestHeader("Method", "POST " + sURL + " HTTP/1.1");
-        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      }
-      xmlhttp.onreadystatechange = function () {
-        if (xmlhttp.readyState == 4 && !bComplete) {
-          bComplete = true;
-          fnDone(xmlhttp);
+        try {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (e) {
+          try {
+            xmlhttp = new XMLHttpRequest();
+          } catch (e) {
+            xmlhttp = false;
+          }
         }
+      }
+      if (!xmlhttp) return null;
+      this.connect = function (sURL, sMethod, sVars, fnDone) {
+        if (!xmlhttp) return false;
+        bComplete = false;
+        sMethod = sMethod.toUpperCase();
+        try {
+          if (sMethod == "GET") {
+            xmlhttp.open(sMethod, sURL + "?" + sVars, true);
+            sVars = "";
+          } else {
+            xmlhttp.open(sMethod, sURL, true);
+            xmlhttp.setRequestHeader("Method", "POST " + sURL + " HTTP/1.1");
+            xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          }
+          xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && !bComplete) {
+              bComplete = true;
+              fnDone(xmlhttp);
+            }
+          };
+          xmlhttp.send(sVars);
+        } catch (z) {
+          return false;
+        }
+        return true;
       };
-      xmlhttp.send(sVars);
-    } catch (z) {
-      return false;
+      return this;
     }
-    return true;
-  };
-  return this;
-}
 
-function GM_xmlhttpRequest(details) {
-  var xmlhttp = new ActiveXObject("microsoft.xmlhttp");
-  xmlhttp.onreadystatechange = function () {
-    var responseState = {
-      responseXML: (xmlhttp.readyState == 4 ? xmlhttp.responseXML : ''),
-      responseText: (xmlhttp.readyState == 4 ? xmlhttp.responseText : ''),
-      readyState: xmlhttp.readyState,
-      responseHeaders: (xmlhttp.readyState == 4 ? xmlhttp.getAllResponseHeaders() : ''),
-      status: (xmlhttp.readyState == 4 ? xmlhttp.status : 0),
-      statusText: (xmlhttp.readyState == 4 ? xmlhttp.statusText : '')
-    }
-    if (details["onreadystatechange"]) {
-      details["onreadystatechange"](responseState);
-    }
-    if (xmlhttp.readyState == 4) {
-      if (details["onload"] && xmlhttp.status >= 200 && xmlhttp.status < 300) {
-        details["onload"](responseState);
+    function GM_xmlhttpRequest(details) {
+      var xmlhttp = new ActiveXObject("microsoft.xmlhttp");
+      xmlhttp.onreadystatechange = function () {
+        var responseState = {
+          responseXML: (xmlhttp.readyState == 4 ? xmlhttp.responseXML : ''),
+          responseText: (xmlhttp.readyState == 4 ? xmlhttp.responseText : ''),
+          readyState: xmlhttp.readyState,
+          responseHeaders: (xmlhttp.readyState == 4 ? xmlhttp.getAllResponseHeaders() : ''),
+          status: (xmlhttp.readyState == 4 ? xmlhttp.status : 0),
+          statusText: (xmlhttp.readyState == 4 ? xmlhttp.statusText : '')
+        }
+        if (details["onreadystatechange"]) {
+          details["onreadystatechange"](responseState);
+        }
+        if (xmlhttp.readyState == 4) {
+          if (details["onload"] && xmlhttp.status >= 200 && xmlhttp.status < 300) {
+            details["onload"](responseState);
+          }
+          if (details["onerror"] && (xmlhttp.status < 200 || xmlhttp.status >= 300)) {
+            details["onerror"](responseState);
+          }
+        }
       }
-      if (details["onerror"] && (xmlhttp.status < 200 || xmlhttp.status >= 300)) {
-        details["onerror"](responseState);
+      try {
+        //cannot do cross domain
+        xmlhttp.open(details.method, details.url);
+      } catch (e) {
+        if (details["onerror"]) {
+          //simulate a real error
+          details["onerror"]({
+            responseXML: '',
+            responseText: '',
+            readyState: 4,
+            responseHeaders: '',
+            status: 403,
+            statusText: 'Forbidden'
+          });
+        }
+        return;
       }
+      if (details.headers) {
+        for (var prop in details.headers) {
+          xmlhttp.setRequestHeader(prop, details.headers[prop]);
+        }
+      }
+      xmlhttp.send((typeof (details.data) != 'undefined') ? details.data : null);
     }
-  }
-  try {
-    //cannot do cross domain
-    xmlhttp.open(details.method, details.url);
-  } catch (e) {
-    if (details["onerror"]) {
-      //simulate a real error
-      details["onerror"]({
-        responseXML: '',
-        responseText: '',
-        readyState: 4,
-        responseHeaders: '',
-        status: 403,
-        statusText: 'Forbidden'
-      });
-    }
-    return;
-  }
-  if (details.headers) {
-    for (var prop in details.headers) {
-      xmlhttp.setRequestHeader(prop, details.headers[prop]);
-    }
-  }
-  xmlhttp.send((typeof (details.data) != 'undefined') ? details.data : null);
-}

@@ -11,7 +11,7 @@ function createUserInfo(nickNameElement, blankTail) {
 
   function cleanupName(name) {
     // Because of how funky the HTML can come back, its just easier to do cleanup work here
-    // Remove any final ':' 
+    // Remove any final ':'
     name = name.replace(/:$/, '');
     name = name.trim();
     name = name.trim();
@@ -413,7 +413,7 @@ upgrades.chatroom = (function() {
 
 
   function getPostMarkers() {
-    // Locate the '~' or '*' links by posts	
+    // Locate the '~' or '*' links by posts
     var actionLinks = document.querySelectorAll("hr + i + a, hr + center table i + a");
     var dialogTags;
     var allowedDistance = 4;
@@ -426,10 +426,10 @@ upgrades.chatroom = (function() {
     // horribly in the browser.
 
     // We can pass back an array instead of a NodeList and ChatPlus is OK with that.
-    // forEachNode will happily iterate over arrays since all we really need is 
+    // forEachNode will happily iterate over arrays since all we really need is
     // that all important length property.
 
-    // The approach: Loop through the actionLinks and then see if there is a 
+    // The approach: Loop through the actionLinks and then see if there is a
     // <b> element with allowedDistance elements.  We can't make this a fixed
     // number because the Flaire code (one of my other toys) may add elements.
     dialogTags = [];
@@ -505,7 +505,7 @@ upgrades.chatroom = (function() {
         sep: sep
       };
     } catch (err) {
-	  cpConsole.log("splitDialogTag Error: Can't make heads or tails of '" 
+	  cpConsole.log("splitDialogTag Error: Can't make heads or tails of '"
 	  + tag.textContent + "'  The HTML was too confusing.");
       r = {
         canUpgradeName: false
@@ -718,65 +718,6 @@ upgrades.chatroom = (function() {
 
   }
 
-
-  function upgradeResetButton() {
-    var buttons = [{
-      text: "Yes",
-      value: "y"
-    }, {
-      text: "No",
-      value: "n"
-    }];
-
-    var newReset;
-    var newUndo;
-
-    if (window.soiDetails.resetButton) {
-      newReset = myDom.createATag("#", "Reset");
-      newReset.id = "chatplus-reset";
-
-      myDom.insertAfter(newReset, window.soiDetails.resetButton);
-      window.soiDetails.resetButton.style.display = "none";
-      window.soiDetails.resetButton.disabled = "true";
-
-      addEvent(newReset, 'click', function() {
-        return function( /*event*/ ) {
-          modalWindow.confirm("Do you really want to reset?", buttons, function(answer) {
-            if (answer === "y") {
-              window.soiDetails.formMsg.reset();
-            }
-
-          });
-        };
-      }());
-    }
-
-    var oldUndo = getLinkByText("[Undo]");
-    if (oldUndo) {
-      oldUndo.style.display = "none";
-    }
-
-    if (window.soiDetails.formMsg && oldUndo && newReset) {
-      newUndo = myDom.createATag("#", "Undo");
-      newUndo.id = "chatplus-undo";
-
-      myDom.insertAfter(document.createTextNode(" "), newReset);
-      myDom.insertAfter(newUndo, newReset);
-      myDom.insertAfter(document.createTextNode(" "), newReset);
-
-      addEvent(newUndo, 'click', function() {
-        return function( /*event*/ ) {
-          modalWindow.confirm("Are you you sure you want to undo the last post?", buttons, function(answer) {
-            if (answer === "y") {
-              userWindow.location.href = oldUndo.href;
-            }
-          });
-        };
-      }());
-
-    }
-  }
-
   function createAuto2Button() {
     function handleAutoOn() {
       setTimeout(function() {
@@ -789,7 +730,7 @@ upgrades.chatroom = (function() {
         el[0].style.display = "none";
       }
 
-      window.soiDetails.resetButton.scrollIntoView(true);
+      window.soiDetails.lastLink.scrollIntoView(true);
     }
 
     function setMode() {
@@ -868,13 +809,13 @@ upgrades.chatroom = (function() {
       }
     }
 
-    if (window.soiDetails.resetButton) {
+    if (window.soiDetails.lastLink) {
       specialButton = myDom.createATag("#", "Special ...");
       specialButton.className += " chatPlus_popupok";
       specialButton.id = "chatplus-special";
 
-      window.soiDetails.resetButton.parentNode.insertBefore(specialButton, window.soiDetails.resetButton);
-      window.soiDetails.resetButton.parentNode.insertBefore(document.createTextNode(" "), window.soiDetails.resetButton);
+      window.soiDetails.lastLink.parentNode.insertBefore(specialButton, window.soiDetails.lastLink);
+      window.soiDetails.lastLink.parentNode.insertBefore(document.createTextNode(" "), window.soiDetails.lastLink);
 
       addEvent(specialButton, 'click', function() {
         var outerDiv = popupMenu.createFor(specialButton);
@@ -896,7 +837,7 @@ upgrades.chatroom = (function() {
 
     forEachNode(dialogTags, function(tag, i) {
       var result = splitDialogTag(this);
-	  
+
 	  if (result.canUpgradeName === false) {
 	    return;
 	  }
@@ -938,7 +879,6 @@ upgrades.chatroom = (function() {
     upgradeDialogTags(markers);
     createAuto2Button();
     createSpecialButton();
-    upgradeResetButton();
     createRealmButton();
 
     if (!window.soiDetails.isCork) {

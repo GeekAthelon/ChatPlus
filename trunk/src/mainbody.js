@@ -1,10 +1,10 @@
 function addGlobalListeners() {
   document.body.removeEventListener('click', handleNicknameClick, false);
   document.body.addEventListener('click', handleNicknameClick, false);
-  
+
   document.body.removeEventListener('click', handleRealmAddRemove, false);
   document.body.addEventListener('click', handleRealmAddRemove, false);
-  
+
   modalWindow.create();
 }
 
@@ -21,7 +21,7 @@ function testo() {
   prepToolbar();
   setStyles(master);
   addGlobalListeners();
-  
+
   if (window.soiDetails.isHot) {
     upgrades.hotlist.upgrade();
   }
@@ -70,24 +70,6 @@ function identifySoi() {
     var $$_MSGFORM = null;
     var $$_FULLROOMNAME = null;
     var $$_BLANKTAIL = null;
-    var $$_RESETBUTTON = null;
-
-    function findResetButton() {
-      var resetCtl;
-	  if ($$_MSGFORM && $$_MSGFORM.elements) {
-        var l = $$_MSGFORM.elements.length;
-        var i;
-        var ctl;
-        for (i = 0; i < l; i++) {
-          ctl = $$_MSGFORM.elements[i];
-          if (ctl && ctl.type && ctl.type.toLowerCase() === "reset") {
-            resetCtl = ctl;
-            break;
-          }
-        }
-      }
-      return resetCtl;
-    }
 
     var e;
 
@@ -135,14 +117,19 @@ function identifySoi() {
       $$_BLANKTAIL = e.value;
     }
 
-    $$_RESETBUTTON = findResetButton();
+    var lastLink = null;
+
+    if ($$_MSGFORM) {
+      var links =  $$_MSGFORM.querySelectorAll("a");
+       lastLink = links[links.length -1];
+    }
 
     o.formMail = $$_MAILFORM;
     o.formFind = $$_FINDFORM;
     o.formMsg = $$_MSGFORM;
     o.fullRoomName = $$_FULLROOMNAME;
     o.blankTail = $$_BLANKTAIL;
-    o.resetButton = $$_RESETBUTTON;
+    o.lastLink = lastLink;
   }
 
 
@@ -212,7 +199,7 @@ function runAll(document) {
     var verCheckTime = gmGetValue("verCheckTime", now);
     if (now >= verCheckTime) {
       gmSetValue("verCheckTime", now + msecsInADay);
-        // Embed the version number
+      // Embed the version number
       ezz = document.createElement("div");
       ezz.id = 'cp_version';
       ezz.className = "_" + myStats.ver;

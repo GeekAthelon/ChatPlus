@@ -124,9 +124,9 @@ function resetGlobals() {
     },
     ":avatars:": {},
     ":macros:": {},
-	":roomAnnouncements:": {}	
+	":roomAnnouncements:": {}
   };
-  
+
   window.soiDetails = identifySoi();
 }
 
@@ -144,7 +144,7 @@ QUnit.assert.validConfig = function(soi, expected) {
     isHot: soi.isHot,
     isNickRoom: soi.isNickRoom,
     isSoi: soi.isSoi,
-    resetButton: !!soi.resetButton
+    lastLink: !!soi.lastLink
   };
 
   assert.strictEqual(expected.blankTail, c.blankTail, "Correct tail: Found");
@@ -157,5 +157,5 @@ QUnit.assert.validConfig = function(soi, expected) {
   assert.strictEqual(expected.isHot, c.isHot, "Is Hot List: False");
   assert.strictEqual(expected.isNickRoom, c.isNickRoom, "Is NickName Controls: False");
   assert.strictEqual(expected.isSoi, c.isSoi, "Is an SOI Page: True");
-  assert.strictEqual(expected.resetButton, c.resetButton, "Reset Button Found: " + c.resetButton);
+  //assert.strictEqual(expected.resetButton, c.resetButton, "Reset Button Found: " + c.resetButton);
 };

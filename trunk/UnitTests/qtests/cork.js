@@ -32,7 +32,7 @@ QUnit.test("Configuration", function(assert) {
     isHot: false,
     isNickRoom: false,
     isSoi: true,
-    resetButton: true
+    lastLink: true
   };
 
   assert.validConfig(id, expected);
@@ -530,25 +530,25 @@ QUnit.test("Testing Click Handler", function(assert) {
 
 QUnit.test("Testing purging of expired cork data", function(assert) {
   upgrades.cork.upgrade();
-  
+
   // CLICK all the things, make sure that our bucket is prepped.
   var allCorkPosts = document.querySelectorAll("[data-cp-cork-reactions]");
   forEachNode(allCorkPosts, function() {
     doClick(this);
   });
-    
-  var corkEntryLink = document.querySelector("[data-cp-cork-reactions='8']");  
+
+  var corkEntryLink = document.querySelector("[data-cp-cork-reactions='8']");
   var oldList = upgrades.cork.internals.getBucket();
-  
+
   var corkEntryLink = document.querySelector("[data-cp-cork-reactions]");
   var corkEntryLi = corkEntryLink.parentNode;
   corkEntryLi.parentNode.removeChild(corkEntryLi);
 
-  doClick(corkEntryLink);  
+  doClick(corkEntryLink);
   var newList = upgrades.cork.internals.getBucket();
-    
-  assert.notDeepEqual(newList, oldList, "Pre-Remove bucket and Post-Remove bucket do not match");  
-  assert.deepEqual(Object.keys(newList).length, Object.keys(oldList).length-1, "Item removed from list");  
+
+  assert.notDeepEqual(newList, oldList, "Pre-Remove bucket and Post-Remove bucket do not match");
+  assert.deepEqual(Object.keys(newList).length, Object.keys(oldList).length-1, "Item removed from list");
 });
 
 QUnit.test("Test Active Buddy List", function(assert) {

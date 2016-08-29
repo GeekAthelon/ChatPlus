@@ -29,9 +29,9 @@ QUnit.test("Configuration", function(assert) {
     isHot: false,
     isNickRoom: false,
     isSoi: true,
-    resetButton: false
+    lastLink: true
   };
-  
+
   assert.validConfig(id, expected);
 
 });
@@ -56,10 +56,8 @@ QUnit.test("getExtension", function(assert) {
 
 QUnit.test("Check for added options", function(assert) {
   upgrades.control_ftp_files.upgrade();
-  
+
   assert.strictEqual(document.querySelectorAll(".chatplus-file-size").length, 7, "Human readable sizes present");
   assert.strictEqual(document.querySelectorAll(".chatplus-add-ava").length, 6, "Add Avatar buttons present");
   assert.strictEqual(document.querySelectorAll(".chatplus-edit-button").length, 1, "Edit button present");
 });
-
-

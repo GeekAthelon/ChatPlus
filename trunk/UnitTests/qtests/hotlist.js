@@ -33,7 +33,7 @@
       isHot: true,
       isNickRoom: false,
       isSoi: true,
-      resetButton: false
+      lastLink: true
     };
 
     assert.validConfig(id, expected);
@@ -49,7 +49,7 @@
       // Make FireFox happy...
       a.roomURL = a.roomURL.replace(/%60/g, "`");
       delete a.folk;
-    });   
+    });
 
     console.log(JSON.stringify(data));
 	*/
@@ -188,7 +188,7 @@
 
   QUnit.test("parseHotList #2 - Verify we have no blank names on the list", function(assert) {
     // There is a bug where if a room appears in two different realms,
-    //  the second time the room is listed, the nicknames are empty. 
+    //  the second time the room is listed, the nicknames are empty.
 
     upgrades.hotlist.upgrade();
 
@@ -280,26 +280,26 @@
 
 	assert.equal(realmList.favs.roomInclude.indexOf("jhnchat@soi"), -1, "jhnchat@soi was not found in `favs`");
 	assert.notEqual(realmList.break1.roomInclude.indexOf("sshh@soi"), -1, "sshh@soi was found in `break1`");
-	
+
 	var saveRealmList = JSON.parse(JSON.stringify(realmList));
-	
+
 	var addTable = document.querySelector('table[data-realm-name="all"]');
 	var addButton = addTable.querySelector('[data-hotlist-action="add-realm"][data-room="jhnchat@soi"]');
-	
+
 	var removeTable = document.querySelector('table[data-realm-name="break1"]');
 	var removeButton = removeTable.querySelector('[data-hotlist-action="remove-realm"][data-room="sshh@soi"]');
-	
+
 	doClick(addButton);
 	document.getElementById("realmSelect").value = "favs"
-	doClick(document.getElementById("cp_Save Data"));	
+	doClick(document.getElementById("cp_Save Data"));
 	assert.notEqual(realmList.favs.roomInclude.indexOf("jhnchat@soi"), -1, "jhnchat@soi was added to `favs`");
-		
+
 	doClick(removeButton);
 	doClick(document.getElementById("cp_Save Data"));
 	assert.equal(realmList.break1.roomInclude.indexOf("sshh@soi"), -1, "jhnchat@soi was removed from `break`");
   });
 
-  
+
   QUnit.test("Test Active Buddy List", function(assert) {
     testNicknamePopup(assert, upgrades.hotlist.upgrade, "Aizen", "aizen@soi");
   });

@@ -69,7 +69,7 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
       isHot: false,
       isNickRoom: false,
       isSoi: true,
-      resetButton: true
+      lastLink: true
     };
 
     assert.validConfig(id, expected);
@@ -110,7 +110,7 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
       "Punch the Clown",
       "Punch the Clown",
       "",
-      "Seræna",
+      "Serï¿½na",
       "",
       "Couch1",
       "",

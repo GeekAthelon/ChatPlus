@@ -5988,5 +5988,272 @@
     "build_date": "Mon May 18 09:13:13 EDT 2015",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 895,
+    "build_date": "Mon Aug 29 12:02:20 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 895,
+    "build_date": "Mon Aug 29 12:02:20 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 896,
+    "build_date": "Mon Aug 29 12:11:29 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 897,
+    "build_date": "Mon Aug 29 12:16:13 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 897,
+    "build_date": "Mon Aug 29 12:16:13 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 898,
+    "build_date": "Mon Aug 29 12:26:03 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 899,
+    "build_date": "Mon Aug 29 12:26:46 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 900,
+    "build_date": "Mon Aug 29 12:40:36 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 901,
+    "build_date": "Mon Aug 29 12:44:12 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 902,
+    "build_date": "Mon Aug 29 12:46:02 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 903,
+    "build_date": "Mon Aug 29 12:49:24 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 904,
+    "build_date": "Mon Aug 29 12:52:23 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 904,
+    "build_date": "Mon Aug 29 12:52:23 EDT 2016",
+    "build_comments": ""
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 905,
+    "build_date": "Mon Aug 29 12:55:03 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 906,
+    "build_date": "Mon Aug 29 12:55:39 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 907,
+    "build_date": "Mon Aug 29 13:06:19 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 908,
+    "build_date": "Mon Aug 29 13:07:14 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 909,
+    "build_date": "Mon Aug 29 13:36:46 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 910,
+    "build_date": "Mon Aug 29 13:36:48 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 911,
+    "build_date": "Mon Aug 29 13:38:52 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 912,
+    "build_date": "Mon Aug 29 13:39:46 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.08,
+    "build_number": 913,
+    "build_date": "Mon Aug 29 13:41:08 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 914,
+    "build_date": "Mon Aug 29 13:47:47 EDT 2016",
+    "build_comments": "Hacky resolve of issue that users cannow exit Auto2 due to SOI changes",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 915,
+    "build_date": "Mon Aug 29 13:48:45 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 916,
+    "build_date": "Mon Aug 29 13:54:21 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 917,
+    "build_date": "Mon Aug 29 13:54:22 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 918,
+    "build_date": "Mon Aug 29 13:55:15 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 919,
+    "build_date": "Mon Aug 29 13:55:36 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 920,
+    "build_date": "Mon Aug 29 13:56:35 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 921,
+    "build_date": "Mon Aug 29 13:57:15 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 922,
+    "build_date": "Mon Aug 29 13:59:05 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 923,
+    "build_date": "Mon Aug 29 14:00:09 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 924,
+    "build_date": "Mon Aug 29 14:03:26 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 925,
+    "build_date": "Mon Aug 29 14:06:59 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 926,
+    "build_date": "Mon Aug 29 14:07:43 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 927,
+    "build_date": "Mon Aug 29 14:08:44 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 928,
+    "build_date": "Mon Aug 29 14:13:12 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 929,
+    "build_date": "Mon Aug 29 14:16:15 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 930,
+    "build_date": "Mon Aug 29 14:18:53 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.09,
+    "build_number": 931,
+    "build_date": "Mon Aug 29 14:20:03 EDT 2016",
+    "build_comments": "",
+    "status": "build success"
   }
 ]

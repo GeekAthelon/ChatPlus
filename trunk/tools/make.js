@@ -1,6 +1,7 @@
 var srcdir = "..\\src";
 var destdir = "..\\bin";
-destdir = "C:\\Users\\jjs\\Desktop\\Network\\WebTest\\EasyPHP\\www\\chatplus";
+//destdir = "C:\\Program Files (x86)\\EasyPHP-Devserver-16.1\\eds-www"
+//destdir = "C:\\Users\\jjs\\Desktop\\Network\\WebTest\\EasyPHP\\www\\chatplus";
 
 var ftpDestDir = "/rooms/chatplus";
 //var ftpDestDir = "/rooms/innoff";
@@ -83,11 +84,12 @@ function build() {
 
   var s;
 
+
   var bodyfiles = ["onerror.js", "globals.js", "controlpanel.js", "text.js", "taillist.js", "utils.js", "upgrade_nickroom.js", "upgrade_ftproom.js", "upgrade_chat.js", "upgrade_mail.js", "upgrade_hotlist.js", "upgrade_cork.js", "preptoolbar.js", "buddypanel.js", 'mainbody.js', 'shortcut.js'];
   var jscripts = combine_js(bodyfiles);
 
-  var hta_files = ['hta.js', 'fix_ie.js'];
-  var htascripts = combine_js(hta_files);
+  //var hta_files = ['hta.js', 'fix_ie.js'];
+  //var htascripts = combine_js(hta_files);
 
   uscript = uscript.replace("{SCRIPTS}", jscripts);
   uscript = doReplacement(uscript);
@@ -113,8 +115,8 @@ function build() {
   ie_writeFile(htafilename, htatext);
   filesToSend.push(htafilename);
   */
-  
-  
+
+
   stats.status = "build success";
   updateBuildHistory(stats, true);
 
@@ -146,7 +148,7 @@ function runCommand(cmd, params, callback) {
       if (callback) {
         reply = {};
         reply.text = ie_readFile(batchFileOutput);
-        //alert(reply.text);
+        alert("Run Command\n" + reply.text);
         callback(reply);
       }
     }
@@ -186,28 +188,29 @@ function runFtpCommand(ftpscript, callback) {
   ie_writeFile(fname, s);
   //alert(s);
   // -a passive mode.  -s: run script
-  runCommand("ftps", "-quiterror -s:" + fname + " ftp.hyperchat.com", callback);
+  //runCommand("ftps", "-quiterror -s:" + fname + " ftp.hyperchat.com", callback);
+  runCommand("ftp", "-s:" + fname + " ftp.hyperchat.com", callback);
 }
 
 function ftpUploadFile(src, destdir, callback) {
   var n = src.split("\\");
   n = n[n.length-1];
- 
+
   var ftpscript = getFtpLoginText();
   ftpscript.push("passive");
   ftpscript.push("debug");
   ftpscript.push("bin");
   ftpscript.push("prompt");
   ftpscript.push("cd " + destdir);
-  
+
   // Horrible, horrible ... but for some reason it seems to work.
   // If I only use one mput, the upload is never complete.
-  
+
   //ftpscript.push("mput " + src);
-  //ftpscript.push("del " + n);
+  ftpscript.push("del " + n);
   ftpscript.push("mput " + src);
-  ftpscript.push("mput " + src);
-  ftpscript.push("mput " + src);
+  //ftpscript.push("mput " + src);
+  //ftpscript.push("mput " + src);
 
   //ftpscript.push("put " + src + " " + n);
   ftpscript.push("dir");
@@ -258,9 +261,9 @@ function publish() {
   function showdir(ftpReply) {
     var sizes = getSizes();
     var data = ftpReply.text.split(/\r\n|\r|\n/);
-	
+
 //	document.write(JSON.stringify(data));
-	
+
     var i, l = data.length;
     var s, bits;
     var ftpFileName, ftpFileLength;
@@ -328,10 +331,10 @@ function publish() {
     out[out.length] = "there is a reason to use one of the others.</p>";
     out[out.length] = "<p>If upgrading from one of the 2.x versions of ChatPlus ";
     out[out.length] = "<br><strong>BACK UP YOUR DATA</strong> before going on.<br>There is a special version ";
-    out[out.length] = "of the backup page <a href='http://soiroom.hyperchat.com/chatplus/b3/hchat_backup2.html'>Here</a>";
+    out[out.length] = "of the backup page <a href='https://soiroom.hyperchat.com/chatplus/b3/hchat_backup2.html'>Here</a>";
     out[out.length] = "</p>";
     out[out.length] = "<p>If you have not installed ChatPlus before:<br>";
-    out[out.length] = "<strong><a href='http://soiroom.hyperchat.com/chatplus/install_cp.html'>READ THIS PAGE</a>";
+    out[out.length] = "<strong><a href='https://soiroom.hyperchat.com/chatplus/install_cp.html'>READ THIS PAGE</a>";
     out[out.length] = "<br>You must install a plugin first.</p>";
 
     out[out.length] = "<table border = '1'>";
@@ -374,5 +377,5 @@ String.prototype.endsWith = function (suffix) {
 };
 
 window.onerror = function (a, b, c) {
-  alert(a + b + c);
+  alert("Global error " + a + b + c);
 }

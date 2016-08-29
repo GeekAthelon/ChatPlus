@@ -31,7 +31,7 @@
       isHot: false,
       isNickRoom: false,
       isSoi: true,
-      resetButton: true
+      lastLink: true
     };
 
     assert.validConfig(id, expected);

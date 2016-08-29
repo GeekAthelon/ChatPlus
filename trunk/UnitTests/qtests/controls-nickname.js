@@ -27,7 +27,7 @@ QUnit.test("Configuration", function(assert) {
     isHot: false,
     isNickRoom: true,
     isSoi: true,
-    resetButton: false
+    lastLink: true
   };
 
    assert.validConfig(id, expected);
@@ -35,9 +35,7 @@ QUnit.test("Configuration", function(assert) {
 
 QUnit.test("Check for added options", function(assert) {
   upgrades.control_nicknames.upgrade();
-  
+
   assert.ok(document.querySelector("#chatplus-previewnick"), "Preview Nickname Button exists");
-  assert.ok(document.querySelector("#chatplus-select-avatar"), "Select Avatar dropdown exists");  
+  assert.ok(document.querySelector("#chatplus-select-avatar"), "Select Avatar dropdown exists");
 });
-
-
