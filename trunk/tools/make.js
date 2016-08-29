@@ -10,7 +10,7 @@ var uscriptdest = destdir + "\\chatplus###VERSION###.user.js";
 var htadest = destdir + "\\chatplus###VERSION###.hta";
 var checkversionfilename = destdir + "\\checkversion.js";
 
-var httpSource = "http://soiroom.hyperchat.com/chatplus/";
+var httpSource = "https://soiroom.hyperchat.com/chatplus/";
 
 var uscriptfilename;
 var htafilename;
@@ -145,10 +145,12 @@ function runCommand(cmd, params, callback) {
     setStatus("[" + s + "]");
     if (s !== "Running") {
       window.clearInterval(flagT);
+
+      reply = {};
+      reply.text = ie_readFile(batchFileOutput);
+      //alert("Run Command\n" + reply.text);
+
       if (callback) {
-        reply = {};
-        reply.text = ie_readFile(batchFileOutput);
-        alert("Run Command\n" + reply.text);
         callback(reply);
       }
     }
@@ -178,6 +180,7 @@ function getFtpLoginText() {
   }
   ftpscript.push(user_name); // First answer the user name
   ftpscript.push(password); // Then the pass word
+  ftpscript.push("passive");
   return ftpscript;
 }
 
@@ -189,7 +192,6 @@ function runFtpCommand(ftpscript, callback) {
   //alert(s);
   // -a passive mode.  -s: run script
   runCommand("ftps", "-quiterror -s:" + fname + " ftp.hyperchat.com", callback);
-  //runCommand("ftp", "-s:" + fname + " ftp.hyperchat.com", callback);
 }
 
 function ftpUploadFile(src, destdir, callback) {
@@ -197,7 +199,6 @@ function ftpUploadFile(src, destdir, callback) {
   n = n[n.length-1];
 
   var ftpscript = getFtpLoginText();
-  //ftpscript.push("passive");
   ftpscript.push("debug");
   ftpscript.push("bin");
   ftpscript.push("prompt");
@@ -207,10 +208,10 @@ function ftpUploadFile(src, destdir, callback) {
   // If I only use one mput, the upload is never complete.
 
   //ftpscript.push("mput " + src);
-  ftpscript.push("del " + n);
+  //ftpscript.push("del " + n);
   ftpscript.push("mput " + src);
-  //ftpscript.push("mput " + src);
-  //ftpscript.push("mput " + src);
+  ftpscript.push("mput " + src);
+  ftpscript.push("mput " + src);
 
   //ftpscript.push("put " + src + " " + n);
   ftpscript.push("dir");
@@ -240,6 +241,7 @@ function publish() {
     ftpscript = getFtpLoginText();
     ftpscript.push("cd " + ftpDestDir);
     ftpscript.push("dir");
+
     runFtpCommand(ftpscript, showdir);
 
   } //

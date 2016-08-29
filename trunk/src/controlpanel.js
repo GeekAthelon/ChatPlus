@@ -76,7 +76,7 @@ var controlPanel = (function() {
     }
 
     var el = myDom.displayPopupDiv(cp_event, atTop);
-    el.style.backgroundImage = "url(http://ssom15.hyperchat.com/images/chatplus/BG-Puzzle.gif)";
+    el.style.backgroundImage = "url(https://ssom15.hyperchat.com/images/chatplus/BG-Puzzle.gif)";
     el.className += "chatPlus_popupok controlPanel";
     return el;
   }

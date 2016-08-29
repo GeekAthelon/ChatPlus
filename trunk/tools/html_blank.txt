@@ -4,16 +4,16 @@
 
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 	<link rel="stylesheet"
- type="text/css" 
- href="http://soiroom.hyperchat.com/chatplus/chatplus.css">
+ type="text/css"
+ href="https://soiroom.hyperchat.com/chatplus/chatplus.css">
 
   </head>
 
-  <body background="http://soiroom.hyperchat.com/chatplus/BG-Puzzle.gif">
+  <body background="https://soiroom.hyperchat.com/chatplus/BG-Puzzle.gif">
   <div id='main-content' class='alpha60'>
   ###BODY###
   </div>
-  
+
   </body>
   <head>
     <!-- Thank you, IE, for this lovely piece of needed fluff. -->

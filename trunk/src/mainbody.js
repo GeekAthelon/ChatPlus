@@ -221,7 +221,7 @@ function runAll(document) {
 
   userWindow = unsafeWindow ? unsafeWindow : window;
 
-  var homeUrl = "http://soiroom.hyperchat.com/chatplus/";
+  var homeUrl = "https://soiroom.hyperchat.com/chatplus/";
   //homeUrl = "http://127.0.0.1/chatplus/";
   myStats = {
     "sname": "ChatPlus",

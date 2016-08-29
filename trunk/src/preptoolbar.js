@@ -5,7 +5,7 @@ function prepToolbar() {
    "use strict";
 
  function showLog(cp_event) {
-   function closeLog() {   
+   function closeLog() {
      myDom.hidePopupDiv();
    }
    var atTop = true;
@@ -17,7 +17,7 @@ function prepToolbar() {
    cpConsole.show(el);
  }
 
-   
+
    window.soiDetails = identifySoi(); //jshint ignore:line
    var bar = document.createElement("div");
    var inn = "span";
@@ -134,7 +134,7 @@ function prepToolbar() {
    style.push('}');
 
    style.push("fieldset.hchat_mail {");
-   style.push("  background-image:url('http://soiroom.hyperchat.com/chatplus/BG-Puzzle.gif');");
+   style.push("  background-image:url('https://soiroom.hyperchat.com/chatplus/BG-Puzzle.gif');");
    style.push("  color: black;");
    style.push("}");
 
@@ -188,8 +188,8 @@ function prepToolbar() {
 
    style.push('.cp-underline-bar {');
    style.push('  border-bottom: 1px solid Scrollbar;');
-   style.push('}');   
-   
+   style.push('}');
+
    style.push('.cp-popup-visible,');
    style.push('.cp-popup-hidden {');
    style.push('overflow: hidden;');
@@ -225,7 +225,7 @@ function prepToolbar() {
    style.push('}');
 
    style.push('.cp-popup-visible a:link, .cp-popup-visible a:visited, .cp-popup-visible a:hover, .cp-popup-visible a:active { color:WindowText; } ');
-   
+
    style.push('.cp-popup-nickname-menu {');
    style.push('  border: 1px solid WindowFrame;');
    style.push('  padding: 0.5em;');
@@ -290,6 +290,6 @@ function prepToolbar() {
    style.push('}');
 
    style.push('.modalDialogClose { background: #00d9ff; }');
-   
+
    GM_addStyle(style.join("\r\n")); //jshint ignore:line
  }

@@ -46,7 +46,7 @@ upgrades.control_nicknames = (function() {
     div.appendChild(myDom.createTag("i", "Goto FTP_FILES to add avatars to " + "this list, or to clean out ghosts."));
 
     var avalist = realmList[":avatars:"][nick] || {};
-	
+
     form = document.getElementsByName("avaurl")[0];
     while (form.tagName.toLowerCase() !== "form") {
       form = form.parentNode;
@@ -59,22 +59,22 @@ upgrades.control_nicknames = (function() {
 
     opt = new Option("***** Choose one *****", "");
     sel.options.add(opt);
-	
+
 	var avaArray = [];
 	avaArray = Object.keys(avalist);
 	avaArray.sort();
-	
+
 	avaArray.forEach(function(item) {
         opt = new Option(item, item);
         sel.options.add(opt);
 	});
-	
-	
+
+
     div.appendChild(document.createElement("br"));
     div.appendChild(sel);
 
     e = document.createElement("img");
-    e.src = "http://soiroom.hyperchat.com/chatplus/question_mark.jpg";
+    e.src = "https://soiroom.hyperchat.com/chatplus/question_mark.jpg";
 
     div.appendChild(e);
     myDom.insertAfter(div, dest);

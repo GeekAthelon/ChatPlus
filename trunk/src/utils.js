@@ -172,23 +172,23 @@ function MakeMyDom() {
     var f = window.soiDetails.formFind;
 	if (f) {
       f.elements.namedItem("vqxfi").value = room;
-      var results = serializeFormUrlencoded(f);	
-	  
+      var results = serializeFormUrlencoded(f);
+
 	  var array = [];
 	  Object.keys(results).forEach(function(key) {
 	    array.push(key + "=" + results[key]);
 	  });
-	  	  
+
 	  var formAction = f.action.split("#")[0];
 	  var formHash = f.action.split("#")[1];
-	  
+
 	  f.elements.namedItem("vqxfi").value = "";
 	  var link = document.createElement("a");
 	  link.href = formAction + "?" + array.join("&") + "#" + formHash;
 	  link.appendChild(document.createTextNode(desc));
 	  return link;
 	}
-	
+
     var a = this.createTag("span", desc);
     a.style.textDecoration = "underline";
     a.style.cursor = "pointer";
@@ -200,7 +200,7 @@ function MakeMyDom() {
           f.elements.namedItem("vqxfi").value = _room;
           f.submit();
         } else {
-          userWindow.location.href = "http://soi.hyperchat.com/cgi-bin/soi.cgi?room=" + _room;
+          userWindow.location.href = "https://soi.hyperchat.com/cgi-bin/soi.cgi?room=" + _room;
         }
       };
     }(room)));
@@ -239,7 +239,7 @@ function MakeMyDom() {
       span.className = "cpbutton";
 
       // Add it to the body just long enough to set up a page-level, DOM0 event handler
-      // Note that we add it to userWindow.document -- this lets us set up a page level 
+      // Note that we add it to userWindow.document -- this lets us set up a page level
       // handler that runs on the USER page, and not GreaseMonkey.
       // That keeps the button from actually *doing* anything.
       var body = userWindow.document.getElementsByTagName("body")[0];
@@ -1029,7 +1029,7 @@ var modalWindow = (function() {
         document.getElementById("modal-window-prompt-voice").options.add(option);
       });
     };
-		
+
     if (details) {
       document.getElementById("modal-window-prompt").value = details.text;
       document.getElementById("modal-window-prompt-voice").value = details.voice;
