@@ -188,8 +188,8 @@ function runFtpCommand(ftpscript, callback) {
   ie_writeFile(fname, s);
   //alert(s);
   // -a passive mode.  -s: run script
-  //runCommand("ftps", "-quiterror -s:" + fname + " ftp.hyperchat.com", callback);
-  runCommand("ftp", "-s:" + fname + " ftp.hyperchat.com", callback);
+  runCommand("ftps", "-quiterror -s:" + fname + " ftp.hyperchat.com", callback);
+  //runCommand("ftp", "-s:" + fname + " ftp.hyperchat.com", callback);
 }
 
 function ftpUploadFile(src, destdir, callback) {
@@ -197,7 +197,7 @@ function ftpUploadFile(src, destdir, callback) {
   n = n[n.length-1];
 
   var ftpscript = getFtpLoginText();
-  ftpscript.push("passive");
+  //ftpscript.push("passive");
   ftpscript.push("debug");
   ftpscript.push("bin");
   ftpscript.push("prompt");
