@@ -6346,5 +6346,12 @@
     "build_date": "Mon Aug 29 15:35:06 EDT 2016",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.13,
+    "build_number": 945,
+    "build_date": "Sat Sep 24 10:37:46 EDT 2016",
+    "build_comments": "*should* have resolved issue of not being able to look up homepages",
+    "status": "build success"
   }
 ]
