@@ -2,8 +2,8 @@
 // @name          ChatPlus
 // @namespace     tag:athelon@hyperchat.com,2008-08-17:Athelon
 // @description   Add new options to SOI (and sister-site) pages.
-// @include    	  http://*/*
-// @include    	  https://*/*
+// @include    	  http://*.hyperchat.com/*
+// @include    	  https://*.hyperchat.com/*
 // @icon          cp_logo.gif
 // @grant         GM_getValue
 // @grant         GM_setValue
@@ -20,4 +20,3 @@
 "use strict";
 
 {SCRIPTS}
-
