@@ -6367,5 +6367,12 @@
     "build_date": "Sat Oct 22 16:00:57 EDT 2016",
     "build_comments": "Fixing undo button",
     "status": "build success"
+  },
+  {
+    "version_number": 6.16,
+    "build_number": 948,
+    "build_date": "Sat Oct 22 16:28:53 EDT 2016",
+    "build_comments": "Fixed failing unit tests",
+    "status": "build success"
   }
 ]

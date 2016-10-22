@@ -729,6 +729,9 @@ upgrades.chatroom = (function() {
 
 
         var undo = getLinkByText("[Undo]");
+        if (!undo) {
+          return;
+        }
         undo.style.display = "none";
 
         var newUndo = myDom.createATag("#", "Undo");

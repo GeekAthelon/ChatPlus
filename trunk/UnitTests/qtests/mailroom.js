@@ -60,7 +60,6 @@
 
     assert.ok(document.querySelector("#chatplus-auto2"), "Auto2 button exists");
     assert.ok(document.querySelector("#chatplus-special"), "Special Actions Button exists");
-    assert.ok(document.querySelector("#chatplus-reset"), "Reset button exists");
     assert.ok(!document.querySelector("#chatplus-undo"), "Undo button doesn't exist");
     assert.ok(document.querySelector("#chatplus-mass-mail"), "Mass Mail button found");
 

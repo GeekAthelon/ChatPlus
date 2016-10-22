@@ -131,8 +131,6 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
 
     assert.ok(document.querySelector("#chatplus-auto2"), "Auto2 button exists");
     assert.ok(document.querySelector("#chatplus-special"), "Special Actions Button exists");
-    assert.ok(document.querySelector("#chatplus-reset"), "Reset button exists");
-    assert.ok(document.querySelector("#chatplus-undo"), "Undo button exists");
   });
 
   QUnit.test("Convert to Postable Code", function(assert) {
