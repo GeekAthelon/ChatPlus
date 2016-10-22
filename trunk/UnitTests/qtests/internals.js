@@ -18,7 +18,7 @@
   QUnit.test("getNumberOfElementsByName", function(assert) {
     assert.strictEqual(typeof getNumberOfElementsByName, "function", "Function exists");
     var vqvakLengthOnHotList;
-	
+
     vqvakLengthOnHotList = getNumberOfElementsByName(document, "vqvak");
     assert.strictEqual(vqvakLengthOnHotList, 3, "Correctly found 3 elements");
 
@@ -103,7 +103,7 @@
   });
 
   QUnit.test("makePlayerHomePageLink", function(assert) {
-    var expected = "http://soiuser.hyperchat.com/jjs/homepage.html#vqxus=Visitor&vqxha=Visitor&roomsite=soi&vqxti=1428299047&vqvak=Find&vqxfi=c&chatplus_homepage&true";
+    var expected = "https://soiuser.hyperchat.com/jjs/homepage.html#vqxus=Visitor&vqxha=Visitor&roomsite=soi&vqxti=1428299047&vqvak=Find&vqxfi=c&chatplus_homepage&true";
     var l1 = makePlayerHomePageLink("jjs", "soi");
     var l2 = makePlayerHomePageLink("jjs", "priv");
 
@@ -244,7 +244,7 @@
   });
 
   QUnit.test("urlEncode", function(assert) {
-    var str = "The quick !@#$$$$$%^&*()_+<> Iñtërnâtiônàlizætiøn \u1F4A9"; //jshint ignore:line
+    var str = "The quick !@#$$$$$%^&*()_+<> Iï¿½tï¿½rnï¿½tiï¿½nï¿½lizï¿½tiï¿½n \u1F4A9"; //jshint ignore:line
 
     var s = myDom.urlEncode(str);
     assert.strictEqual(s, "The+quick+%21%40%23%24%24%24%24%24%25%5E%26%2A%28%29_%2B%3C%3E+I%F1t%EBrn%E2ti%F4n%E0liz%E6ti%F8n+%1F4A9", "UrlEncode correct");

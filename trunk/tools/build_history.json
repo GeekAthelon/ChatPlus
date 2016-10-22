@@ -6360,5 +6360,12 @@
     "build_date": "Sat Sep 24 10:49:07 EDT 2016",
     "build_comments": "Limited to SOI Domains",
     "status": "build success"
+  },
+  {
+    "version_number": 6.15,
+    "build_number": 947,
+    "build_date": "Sat Oct 22 16:00:57 EDT 2016",
+    "build_comments": "Fixing undo button",
+    "status": "build success"
   }
 ]
