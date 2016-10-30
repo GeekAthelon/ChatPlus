@@ -289,6 +289,15 @@ function prepToolbar() {
    style.push('  box-shadow: 1px 1px 3px #000;');
    style.push('}');
 
+   style.push('.cp-corkago {');
+  //  style.push('  background: #606061;');
+  //  style.push('  color: #FFFFFF;');
+   style.push('  border: 1px dotted white;');
+   style.push('  display: inline-block;');
+   style.push('  font-size: small;');
+   style.push('  width: 8em;');
+   style.push('}');
+
    style.push('.modalDialogClose { background: #00d9ff; }');
 
    GM_addStyle(style.join("\r\n")); //jshint ignore:line

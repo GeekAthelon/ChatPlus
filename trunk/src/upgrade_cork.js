@@ -151,6 +151,25 @@ upgrades.cork = (function() {
     saveBucket(userHasSeen);
   }
 
+  function renderTimeAgo(posts, soiTimeStamp, isDst) {
+    var soiDate = new Date(soiTimeStamp * 1000);
+
+    posts.forEach(function(post, i) {
+      var el = corkPosts[i].querySelector("i");
+      var corkDateStamp = el.textContent;
+      var corkDate =  dateTimeHandler.getDateFromDateString(corkDateStamp, soiTimeStamp, isDst);
+
+      var ago = dateTimeHandler.timeDifference(soiDate, corkDate);
+      var span = document.createElement("span");
+      span.innerHTML = ago;
+      span.className = "cp-corkago";
+
+      el.parentNode.parentNode.insertBefore(span, el.parentNode);
+
+    });
+  }
+
+
   function upgrade() {
     //TEST
     var old = document.querySelectorAll(".chatplus_cork_count");
@@ -158,8 +177,18 @@ upgrades.cork = (function() {
       this.parentNode.removeChild(this);
     });
 
+    var form = document.querySelector("[name=vqvaj]");
+    while (form.tagName.toLowerCase() !== "form") {
+      form = form.parentNode;
+    }
+
+    var soiTimeString = form.textContent;
+    var soiTimeStamp = document.querySelector("[name=vqxti]").value;
+    var isDst = dateTimeHandler.isSoiDst(soiTimeStamp, soiTimeString);
+
     var posts = parseCork();
     renderNewFlags(posts);
+    renderTimeAgo(posts, soiTimeStamp, isDst);
   }
 
   var internals = {

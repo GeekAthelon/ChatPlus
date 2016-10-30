@@ -1166,3 +1166,150 @@ var popupMenu = (function() {
     destroy: destroyMenu
   };
 }());
+
+
+var dateTimeHandler = (function() {
+  var getTimestampDayList = "Sun|Mon|Tue|Wed|Thu|Fri|Sat".split("|");
+  var getTimestampMonthList = "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec".split("|");
+  var timeZoneOffset = [-6, -7];
+
+  function isSoiDst(soiTimeStamp, soiScreenTime) {
+    var testDate = getUTCDateFromTimestamp(soiTimeStamp, false);
+    var timebit = soiScreenTime.match(/\[(\d\d):(\d\d)\]/);
+    var hour = +timebit[1];
+
+    return hour !== testDate.getUTCHours();
+  }
+
+  function getUTCDateFromTimestamp(soiTimeStamp, isDST) {
+    var dstOffset = isDST ? timeZoneOffset[0] : timeZoneOffset[1];
+    var soiTimeZoneFix = (dstOffset  * 60 * 60 * 1000);
+
+    return  new Date((soiTimeStamp * 1000) + soiTimeZoneFix);
+  }
+
+
+  function buildUtcString(year, monthNumber,  day, hour, minutes, seconds) {
+    // "2021-04-06T22:26:00.000Z"
+
+    function pad(n) {
+      if (n < 10) {
+        return "0" + n;
+      }
+      return "" + n;
+    }
+
+    var str = "";
+    str += year;
+    str += "-";
+    str += pad(monthNumber+1);
+    str += "-";
+    str += pad(day);
+    str += "T";
+    str += pad(hour);
+    str += ":";
+    str += pad(minutes);
+    str += ":";
+    str += pad(seconds);
+    // str += ".000Z";
+
+    return str;
+
+  }
+
+  function getDateFromDateString(dateString, soiTimeStamp, isDST) {
+
+    // Sat Oct 29 08:32:52
+    var bits = dateString.split(/ |:/);
+    var dayOfWeekName = bits[0];
+    var monthName = bits[1];
+    var day = +bits[2];
+    var hour = +bits[3];
+    var minutes = +bits[4];
+    var seconds = +bits[5] || 0;
+
+    var monthNumber = getTimestampMonthList.indexOf(monthName) ;
+    var dayOfWeekNumber = getTimestampDayList.indexOf(dayOfWeekName) ;
+
+    var tryYear = new Date(soiTimeStamp * 1000).getUTCFullYear();
+
+    for (var i = -1; i < 30; i++) {
+      // new Date(year, month[, date[, hours[, minutes[, seconds[, milliseconds]]]]]);
+      var thisYear = tryYear - i;
+
+      var utcString = buildUtcString(thisYear, monthNumber,  day, hour, minutes, seconds);
+      var localDate = new Date(utcString);
+
+      var thisDayOfWeek = localDate.getUTCDay() ;
+      var isMatch = thisDayOfWeek === dayOfWeekNumber;
+
+      if (isMatch) {
+        var dstOffset = isDST ? timeZoneOffset[0] : timeZoneOffset[1];
+        var soiTimeZoneFix = (dstOffset  * 60 * 60 * 1000);
+        localDate.setUTCMilliseconds(-soiTimeZoneFix);
+        return localDate;
+      }
+    }
+
+    return null;
+  }
+
+  function timeDifference(current, previous) {
+
+      var msPerMinute = 60 * 1000;
+      var msPerHour = msPerMinute * 60;
+      var msPerDay = msPerHour * 24;
+      var msPerMonth = msPerDay * 30;
+      var msPerYear = msPerDay * 365;
+
+      var elapsed = current - previous;
+      var rounded;
+      var plural
+
+      if (elapsed === 0) {
+        return "\u2245 now";
+      }
+
+      if (elapsed < msPerMinute) {
+          rounded = Math.round(elapsed/1000);
+          plural = rounded === 1 ? "" : "s";
+          return rounded + ' second' + plural + ' ago';
+      }
+
+      if (elapsed < msPerHour) {
+        rounded = Math.round(elapsed/msPerMinute);
+        plural = rounded === 1 ? "" : "s";
+        return rounded + ' minute' + plural + ' ago';
+      }
+
+      if (elapsed < msPerDay ) {
+          rounded = Math.round(elapsed/msPerHour );
+          plural = rounded === 1 ? "" : "s";
+          return rounded + ' hour' + plural + ' ago';
+      }
+
+      // pproximately equal to, U+2245 ISOtech
+
+       if (elapsed < msPerMonth) {
+         rounded = Math.round(elapsed/msPerDay) ;
+         plural = rounded === 1 ? "" : "s";
+          return '\u2245 ' +rounded + ' day' + plural + ' ago';
+      }
+
+       if (elapsed < msPerYear) {
+         rounded = Math.round(elapsed/msPerMonth)  ;
+         plural = rounded === 1 ? "" : "s";
+          return '\u2245 ' +rounded + ' month' + plural + ' ago';
+      }
+
+      rounded =  Math.round(elapsed/msPerYear )
+      plural = rounded === 1 ? "" : "s";
+      return '\u2245 ' +rounded + ' year' + plural + ' ago';
+  }
+
+  return {
+    getDateFromDateString: getDateFromDateString,
+    isSoiDst: isSoiDst,
+    timeDifference: timeDifference
+  }
+}());

@@ -316,4 +316,134 @@
     });
     assert.deepEqual(result, expectedResult, "Two element object");
   });
+
+  QUnit.module("utils.dateHandling test", {});
+
+  QUnit.test("isSoiDst", function(assert) {
+    var soiTimestamp = 1477758726; // 10:08
+    var soiTimeString = "** Gibberish 11:12 [10:32]";
+
+    var isDst = dateTimeHandler.isSoiDst(soiTimestamp, soiTimeString);
+    assert.equal(isDst, true);
+  });
+
+/*
+*/
+
+  QUnit.test("getDateFromDateString - test borked", function(assert) {
+    var dates = [
+      "Mon Apr 06 18:26",
+      "Wed Apr 08 18:17",
+      "Sun Apr 05 17:31",
+      "Sun Apr 05 17:31",
+      "Mon Feb 02 18:11"
+    ];
+
+
+    var dates2 = [
+      "Wed Oct 03 15:29",
+      "Sun Sep 23 17:19",
+      "Sat Sep 22 21:01",
+      "Wed Sep 19 14:38 "
+    ];
+
+    var soiTimestamp = 1477758726;
+    var isDST = true;
+
+    dates.forEach(function(d) {
+      var thisDate = dateTimeHandler.getDateFromDateString(d, soiTimestamp, isDST);
+      assert.equal(thisDate.getFullYear(), 2015);
+    });
+
+    dates2.forEach(function(d) {
+      var thisDate = dateTimeHandler.getDateFromDateString(d, soiTimestamp, isDST);
+      assert.equal(thisDate.getFullYear(), 2012);
+    });
+
+  });
+
+
+  QUnit.test("getDateFromDateString - isDst true", function(assert) {
+      var soiTimestamp = 1477758726;
+      var dateString = "Sat Oct 29 10:32:06";
+      var isDST = true;
+
+      var date1 = new Date(soiTimestamp * 1000);
+      var date2 = dateTimeHandler.getDateFromDateString(dateString, soiTimestamp, isDST);
+
+      assert.equal(date2.getTime(), soiTimestamp * 1000);
+      assert.equal(date1.toString(), date2.toString());
+  });
+
+  QUnit.test("getDateFromDateString - isDst false", function(assert) {
+      var soiTimestamp = 1477758726;
+      var dateString = "Sat Oct 29 09:32:06";
+      var isDST = false;
+
+      var date1 = new Date(soiTimestamp * 1000);
+      var date2 = dateTimeHandler.getDateFromDateString(dateString, soiTimestamp, isDST);
+
+      assert.equal(date2.getTime(), soiTimestamp * 1000);
+      assert.equal(date1.toString(), date2.toString());
+  });
+
+  QUnit.test("getDateFromDateString - timeDifference", function(assert) {
+      var time = 1477758726 * 1000;
+
+      var date1 = new Date(time);
+      var date2 = new Date(time);
+
+      var res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 now");
+
+      date2 = new Date(time);
+      date2.setSeconds(date2.getSeconds() -30);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "30 seconds ago");
+
+      date2 = new Date(time);
+      date2.setSeconds(date2.getSeconds() -80);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "1 minute ago");
+
+      date2 = new Date(time);
+      date2.setSeconds(date2.getSeconds() -100);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "2 minutes ago");
+
+      date2 = new Date(time);
+      date2.setMinutes(date2.getMinutes() -60);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "1 hour ago");
+
+      date2 = new Date(time);
+      date2.setMinutes(date2.getMinutes() -120);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "2 hours ago");
+
+      date2 = new Date(time);
+      date2.setDate(date2.getDate() -5);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 5 days ago");
+
+      date2 = new Date(time);
+      date2.setDate(date2.getDate() -29);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 29 days ago");
+
+      date2 = new Date(time);
+      date2.setDate(date2.getDate() -30);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 1 month ago");
+
+      date2 = new Date(time);
+      date2.setMonth(date2.getMonth() -11);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 11 months ago");
+
+      date2 = new Date(time);
+      date2.setMonth(date2.getMonth() -12);
+      res = dateTimeHandler.timeDifference(date1, date2);
+      assert.equal(res, "\u2245 1 year ago");
+  });
 }());
