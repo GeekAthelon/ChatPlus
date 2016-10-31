@@ -181,7 +181,19 @@
       a.folkLen = a.folk.length;
       // Make FireFox happy...
       a.roomURL = a.roomURL.replace(/%60/g, "`");
+
+      // Don't actually check the folk, since that is a list
+      // of document fragments that are generated.
+      // But we will make sure the number of records was found.
+      assert.deepEqual(a.folk.length, result[i].folkLen, "Folk length");
       delete a.folk;
+
+      // Just check that the hide button is thee.
+      // attributes differ on browsers, so don']t do ane exact compare
+      assert.deepEqual(!!data[i].hideButton, !!result[i].hideButton, "Hide button");
+      delete data[i].hideButton;
+      delete result[i].hideButton;
+
       assert.deepEqual(data[i], result[i], "Data matches expected result for room " + a.roomName);
     });
   });
