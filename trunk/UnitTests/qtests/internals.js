@@ -244,10 +244,13 @@
   });
 
   QUnit.test("urlEncode", function(assert) {
-    var str = "The quick !@#$$$$$%^&*()_+<> I�t�rn�ti�n�liz�ti�n \u1F4A9"; //jshint ignore:line
+    var str = "The quick !$$$$$%^&*() I I\u00F1t\u00EBrn\u00E2ti\u00F4n\u00E0liz\u00E6ti\u00F8n"; //jshint ignore:line
 
     var s = myDom.urlEncode(str);
-    assert.strictEqual(s, "The+quick+%21%40%23%24%24%24%24%24%25%5E%26%2A%28%29_%2B%3C%3E+I%F1t%EBrn%E2ti%F4n%E0liz%E6ti%F8n+%1F4A9", "UrlEncode correct");
+    var s1 = unescape(s.replace(/\+/g, '%20'));
+
+    assert.strictEqual(s, "The+quick+%21%24%24%24%24%24%25%5E%26%2A%28%29+I+I%F1t%EBrn%E2ti%F4n%E0liz%E6ti%F8n", "UrlEncode correct");
+    assert.strictEqual(s1, str, "UrlEncode correct");
   });
 
   QUnit.test("getLinkByText", function(assert) {
