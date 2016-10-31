@@ -1189,8 +1189,11 @@ var dateTimeHandler = (function() {
   }
 
 
-  function buildUtcString(year, monthNumber,  day, hour, minutes, seconds) {
-    // "2021-04-06T22:26:00.000Z"
+  function buildUtcDate(year, monthNumber,  day, hours, minutes, seconds) {
+
+    var ms = Date.UTC(year, monthNumber, day, hours, minutes, seconds);
+    return new Date(ms);
+
 
     function pad(n) {
       if (n < 10) {
@@ -1206,15 +1209,14 @@ var dateTimeHandler = (function() {
     str += "-";
     str += pad(day);
     str += "T";
-    str += pad(hour);
+    str += pad(hours);
     str += ":";
     str += pad(minutes);
     str += ":";
     str += pad(seconds);
     // str += ".000Z";
 
-    return str;
-
+    return new Date(str);
   }
 
   function getDateFromDateString(dateString, soiTimeStamp, isDST) {
@@ -1237,8 +1239,7 @@ var dateTimeHandler = (function() {
       // new Date(year, month[, date[, hours[, minutes[, seconds[, milliseconds]]]]]);
       var thisYear = tryYear - i;
 
-      var utcString = buildUtcString(thisYear, monthNumber,  day, hour, minutes, seconds);
-      var localDate = new Date(utcString);
+      var localDate = buildUtcDate(thisYear, monthNumber,  day, hour, minutes, seconds);
 
       var thisDayOfWeek = localDate.getUTCDay() ;
       var isMatch = thisDayOfWeek === dayOfWeekNumber;
