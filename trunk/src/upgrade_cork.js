@@ -188,7 +188,7 @@ upgrades.cork = (function() {
 
     var posts = parseCork();
     renderNewFlags(posts);
-    renderTimeAgo(posts, soiTimeStamp, isDst);
+    // renderTimeAgo(posts, soiTimeStamp, isDst);
   }
 
   var internals = {
