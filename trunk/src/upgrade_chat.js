@@ -403,9 +403,21 @@ upgrades.chatroom = (function() {
             }
         }
 
+        function removeLineFeeds() {
+            var txt = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
+
+            txt = txt.
+            replace(/\r/g, " ").
+            replace(/\n/g, " ");
+
+            window.soiDetails.formMsg.elements.namedItem("vqxsp").value = txt;
+        }
+
         window.qunit.chat.convertToCode = convertToCode;
+        window.qunit.chat.removeLineFeeds = removeLineFeeds;
         return {
-            convertToPostableCode: convertToCode
+            convertToPostableCode: convertToCode,
+            removeLineFeeds: removeLineFeeds
         };
 
     }());
@@ -730,7 +742,7 @@ upgrades.chatroom = (function() {
 
         var undo = getLinkByText("[Undo]");
         if (!undo) {
-          return;
+            return;
         }
         undo.style.display = "none";
 
@@ -854,6 +866,8 @@ upgrades.chatroom = (function() {
                 var outerDiv = popupMenu.createFor(specialButton);
                 var menu = outerDiv.querySelector("div");
                 menu.appendChild(makeOption("Convert to postable code", special.convertToPostableCode));
+                menu.appendChild(makeOption("Remove Line Feeds (for posting HTML)", special.removeLineFeeds));
+
                 insertMacroButtons(menu);
                 popupMenu.show(outerDiv);
             });

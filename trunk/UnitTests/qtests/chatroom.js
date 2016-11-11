@@ -145,6 +145,18 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
     assert.strictEqual(expectedResult, result, "Converted code matches expected result");
   });
 
+  QUnit.test("Remove Line Feeds", function(assert) {
+    myUpgrade();
+
+    var expectedResult = "Line1 Line2 Line3 Line4";
+
+    window.soiDetails.formMsg.elements.namedItem("vqxsp").value = "Line1\rLine2\nLine3\r\nLine4";
+    window.qunit.chat.removeLineFeeds();
+    var result = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
+
+    assert.strictEqual(expectedResult, result, "Converted code matches expected result");
+  });
+
 
   QUnit.test("Test Type2 Realm Lists", function(assert) {
     window.nameArray = ["~*~ Hong Kong RPG ~*~ ", " ", "~*~ Realm Information ~*~ ", "IC/OOC Cork", "Map Cork", " "];
@@ -176,7 +188,7 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
     assert.ok(!!popup, "Popup made");
 
     var items = popup.querySelectorAll("input[type='button']").length;
-    assert.deepEqual(items, 1, "No macros, only one button");
+    assert.deepEqual(items, 2, "No macros, two special buttons");
 
     var convertButton = popup.querySelector("input[type='button']");
     doClick(convertButton);
@@ -204,7 +216,7 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
     doClick(specialButton);
     var popup = document.querySelectorAll(".cp-popup-visible, .cp-popup-hidden")[0];
     var items = popup.querySelectorAll("input[type='button']").length;
-    assert.deepEqual(items, 2, "One empty, one populated macro");
+    assert.deepEqual(items, 3, "Special Buttons + one populated macro");
   });
 
 
