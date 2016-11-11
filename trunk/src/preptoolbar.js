@@ -300,5 +300,9 @@ function prepToolbar() {
 
    style.push('.modalDialogClose { background: #00d9ff; }');
 
+   style.push(".cp-candystripe tr:nth-child(odd) {");
+   style.push('  background-color:rgba(0, 0, 0, .1)');
+   style.push('}');
+
    GM_addStyle(style.join("\r\n")); //jshint ignore:line
  }
