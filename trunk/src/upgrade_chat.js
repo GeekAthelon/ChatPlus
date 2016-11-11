@@ -42,7 +42,6 @@ function createUserInfo(nickNameElement, blankTail) {
         }
     }
 
-
     if (tail) {
         var p = new RegExp(tail + "$", "");
         nameNoTail = decoratedName.replace(p, "");
@@ -180,7 +179,6 @@ function handleNicknameClick(e) {
     }
 }
 
-
 upgrades.chatroom_auto = (function() {
     function processRefreshRooms(markers) {
         window.soiDetails = identifySoi(); //jshint ignore:line
@@ -290,7 +288,6 @@ upgrades.chatroom_auto = (function() {
             roomWatchDiv.appendChild(announcementButton);
         };
 
-
         function setRefreshStatus() {
             if (roomStampData.alertMode) {
                 status.innerHTML = "Looking for posts newer than " + roomStampData.lastStampOnRecord;
@@ -366,7 +363,6 @@ upgrades.chatroom_auto = (function() {
 
 }());
 
-
 upgrades.chatroom = (function() {
     "use strict";
 
@@ -374,7 +370,8 @@ upgrades.chatroom = (function() {
 
     var special = (function() {
         function convertToCode() {
-            var txt = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
+            var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
+            var txt = sourceElement.value;
 
             var n, o;
             var re;
@@ -398,19 +395,19 @@ upgrades.chatroom = (function() {
             if (txt.length > 11000) {
                 window.alert("Converted length too long.");
             } else {
-                window.soiDetails.formMsg.elements.namedItem("vqxsp")
-                    .value = txt;
+                sourceElement.value = txt;
             }
         }
 
         function removeLineFeeds() {
-            var txt = window.soiDetails.formMsg.elements.namedItem("vqxsp").value;
+            var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
+            var txt = sourceElement.value;
 
             txt = txt.
             replace(/\r/g, " ").
             replace(/\n/g, " ");
 
-            window.soiDetails.formMsg.elements.namedItem("vqxsp").value = txt;
+            sourceElement.value = txt;
         }
 
         window.qunit.chat.convertToCode = convertToCode;
