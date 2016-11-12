@@ -6458,5 +6458,12 @@
     "build_date": "Fri Nov 11 19:13:08 EST 2016",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.19,
+    "build_number": 961,
+    "build_date": "Fri Nov 11 21:45:56 EST 2016",
+    "build_comments": "",
+    "status": "build success"
   }
 ]
