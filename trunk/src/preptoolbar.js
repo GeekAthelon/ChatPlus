@@ -304,5 +304,14 @@ function prepToolbar() {
    style.push('  background-color:rgba(0, 0, 0, .1)');
    style.push('}');
 
+   style.push("#cp-preview-div {");
+   style.push('  border: 1px solid white;');
+   style.push('  outline: 1px solid black;');   
+   style.push('  width: 100%;');
+   style.push('  min-height: 6em;');
+   style.push('}');
+
+
+
    GM_addStyle(style.join("\r\n")); //jshint ignore:line
  }

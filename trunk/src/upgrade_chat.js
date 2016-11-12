@@ -397,6 +397,8 @@ upgrades.chatroom = (function() {
             } else {
                 sourceElement.value = txt;
             }
+
+            doPreview();
         }
 
         function removeLineFeeds() {
@@ -408,6 +410,7 @@ upgrades.chatroom = (function() {
             replace(/\n/g, " ");
 
             sourceElement.value = txt;
+            doPreview();
         }
 
         window.qunit.chat.convertToCode = convertToCode;
@@ -915,6 +918,92 @@ upgrades.chatroom = (function() {
         });
     }
 
+    var mangleList1 = ["onclick", "<div>", "<marquee>", "<hr>"];
+    var mangleList = []
+
+    function getMangledList() {
+
+        if (mangleList.length) {
+            return mangleList;
+        }
+
+        mangleList1.forEach(function(item) {
+            mangleList.push(item);
+            if (item.charAt(0) === "<") {
+                var lastChar = item.slice(-1);
+                if (lastChar !== ">") {
+                    throw new Error("mangleList has item that starts with < but doesn't end with >");
+                }
+                var item = item.slice(0, -1);
+                mangleList.push(item);
+            }
+        });
+
+        mangleList.sort(function(a, b) {
+            return b.length - a.length;
+        });
+
+        return mangleList;
+    }
+
+
+    function soiIftyString(s) {
+        function replaceAll(str, find, replace) {
+            return str.replace(new RegExp(find, "g"), replace);
+        }
+
+        var r = s.
+        replace(/\r\n\r\n/g, "<p>").
+        replace(/\r\r/g, "<p>").
+        replace(/\n\n/g, "<p>").
+        replace(/\r\n/g, "<br>").
+        replace(/\r/g, "<br>").
+        replace(/\n/g, "<br>");
+        
+        var mangleList = getMangledList();
+        var l = mangleList.length;
+        for (var i = 0; i < l; i++) {
+            r = replaceAll(r, mangleList[i], "*");
+        }
+
+        console.log(JSON.stringify(s), JSON.stringify(r));
+        return r;
+    }
+
+    function doPreview() {
+        var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
+        var previewDiv = document.getElementById("cp-preview-div");
+        previewDiv.innerHTML = soiIftyString(sourceElement.value);
+    }
+
+    function setupPreview() {
+        var container = window.soiDetails.formMsg;
+        while (container && container.tagName.toLowerCase() !== "td") {
+            container = container.parentNode;
+        }
+
+        if (container) {
+            var previewHolder = document.createElement("div");
+            previewHolder.id = "cp-preview-holder";
+
+            container.appendChild(previewHolder);
+
+            // var button = myDom.createATag("#", "Toggle Preview");
+            // button.id = "chatplus-previewToggle";
+            // previewHolder.appendChild(button);
+
+            var previewDiv = document.createElement("div");
+            previewDiv.id = "cp-preview-div";
+            previewHolder.appendChild(previewDiv);
+
+            var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
+
+            addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
+                doPreview();
+            });
+        }
+    }
+
     function upgrade() {
         window.soiDetails = identifySoi(); //jshint ignore:line
 
@@ -925,6 +1014,7 @@ upgrades.chatroom = (function() {
         upgradeUndoButton();
         createSpecialButton();
         createRealmButton();
+        setupPreview();
 
         if (!window.soiDetails.isCork) {
             upgrades.chatroom_auto.upgrade(markers);
@@ -939,7 +1029,8 @@ upgrades.chatroom = (function() {
         getPostMarkers: getPostMarkers,
         splitDialogTag: splitDialogTag,
         createAuto2Button: createAuto2Button,
-        createSpecialButton: createSpecialButton
+        createSpecialButton: createSpecialButton,
+        soiIftyString: soiIftyString
     };
 
     return {
