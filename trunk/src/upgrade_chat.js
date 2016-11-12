@@ -255,6 +255,7 @@ upgrades.chatroom_auto = (function() {
             setRefreshStatus();
             rBut = myDom.createATag("#", "Current mode: Room watcher turned off.");
             rBut.title = "Click to turn feature on";
+
             addEvent(rBut, 'click', function() {
                 saveLastTimeStamp();
                 setMode(!roomStampData.alertMode);
@@ -266,6 +267,7 @@ upgrades.chatroom_auto = (function() {
             setRefreshStatus("");
             rBut = myDom.createATag("#", "Current Mode: Room watcher turned on.");
             rBut.title = "Click to turn feature off";
+
             addEvent(rBut, 'click', function() {
                 setMode(!roomStampData.alertMode);
             });
@@ -278,6 +280,7 @@ upgrades.chatroom_auto = (function() {
             }
 
             announcementButton = myDom.createATag("#", "Change Announcement");
+
             addEvent(announcementButton, 'click', function() {
                 var details = realmList[":roomAnnouncements:"][window.soiDetails.fullRoomName];
                 modalWindow.promptTextToSpeach("What shall I say?  (Leave blank to stay quiet.)", details, function(answer) {
@@ -803,6 +806,7 @@ upgrades.chatroom = (function() {
 
         button = myDom.createATag("#", txt);
         button.id = "chatplus-auto2";
+
         addEvent(button, 'click', setMode);
 
         autoLink.parentNode.insertBefore(button, autoLink);
@@ -814,6 +818,7 @@ upgrades.chatroom = (function() {
         function makeOption(txt, f) {
             var el = myDom.createATag("#", txt);
             el.className += " fullButton";
+
             addEvent(el, 'click', function() {
                 f();
                 popupMenu.destroy();
@@ -959,7 +964,7 @@ upgrades.chatroom = (function() {
         replace(/\r\n/g, "<br>").
         replace(/\r/g, "<br>").
         replace(/\n/g, "<br>");
-        
+
         var mangleList = getMangledList();
         var l = mangleList.length;
         for (var i = 0; i < l; i++) {
@@ -977,10 +982,17 @@ upgrades.chatroom = (function() {
     }
 
     function setupPreview() {
+        var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
         var container = window.soiDetails.formMsg;
+
+        if (!sourceElement) {
+            return;
+        }
+
         while (container && container.tagName.toLowerCase() !== "td") {
             container = container.parentNode;
         }
+
 
         if (container) {
             var previewHolder = document.createElement("div");
@@ -995,8 +1007,6 @@ upgrades.chatroom = (function() {
             var previewDiv = document.createElement("div");
             previewDiv.id = "cp-preview-div";
             previewHolder.appendChild(previewDiv);
-
-            var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
 
             addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
                 doPreview();
