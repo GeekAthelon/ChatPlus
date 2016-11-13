@@ -989,29 +989,36 @@ upgrades.chatroom = (function() {
             return;
         }
 
-        while (container && container.tagName.toLowerCase() !== "td") {
+        while (container && container.tagName && container.tagName.toLowerCase() !== "td") {
             container = container.parentNode;
         }
 
-
-        if (container) {
-            var previewHolder = document.createElement("div");
-            previewHolder.id = "cp-preview-holder";
-
-            container.appendChild(previewHolder);
-
-            // var button = myDom.createATag("#", "Toggle Preview");
-            // button.id = "chatplus-previewToggle";
-            // previewHolder.appendChild(button);
-
-            var previewDiv = document.createElement("div");
-            previewDiv.id = "cp-preview-div";
-            previewHolder.appendChild(previewDiv);
-
-            addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
-                doPreview();
-            });
+        if (!container) {
+            return;
         }
+
+        if (!container.tagName || container.tagName.toLowerCase() !== "td") {
+            return;
+        }
+
+
+        var previewHolder = document.createElement("div");
+        previewHolder.id = "cp-preview-holder";
+
+        container.appendChild(previewHolder);
+
+        // var button = myDom.createATag("#", "Toggle Preview");
+        // button.id = "chatplus-previewToggle";
+        // previewHolder.appendChild(button);
+
+        var previewDiv = document.createElement("div");
+        previewDiv.id = "cp-preview-div";
+        previewHolder.appendChild(previewDiv);
+
+        addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
+            doPreview();
+        });
+
     }
 
     function upgrade() {
