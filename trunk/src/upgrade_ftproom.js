@@ -177,8 +177,10 @@ upgrades.control_ftp_files = (function() {
     }
 
     function upgrade() {
-        updateAvatarList();
-        zebraStripeTable();
+        if (document.querySelector("[name='vqvee']")) {
+            updateAvatarList();
+            zebraStripeTable();
+        }
     }
 
     var internals = {
