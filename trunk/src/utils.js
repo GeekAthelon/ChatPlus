@@ -988,12 +988,10 @@ var modalWindow = (function() {
   }
 
   function clearUnloadWarning() {
-    console.log("Clearing onload");
     window.removeEventListener("beforeunload", unloadWarning, false);
   }
 
   function setUnloadWarning() {
-    console.log("Setting onload");
     clearUnloadWarning();
     window.addEventListener("beforeunload", unloadWarning, false);
   }
