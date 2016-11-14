@@ -978,7 +978,55 @@ upgrades.chatroom = (function() {
     function doPreview() {
         var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
         var previewDiv = document.getElementById("cp-preview-div");
+        if (previewDiv === null) {
+            return;
+        }
         previewDiv.innerHTML = soiIftyString(sourceElement.value);
+    }
+
+    function addPreviewToDocument(sourceElement, previewHolder) {
+        var previewDiv = document.createElement("div");
+        previewDiv.id = "cp-preview-div";
+        previewHolder.appendChild(previewDiv);
+
+        addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
+            doPreview();
+        });
+    }
+
+    function removePreviewFromDocument(sourceElement, previewHolder) {
+        var previewDiv = document.getElementById("cp-preview-div");
+        previewDiv.parentNode.removeChild(previewDiv);
+    }
+
+    function addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder) {
+        var buttonId = "chatplus-previewToggle";
+
+        var oldButton = document.getElementById(buttonId);
+        if (oldButton) {
+            oldButton.parentNode.removeChild(oldButton);
+        }
+
+        var toggleButtonText = shouldShowPreview ? "Turn preview mode off" : "Turn preview mode on";
+
+        var button = myDom.createATag("#", toggleButtonText);
+        button.id = buttonId;
+        button.dataset.cpPreviewMode = shouldShowPreview;
+        sourceElement.parentNode.appendChild(button);
+
+        addEvent(button, 'click', function(_el, _key, _event) {
+            shouldShowPreview = !shouldShowPreview;
+            gmSetValue("showPreview", shouldShowPreview);
+
+            if (shouldShowPreview) {
+                addPreviewToDocument(sourceElement, previewHolder);
+                doPreview();
+            } else {
+                removePreviewFromDocument(sourceElement, previewHolder);
+            }
+
+            addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder);
+        });
     }
 
     function setupPreview() {
@@ -1001,24 +1049,14 @@ upgrades.chatroom = (function() {
             return;
         }
 
+        var shouldShowPreview = gmGetValue("showPreview", false);
 
         var previewHolder = document.createElement("div");
         previewHolder.id = "cp-preview-holder";
 
         container.appendChild(previewHolder);
 
-        // var button = myDom.createATag("#", "Toggle Preview");
-        // button.id = "chatplus-previewToggle";
-        // previewHolder.appendChild(button);
-
-        var previewDiv = document.createElement("div");
-        previewDiv.id = "cp-preview-div";
-        previewHolder.appendChild(previewDiv);
-
-        addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
-            doPreview();
-        });
-
+        addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder);
     }
 
     function upgrade() {

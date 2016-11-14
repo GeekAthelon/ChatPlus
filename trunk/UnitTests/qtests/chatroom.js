@@ -337,7 +337,25 @@ function testNicknamePopup(assert, setup, fullname, shortName) {
         expectedResult = 	"*1* 2>** >";
         actualResult = upgrades.chatroom.internal.soiIftyString(test);
         assert.deepEqual(actualResult, expectedResult, "Manglement happens");
+    });
 
+    QUnit.test("Testing Preview Mode", function(assert) {
+      myUpgrade();
+
+      var previewToggle = document.getElementById("chatplus-previewToggle")
+      assert.ok(previewToggle, "Preview toggle button found");
+
+      doClick(previewToggle);
+      var previewDiv = document.getElementById("cp-preview-div");
+      assert.ok(previewToggle, "Preview panel found");
+
+      var textArea = document.querySelector("[name='vqxsp']");
+      textArea.value = "123";
+      doClick(previewToggle);
+      doClick(previewToggle);
+      previewDiv = document.getElementById("cp-preview-div");
+
+      assert.deepEqual("123", previewDiv.innerHTML, "Preview pane value set");
     });
 
 }());

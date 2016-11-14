@@ -306,10 +306,15 @@ function prepToolbar() {
 
    style.push("#cp-preview-div {");
    style.push('  border: 1px solid white;');
-   style.push('  outline: 1px solid black;');   
+   style.push('  outline: 1px solid black;');
    style.push('  width: 100%;');
    style.push('  min-height: 6em;');
    style.push('}');
+
+   style.push("#chatplus-previewToggle {");
+   style.push('  display: block;');
+   style.push('}');
+
 
 
 
