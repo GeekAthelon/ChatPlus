@@ -989,6 +989,11 @@ upgrades.chatroom = (function() {
         previewDiv.id = "cp-preview-div";
         previewHolder.appendChild(previewDiv);
 
+        var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
+
+        var width = getComputedStyle(sourceElement).width;
+        previewDiv.style.width = width ;
+
         addEvent(sourceElement, 'keyup', function(_el, _key, _event) {
             doPreview();
         });
@@ -1027,14 +1032,7 @@ upgrades.chatroom = (function() {
             gmSetValue("showPreview", shouldShowPreview);
 
             removePreviewFromDocument(sourceElement, previewHolder);
-
-            // if (shouldShowPreview) {
-            //     // addPreviewToDocument(sourceElement, previewHolder);
-            //     doPreview();
-            // }
-
             addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder);
-
         });
     }
 
