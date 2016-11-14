@@ -6514,5 +6514,61 @@
     "build_date": "Sun Nov 13 21:13:44 EST 2016",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 969,
+    "build_date": "Sun Nov 13 21:14:03 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 970,
+    "build_date": "Sun Nov 13 23:06:27 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 971,
+    "build_date": "Sun Nov 13 23:14:37 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 972,
+    "build_date": "Sun Nov 13 23:16:08 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 973,
+    "build_date": "Sun Nov 13 23:21:27 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 974,
+    "build_date": "Sun Nov 13 23:23:04 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.25,
+    "build_number": 975,
+    "build_date": "Sun Nov 13 23:25:19 EST 2016",
+    "build_comments": "",
+    "status": "build success"
+  },
+  {
+    "version_number": 6.26,
+    "build_number": 976,
+    "build_date": "Sun Nov 13 23:43:18 EST 2016",
+    "build_comments": "",
+    "status": "build success"
   }
 ]
