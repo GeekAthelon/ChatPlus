@@ -996,10 +996,13 @@ upgrades.chatroom = (function() {
 
     function removePreviewFromDocument(sourceElement, previewHolder) {
         var previewDiv = document.getElementById("cp-preview-div");
-        previewDiv.parentNode.removeChild(previewDiv);
+        if (previewDiv) {
+            previewDiv.parentNode.removeChild(previewDiv);
+        }
     }
 
     function addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder) {
+
         var buttonId = "chatplus-previewToggle";
 
         var oldButton = document.getElementById(buttonId);
@@ -1014,38 +1017,54 @@ upgrades.chatroom = (function() {
         button.dataset.cpPreviewMode = shouldShowPreview;
         sourceElement.parentNode.appendChild(button);
 
+        if (shouldShowPreview) {
+            addPreviewToDocument(sourceElement, previewHolder);
+            doPreview();
+        }
+
         addEvent(button, 'click', function(_el, _key, _event) {
             shouldShowPreview = !shouldShowPreview;
             gmSetValue("showPreview", shouldShowPreview);
 
-            if (shouldShowPreview) {
-                addPreviewToDocument(sourceElement, previewHolder);
-                doPreview();
-            } else {
-                removePreviewFromDocument(sourceElement, previewHolder);
-            }
+            removePreviewFromDocument(sourceElement, previewHolder);
+
+            // if (shouldShowPreview) {
+            //     // addPreviewToDocument(sourceElement, previewHolder);
+            //     doPreview();
+            // }
 
             addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder);
+
         });
     }
 
     function setupPreview() {
+
         var sourceElement = window.soiDetails.formMsg.elements.namedItem("vqxsp");
         var container = window.soiDetails.formMsg;
+        var containerDest;
 
         if (!sourceElement) {
             return;
         }
 
+        // Try to find the container for chat rooms.
         while (container && container.tagName && container.tagName.toLowerCase() !== "td") {
             container = container.parentNode;
         }
 
-        if (!container) {
-            return;
+        // If we didn't find the element we are after, assume we are in a mailroom instead
+        if (container.tagName) {
+            containerDest = sourceElement;
+        } else {
+            container = window.soiDetails.formMsg;
+            while (container && container.tagName && container.tagName.toLowerCase() !== "center") {
+                containerDest = container;
+                container = container.parentNode;
+            }
         }
 
-        if (!container.tagName || container.tagName.toLowerCase() !== "td") {
+        if (!container.tagName) {
             return;
         }
 
@@ -1056,7 +1075,7 @@ upgrades.chatroom = (function() {
 
         container.appendChild(previewHolder);
 
-        addUpdatePreviewButton(shouldShowPreview, sourceElement, previewHolder);
+        addUpdatePreviewButton(shouldShowPreview, containerDest, previewHolder);
     }
 
     function upgrade() {

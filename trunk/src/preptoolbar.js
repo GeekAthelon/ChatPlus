@@ -309,6 +309,7 @@ function prepToolbar() {
    style.push('  outline: 1px solid black;');
    style.push('  width: 100%;');
    style.push('  min-height: 6em;');
+   style.push('  text-align: left;');
    style.push('}');
 
    style.push("#chatplus-previewToggle {");
