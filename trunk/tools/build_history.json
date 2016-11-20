@@ -6570,5 +6570,12 @@
     "build_date": "Sun Nov 13 23:43:18 EST 2016",
     "build_comments": "",
     "status": "build success"
+  },
+  {
+    "version_number": 6.27,
+    "build_number": 977,
+    "build_date": "Sun Nov 20 10:18:11 EST 2016",
+    "build_comments": "Fixed broken voice announcement",
+    "status": "build success"
   }
 ]
