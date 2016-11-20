@@ -1032,7 +1032,7 @@ var modalWindow = (function() {
             var selectBox = document.getElementById("modal-window-prompt-voice");
 
             while (selectBox.options.length > 0) {
-                slectBox.remove(0);
+                selectBox.remove(0);
             }
 
             speechSynthesis.getVoices().forEach(function(voice) {
